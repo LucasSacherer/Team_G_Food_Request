@@ -1,9 +1,9 @@
 package Database;
 
+import Manager.EntityManager;
+
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,7 +13,11 @@ public class DatabaseGargoyle {
     final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     private Connection connection;
     private Statement statement;
-    //private ArrayList<EntityManager> managers;
+    private ArrayList<EntityManager> managers;
+
+    public DatabaseGargoyle() {
+        this.managers = new ArrayList<>();
+    }
 
     /**
      * Loads the drivers for the database connection, and then opens a connection to the DB with an open statement
@@ -62,12 +66,53 @@ public class DatabaseGargoyle {
         tableCreator.createFoodLogTable();
     }
 
+    /**
+     * Runs an update query on the database
+     * @param sql
+     */
     public void executeUpdateOnDatabase(String sql) {
-
+        try {
+            statement.executeUpdate(sql);
+            this.destroyConnection();
+            notifyManagers();
+            this.createConnection();
+        } catch (SQLException e) {
+            System.out.println("The statement " + sql +  " failed: ");
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Runs a query on the database and returns the results
+     * @param sql
+     * @return
+     */
     public ResultSet executeQueryOnDatabase(String sql) {
-        return null;
+        try {
+            return statement.executeQuery(sql);
+        } catch (SQLException e) {
+            System.out.println("The statement " + sql +  " failed: ");
+            e.printStackTrace();
+            return null;
+        }
     }
+
+    /**
+     * Adds a manager to the list of managers to be notified of updates
+     * @param manager
+     */
+    public void attachManager(EntityManager manager) {
+        this.managers.add(manager);
+    }
+
+    /**
+     * Updates all the managers
+     */
+    public void notifyManagers(){
+        for (EntityManager manager: managers){
+            manager.update();
+        }
+    }
+
 
 }

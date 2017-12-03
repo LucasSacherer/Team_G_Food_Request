@@ -143,7 +143,7 @@ public class TableCreator {
      * @param table
      * @throws FileNotFoundException
      */
-    public void insertCSVToDatabase(String path, Connection connection, String table) throws FileNotFoundException {
+    private void insertCSVToDatabase(String path, Connection connection, String table) throws FileNotFoundException {
         InputStream file = TableCreator.class.getResourceAsStream(path);
         Scanner br = new Scanner(file);
         String line;
