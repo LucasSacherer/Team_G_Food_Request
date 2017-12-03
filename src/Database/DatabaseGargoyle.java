@@ -16,7 +16,7 @@ public class DatabaseGargoyle {
     //private ArrayList<EntityManager> managers;
 
     /**
-     * Loads the drivers for the databaswe connection, and then opens a connection to the DB with an open statement
+     * Loads the drivers for the database connection, and then opens a connection to the DB with an open statement
      */
     public void createConnection() {
         //Load driver
@@ -29,7 +29,7 @@ public class DatabaseGargoyle {
 
         //Create connection and statement to be run
         try {
-            this.connection = DriverManager.getConnection("jdbc:derby:mini-app;create=true");
+            this.connection = DriverManager.getConnection("jdbc:derby:derby-db;create=true;user=granite_gargoyle;password=wong");
             this.statement = connection.createStatement();
         }catch (SQLException ex){
             System.out.println("Exception thrown in createConnection()");
