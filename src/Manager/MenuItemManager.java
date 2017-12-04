@@ -53,32 +53,6 @@ public class MenuItemManager implements EntityManager {
     }
 
     /**
-     * Adds the amount specified to the stock count of the menu item specified
-     * @param menuItem
-     * @param amount
-     */
-    public void addStock(MenuItem menuItem, int amount){
-        databaseGargoyle.createConnection();
-        databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
-                "STOCKAVAILABLE = '" + (menuItem.getStockAvailable()+amount) + "' " +
-                "WHERE FOODNAME = '" + menuItem.getFoodName() + "'");
-        databaseGargoyle.destroyConnection();
-    }
-
-    /**
-     * Removes the amount specified to the stock count of the menu item specified
-     * @param menuItem
-     * @param amount
-     */
-    public void removeStock(MenuItem menuItem, int amount){
-        databaseGargoyle.createConnection();
-        databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
-                "STOCKAVAILABLE = '" + (menuItem.getStockAvailable()-amount) + "' " +
-                "WHERE FOODNAME = '" + menuItem.getFoodName() + "'");
-        databaseGargoyle.destroyConnection();
-    }
-
-    /**
      * Returns the menu item corresponding to the name given, null if not available (but it will be)
      * @param name
      * @return
@@ -100,5 +74,20 @@ public class MenuItemManager implements EntityManager {
         return menuItems;
     }
 
-    public void modifyMenuItem(MenuItem modified){}
+    /**
+     * Modifies the menu item
+     * @param modified
+     */
+    public void modifyMenuItem(MenuItem modified){
+        databaseGargoyle.createConnection();
+        databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
+                "DESCRIPTION = '" + modified.getDescription() + "' " +
+                "STOCKAVAILABLE = '" + modified.getStockAvailable() + "' " +
+                "CALORIES = '" + modified.getStockAvailable() + "' " +
+                "ISVEGAN = '" + modified.getVegan().toString() + "' " +
+                "ISDIABETIC = '" + modified.getDiabetic() + "' " +
+                "ISGLUTTENFREE = '" + modified.getGluttenFree() + "' " +
+                "WHERE FOODNAME = '" + modified.getFoodName() + "'");
+        databaseGargoyle.destroyConnection();
+    }
 }

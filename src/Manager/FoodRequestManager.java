@@ -142,11 +142,6 @@ public class FoodRequestManager implements EntityManager{
             }
         }
 
-        //Update the Menu Item stock counts
-        for (MenuItem item: fReq.getOrder()){
-            menuItemManager.removeStock(item, 1);
-        }
-
         //Add its order to the food log
         foodLogManager.addFoodLog(fReq);
     }
@@ -157,11 +152,6 @@ public class FoodRequestManager implements EntityManager{
      * @param fReq
      */
     public void deleteRequest(FoodRequest fReq){
-        //Update the Menu Item stock counts
-        for (MenuItem item: fReq.getOrder()){
-            menuItemManager.addStock(item, 1);
-        }
-
         //Remove all food orders of this request from the database
         databaseGargoyle.createConnection();
         databaseGargoyle.executeUpdateOnDatabase("DELETE FROM FOODORDER " +

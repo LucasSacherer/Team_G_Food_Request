@@ -153,10 +153,14 @@ public class TableCreator {
         }
     }
 
+    /**
+     * Creates the WorkerLog
+     */
     public void createWorkerLogTable() {
         try {
             statement.execute("CREATE TABLE workerLog (\n" +
                     " requestName VARCHAR(250) NOT NULL,\n" +
+                    " workerID VARCHAR(250) NOT NULL,\n" +
                     " timeCreated TIMESTAMP NOT NULL, \n" +
                     " timeCompleted TIMESTAMP NOT NULL\n)");
             System.out.println("FoodLog table created!");
