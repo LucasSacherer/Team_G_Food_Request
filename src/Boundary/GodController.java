@@ -132,7 +132,7 @@ public class GodController {
     private Pane foodRequestHubPane;
 
     @FXML
-    private JFXButton toAdminEdit, toStaffMenuOrder, toReports, assignButton, completeOrder;
+    private JFXButton toAdminEdit, toStaffMenuOrder, toReports, assignButton, completeOrderButton;
 
     @FXML
     private JFXListView ordersToAssign, assignOrderItems, ordersAssigned, assignedOrderItems;
@@ -215,8 +215,16 @@ public class GodController {
 
 
 
-    ////////////////
-    /* Main scene */
-    ////////////////
+    //////////////////////
+    /* Food Request Hub */
+    //////////////////////
 
+    @FXML
+    private void selectEmployeeToAssign() { foodRequestHubController.selectEmployeeToAssign(); }
+
+    @FXML
+    private void assignEmployee(){ foodRequestHubController.assignEmployee();}
+
+    @FXML
+    private void completeOrder(){ foodRequestHubController.completeOrder();}
 }
