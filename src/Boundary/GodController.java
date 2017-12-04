@@ -5,7 +5,7 @@ import Entity.FoodRequest;
 import Entity.MenuItem;
 import Entity.Worker;
 import Manager.*;
-import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.*;
 import com.sun.xml.internal.bind.v2.TODO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +41,86 @@ public class GodController {
 
     @FXML
     private JFXButton editMenuBack;
+
+        /* Worker Tab */
+    @FXML
+    private JFXTextField workerID,usernameId;
+
+    @FXML
+    private JFXButton addWorker, cancelWorker, deleteWorker, deleteAllWorkers, exportWorkers, confirmWorkers;
+
+    @FXML
+    private JFXTreeTableView<Worker> workersTable;
+
+    @FXML
+    private JFXTreeTableColumn<Worker,String> workerIDColumn;
+
+    @FXML
+    private JFXTreeTableColumn<Worker,String> usernameColumn;
+        /* Menu Tab */
+    @FXML
+    private JFXTextField foodName,descriptionItem, stockAvailable, calories;
+
+    @FXML
+    private JFXButton addItem, cancelItem, deleteItem, deleteAllItem, exportItem, confirmMenu;
+
+    @FXML
+    private JFXToggleButton vegan, diabetic, gluttenFree;
+
+    @FXML
+    private JFXTreeTableView<MenuItem> menuTable;
+
+    @FXML
+    private JFXTreeTableColumn<MenuItem,String> foodNameColumn;
+
+    @FXML
+    private JFXTreeTableColumn<MenuItem,String> descriptionColumn;
+
+    @FXML
+    private JFXTreeTableColumn<MenuItem,String> stockAvailableColumn;
+
+    @FXML
+    private JFXTreeTableColumn<MenuItem,String> caloriesColumn;
+
+        /* Requests Tab */
+    @FXML
+    private JFXTextField requestName,locationRequest,assignedWorker;
+
+    @FXML
+    private JFXComboBox requestTypeCombo;
+
+    @FXML
+    private JFXTextArea descriptionRequest,requestOrder;
+
+    @FXML
+    private JFXButton addRequest, cancelRequest, deleteRequest, deleteAllRequest, exportRequest, confirmRequests;
+
+    @FXML
+    private JFXTimePicker timeCreated, timeCompleted;
+
+    @FXML
+    private JFXTreeTableView<FoodRequest> requestsTable;
+
+    @FXML
+    private JFXTreeTableColumn<FoodRequest,String> requestNameColumn;
+
+    @FXML
+    private JFXTreeTableColumn<FoodRequest,String> timeCreatedColumn;
+
+    @FXML
+    private JFXTreeTableColumn<FoodRequest,String> timeCompletedColumn;
+
+    @FXML
+    private JFXTreeTableColumn<FoodRequest,String> requestTypeColumn;
+
+    @FXML
+    private JFXTreeTableColumn<FoodRequest,String> descriptionRequestColumn;
+
+    @FXML
+    private JFXTreeTableColumn<FoodRequest,String> locationColumn;
+
+    @FXML
+    private JFXTreeTableColumn<FoodRequest,String> assignedWorkerColumn;
 
     /* Request Hub */
     @FXML
