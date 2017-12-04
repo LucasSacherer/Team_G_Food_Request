@@ -166,6 +166,9 @@ public class GodController {
     @FXML
     private JFXComboBox selectQuantityCombo;
 
+    @FXML
+    private JFXTextField menuItem,itemPrice, destination;
+
 
 
     /** Organize Functions by Scene **/
