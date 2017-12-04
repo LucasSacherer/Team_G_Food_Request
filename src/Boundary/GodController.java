@@ -162,11 +162,21 @@ public class GodController {
     private Pane staffMenuOrderPane;
 
     @FXML
-    private JFXButton menuOrderBack;
+    private JFXButton addMenuItemButton, cancelMenuItemButton, checkoutRequestButton,destinationPopupButton,deleteFoodItem;
 
-    /**
-     * Organize Functions by Scene
-     **/
+    @FXML
+    private JFXComboBox selectQuantityCombo;
+
+    @FXML
+    private JFXTextField menuItem,itemPrice, destination;
+
+
+
+    /** Organize Functions by Scene **/
+
+    /////////////////////////////
+    /* Scene Switching Buttons */
+    /////////////////////////////
 
 
     @FXML
@@ -268,8 +278,31 @@ public class GodController {
         foodRequestHubController.assignEmployee();
     }
 
+    private void completeOrder(){ foodRequestHubController.completeOrder();}
+
+    //////////////////////
+    /* Food Request Hub */
+    //////////////////////
+
     @FXML
-    private void completeOrder() {
-        foodRequestHubController.completeOrder();
-    }
+    private void selectDietaryRestriction() { staffMenuOrderController.selectDietaryRestriction(); }
+
+    @FXML
+    private void deleteFoodItemFromCart(){ staffMenuOrderController.deleteFoodItemFromCart();}
+
+    @FXML
+    private void selectQuantity(){ staffMenuOrderController.selectQuantity();}
+
+    @FXML
+    private void addMenuItem(){ staffMenuOrderController.addMenuItem();}
+
+    @FXML
+    private void cancelMenuItem(){ staffMenuOrderController.cancelMenuItem();}
+
+    @FXML
+    private void checkoutRequest(){ staffMenuOrderController.checkoutRequest();}
+
+    @FXML
+    private void destinationPopup(){ staffMenuOrderController.destinationPopup();}
+
 }
