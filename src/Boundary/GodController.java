@@ -10,6 +10,7 @@ import com.jfoenix.controls.*;
 import com.sun.xml.internal.bind.v2.TODO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.Pane;
 
@@ -27,6 +28,7 @@ public class GodController {
     WorkerManager workerManager = new WorkerManager(databaseGargoyle);
     FoodRequestManager foodRequestManager = new FoodRequestManager( databaseGargoyle,  nodeManager,
              workerManager,  menuItemManager,  foodLogManager);
+
 
     /* Entities */
 
@@ -46,7 +48,10 @@ public class GodController {
 
         /* Worker Tab */
     @FXML
-    private JFXTextField workerID,usernameId;
+    private JFXTextField usernameId;
+
+    @FXML
+    private Label workerID;
 
     @FXML
     private JFXButton addWorker, cancelWorker, deleteWorker, deleteAllWorkers, exportWorkers, confirmWorkers;
@@ -88,20 +93,14 @@ public class GodController {
     private TreeTableColumn<MenuItem,String> caloriesColumn;
 
         /* Requests Tab */
-    @FXML
-    private JFXTextField requestName,locationRequest,assignedWorker;
+
 
     @FXML
-    private JFXComboBox requestTypeCombo;
+    private JFXTextArea requestOrder;
 
     @FXML
-    private JFXTextArea descriptionRequest,requestOrder;
+    private JFXButton  deleteRequest, deleteAllRequest, exportRequest, confirmRequests;
 
-    @FXML
-    private JFXButton addRequest, cancelRequest, deleteRequest, deleteAllRequest, exportRequest, confirmRequests;
-
-    @FXML
-    private JFXTimePicker timeCreated, timeCompleted;
 
     @FXML
     private JFXTreeTableView<FoodRequest> requestsTable;

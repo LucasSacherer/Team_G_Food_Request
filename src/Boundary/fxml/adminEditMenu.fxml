@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTimePicker?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
@@ -40,11 +38,6 @@
                                     <Font size="36.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="workerID" alignment="CENTER" layoutX="38.0" layoutY="119.0" prefHeight="62.0" prefWidth="278.0" promptText="Name" text="Worker ID">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </JFXTextField>
                               <JFXTextField fx:id="username" alignment="CENTER" layoutX="37.0" layoutY="191.0" prefHeight="62.0" prefWidth="278.0" promptText="Quantity" text="Username">
                                  <font>
                                     <Font size="18.0" />
@@ -95,6 +88,11 @@
                                     </JFXButton>
                                  </children>
                               </AnchorPane>
+                              <Label fx:id="workerID" alignment="CENTER" layoutX="68.0" layoutY="138.0" prefHeight="51.0" prefWidth="217.0" text="Worker ID">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </content>
@@ -173,9 +171,9 @@
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXToggleButton fx:id="vegan" layoutX="88.0" layoutY="444.0" text="Vegan" />
+                              <JFXToggleButton fx:id="vegan" layoutX="83.0" layoutY="444.0" text="Vegan" />
                               <JFXToggleButton fx:id="diabetic" layoutX="83.0" layoutY="502.0" text="Diabetic" />
-                              <JFXToggleButton fx:id="gluttenfree" layoutX="80.0" layoutY="560.0" text="Glutten Free" />
+                              <JFXToggleButton fx:id="gluttenfree" layoutX="83.0" layoutY="560.0" text="Glutten Free" />
                               <JFXTextArea fx:id="descriptionItem" layoutX="18.0" layoutY="236.0" prefHeight="80.0" prefWidth="290.0" />
                               <Label alignment="CENTER" layoutX="51.0" layoutY="194.0" prefHeight="42.0" prefWidth="193.0" text="Description">
                                  <font>
@@ -195,32 +193,17 @@
                                     <Font size="36.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="requestName" alignment="CENTER" layoutX="41.0" layoutY="107.0" prefHeight="43.0" prefWidth="186.0" promptText="Food Name" text="Request Name">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </JFXTextField>
-                              <JFXButton fx:id="addRequest" layoutX="18.0" layoutY="688.0" prefHeight="55.0" prefWidth="166.0" text="Add">
+                              <JFXButton fx:id="deleteRequest" layoutX="21.0" layoutY="413.0" prefHeight="55.0" prefWidth="166.0" text="Delete">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="cancelRequest" layoutX="228.0" layoutY="687.0" prefHeight="55.0" prefWidth="166.0" text="Cancel">
+                              <JFXButton fx:id="deleteAllRequest" layoutX="236.0" layoutY="412.0" prefHeight="55.0" prefWidth="166.0" text="Delete All">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="deleteRequest" layoutX="19.0" layoutY="761.0" prefHeight="55.0" prefWidth="166.0" text="Delete">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton fx:id="deleteAllRequest" layoutX="234.0" layoutY="760.0" prefHeight="55.0" prefWidth="166.0" text="Delete All">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton fx:id="exportRequests" layoutX="97.0" layoutY="826.0" prefHeight="55.0" prefWidth="264.0" text="Export Requests CSV">
+                              <JFXButton fx:id="exportRequests" layoutX="99.0" layoutY="478.0" prefHeight="55.0" prefWidth="264.0" text="Export Requests CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -238,9 +221,9 @@
                                           <TreeTableColumn fx:id="timeCreatedColumn" prefWidth="149.0" text="Time Created" />
                                           <TreeTableColumn fx:id="timeCompletedColumn" prefWidth="145.0" text="Time Completed" />
                                           <TreeTableColumn fx:id="requestTypeColumn" prefWidth="196.0" text="Request Type" />
-                                          <TreeTableColumn fx:id="descriptionRequestColumn" prefWidth="142.0" text="Description" />
-                                          <TreeTableColumn fx:id="locationColumn" prefWidth="197.0" text="Location" />
-                                          <TreeTableColumn fx:id="assignedWorkerColumn" prefWidth="244.0" text="Assigned Worker" />
+                                          <TreeTableColumn fx:id="descriptionRequestColumn" prefWidth="254.0" text="Description" />
+                                          <TreeTableColumn fx:id="locationColumn" prefWidth="200.0" text="Location" />
+                                          <TreeTableColumn fx:id="assignedWorkerColumn" prefWidth="316.0" text="Assigned Worker" />
                                        </columns>
                                     </JFXTreeTableView>
                                     <JFXButton fx:id="confrimRequests" layoutX="624.0" layoutY="699.0" prefHeight="55.0" prefWidth="225.0" text="Confirm" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="624.0" AnchorPane.rightAnchor="621.0" AnchorPane.topAnchor="699.0">
@@ -250,31 +233,12 @@
                                     </JFXButton>
                                  </children>
                               </AnchorPane>
-                              <JFXTimePicker fx:id="timeCreated" layoutX="65.0" layoutY="163.0" promptText="Time Created" />
-                              <JFXTimePicker fx:id="timeCompleted" layoutX="65.0" layoutY="195.0" promptText="Time Completed" />
-                              <JFXTextArea fx:id="descriptionRequest" layoutX="13.0" layoutY="332.0" prefHeight="60.0" prefWidth="243.0" />
-                              <Label alignment="CENTER" layoutX="62.0" layoutY="288.0" prefHeight="44.0" prefWidth="139.0" text="Description">
+                              <Label alignment="CENTER" layoutX="94.0" layoutY="140.0" prefHeight="44.0" prefWidth="163.0" text="Order Description">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="locationRequest" alignment="CENTER" layoutX="40.0" layoutY="407.0" prefHeight="41.0" prefWidth="183.0" promptText="Food Name" text="Location">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </JFXTextField>
-                              <JFXTextField fx:id="assignedWorker" alignment="CENTER" layoutX="37.0" layoutY="465.0" prefHeight="30.0" prefWidth="190.0" promptText="Food Name" text="Assigned Worker">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </JFXTextField>
-                              <JFXTextArea fx:id="requestOrder" layoutX="13.0" layoutY="562.0" prefHeight="112.0" prefWidth="417.0" />
-                              <Label alignment="CENTER" layoutX="62.0" layoutY="518.0" prefHeight="44.0" prefWidth="139.0" text="Order">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <JFXComboBox fx:id="requestTypeCombo" layoutX="39.0" layoutY="246.0" prefHeight="25.0" prefWidth="192.0" promptText="Request Type" />
+                              <JFXTextArea fx:id="requestOrder" layoutX="20.0" layoutY="184.0" prefHeight="186.0" prefWidth="437.0" />
                            </children>
                         </AnchorPane>
                      </content>

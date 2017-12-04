@@ -46,9 +46,9 @@
                               <Image url="@../Pictures/BWH.png" />
                            </image>
                         </ImageView>
-                        <Label text="Food Request Hub" underline="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                        <Label text="Food Request Hub" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                            <font>
-                              <Font size="20.0" />
+                              <Font name="System Bold" size="40.0" />
                            </font>
                         </Label>
                      </children>
