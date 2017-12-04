@@ -1,5 +1,6 @@
 package Controller;
 
+import Entity.Worker;
 import Manager.FoodLogManager;
 import Manager.WorkerLogManager;
 import javafx.collections.FXCollections;
@@ -62,5 +63,7 @@ public class RequestController {
         }
     }
 
-    public void assignWorker(){}
+    public void assignWorker(FoodRequest fReq, Worker emp){
+        fm.assignWorker(fReq,emp);
+    }
 }

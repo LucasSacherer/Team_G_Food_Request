@@ -17,6 +17,8 @@ public class MenuController {
 
     public void modifyMenuItem(MenuItem modified){
         //check that is valid menuItem
-        mim.modifyMenuItem(modified);
+        if(mim.getMenuItemByName(modified.getFoodName()) != null) {
+            mim.modifyMenuItem(modified);
+        }
     }
 }
