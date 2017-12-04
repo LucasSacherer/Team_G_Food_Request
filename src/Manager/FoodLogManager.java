@@ -22,7 +22,7 @@ public class FoodLogManager {
         for (MenuItem item: foodRequest.getOrder()){
             databaseGargoyle.createConnection();
             databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODLOG VALUES (" +
-                    "'" + foodRequest.getName() + "', " +
+                    "'" + item.getFoodName() + "', " +
                     "'" + foodRequest.getTimeCreated() + "', " +
                     "'" + foodRequest.getNode().getNodeID() + "')");
             databaseGargoyle.destroyConnection();
