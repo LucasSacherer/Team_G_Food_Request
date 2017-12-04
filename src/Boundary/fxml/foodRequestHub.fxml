@@ -98,7 +98,7 @@
                         </Label>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                            <children>
-                              <HBox prefHeight="180.0" prefWidth="767.0" spacing="50.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0">
+                              <HBox prefHeight="180.0" prefWidth="767.0" spacing="49.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0">
                                  <children>
                                     <JFXComboBox layoutX="1000.0" layoutY="1000.0" prefHeight="31.0" prefWidth="151.0" promptText="Employee" />
                                     <JFXButton alignment="CENTER" buttonType="RAISED" prefHeight="31.0" prefWidth="151.0" text="Assign" />
