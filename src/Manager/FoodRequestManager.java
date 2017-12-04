@@ -227,4 +227,35 @@ public class FoodRequestManager implements EntityManager{
         }
         return null;
     }
+
+    /**
+     * FOR TESTING ONLY
+     * @param original
+     */
+    public void revertFoodRequest(FoodRequest original){
+        //Update the request in the database
+        databaseGargoyle.createConnection();
+        databaseGargoyle.executeUpdateOnDatabase("UPDATE FOODREQUEST SET " +
+                "TIMECOMPLETED = '" + Timestamp.valueOf(original.getTimeCompleted()) + "', " +
+                "TYPE = '" + original.getType() + "', " +
+                "DESCRIPTION = '" + original.getDescription() + "', " +
+                "NODEID = '" + original.getNode().getNodeID() + "', " +
+                "WORKERID = '" + original.getAssignedWorker().getWorkerID() + "' " +
+                "WHERE NAME = '" + original.getName() + "' " +
+                "AND TIMECREATED = '" + Timestamp.valueOf(original.getTimeCreated()) + "'");
+        databaseGargoyle.destroyConnection();
+
+        //Remove all FOODORERS of this request in the DB and add the new ones
+        databaseGargoyle.createConnection();
+        databaseGargoyle.executeUpdateOnDatabase("DELETE FROM FOODORDER " +
+                "WHERE REQUESTNAME = '" + original.getName() +"' " +
+                "AND TIMECREATED = '" + Timestamp.valueOf(original.getTimeCreated()) + "'");
+        databaseGargoyle.destroyConnection();
+        for (MenuItem item: original.getOrder()){
+            databaseGargoyle.createConnection();
+            databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODORDER VALUES (" +
+                    "'" + original.getName() + "','"+ Timestamp.valueOf(original.getTimeCreated()) + "','" + item + "')");
+            databaseGargoyle.destroyConnection();
+        }
+    }
 }
