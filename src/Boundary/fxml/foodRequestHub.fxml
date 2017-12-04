@@ -106,7 +106,7 @@
                               </HBox>
                            </children>
                         </AnchorPane>
-                        <JFXButton fx:id="completeOrderButton" buttonType="RAISED" onAction="#completeOrder" prefHeight="31.0" prefWidth="151.0" text="Complete Order" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                        <JFXButton fx:id="completeOrderButton" buttonType="RAISED" prefHeight="31.0" prefWidth="151.0" text="Complete Order" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
                         <Label text="Orders to Assign" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="20.0" />

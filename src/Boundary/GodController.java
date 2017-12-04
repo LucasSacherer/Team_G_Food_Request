@@ -277,8 +277,8 @@ public class GodController {
     private void assignEmployee() {
         foodRequestHubController.assignEmployee();
     }
-
-    private void completeOrder(){ foodRequestHubController.completeOrder();}
+//    @FXML
+//    private void completeOrder(){ foodRequestHubController.completeOrder();}
 
     //////////////////////
     /* Food Request Hub */

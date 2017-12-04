@@ -106,10 +106,10 @@
                                     <JFXComboBox fx:id="dietaryRestrictions" onAction="#selectDietaryRestriction" promptText="Dietary Restrictions" />
                                  </children>
                               </HBox>
-                              <TreeTableView prefHeight="200.0" prefWidth="200.0">
+                              <TreeTableView fx:id="hubMenuTable" prefHeight="200.0" prefWidth="200.0">
                                 <columns>
-                                  <TreeTableColumn prefWidth="565.0" text="Food Item" />
-                                  <TreeTableColumn minWidth="0.0" prefWidth="580.0" text="Price" />
+                                  <TreeTableColumn fx:id="foodItemColumn" prefWidth="565.0" text="Food Item" />
+                                  <TreeTableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="580.0" text="Price" />
                                 </columns>
                               </TreeTableView>
                               <Label alignment="CENTER" text="My Order">
