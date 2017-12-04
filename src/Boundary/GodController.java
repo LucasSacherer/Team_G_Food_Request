@@ -131,7 +131,15 @@ public class GodController {
     private Pane foodRequestHubPane;
 
     @FXML
-    private JFXButton toAdminEdit, toStaffMenuOrder, toReports;
+    private JFXButton toAdminEdit, toStaffMenuOrder, toReports, assignButton, completeOrder;
+
+    @FXML
+    private JFXListView ordersToAssign, assignOrderItems, ordersAssigned, assignedOrderItems;
+
+    @FXML
+    private JFXComboBox employeeToAssign;
+
+
     /* Map Directory */
 
     //TODO
