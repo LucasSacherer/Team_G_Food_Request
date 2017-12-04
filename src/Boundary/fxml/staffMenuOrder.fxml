@@ -120,10 +120,10 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <TreeTableView prefHeight="200.0" prefWidth="200.0">
+                              <TreeTableView fx:id="orderTable" prefHeight="200.0" prefWidth="200.0">
                                 <columns>
-                                  <TreeTableColumn prefWidth="551.0" text="Food Item" />
-                                  <TreeTableColumn prefWidth="594.0" text="Price" />
+                                  <TreeTableColumn fx:id="foodItemOrderColumn" prefWidth="551.0" text="Food Item" />
+                                  <TreeTableColumn fx:id="priceOrderColumn" prefWidth="594.0" text="Price" />
                                 </columns>
                               </TreeTableView>
                               <JFXButton fx:id="deleteFoodItem" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#deleteFoodItemFromCart" prefHeight="31.0" prefWidth="121.0" text="Delete Food Item" />

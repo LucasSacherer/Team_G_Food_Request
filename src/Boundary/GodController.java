@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -169,6 +170,18 @@ public class GodController {
 
     @FXML
     private JFXTextField menuItem,itemPrice, destination;
+
+    @FXML
+    private TreeTableView<MenuItem> hubMenuTable;
+
+    @FXML
+    private TreeTableView<MenuItem> orderTable;
+
+    @FXML
+    private TreeTableColumn<MenuItem,String> foodItemColumn, foodItemOrderColumn;
+
+    @FXML
+    private TreeTableColumn<MenuItem,Integer> priceColumn, priceOrderColumn;
 
 
 
