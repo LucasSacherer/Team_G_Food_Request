@@ -1,5 +1,6 @@
 package Boundary;
 
+import Boundary.sceneControllers.*;
 import Database.DatabaseGargoyle;
 import Entity.FoodRequest;
 import Entity.MenuItem;
@@ -183,6 +184,36 @@ public class GodController {
 
     @FXML
     private void hubToReports() throws IOException { sceneSwitcher.toReports(this, foodRequestHubPane); }
+
+
+    /* Scene Commandments */
+    AdminEditMenuController adminEditMenuController;
+    FoodRequestHubController foodRequestHubController;
+    MapDirectoryController mapDirectoryController;
+    ReportsController reportsController;
+    StaffIntoPopupController staffIntoPopupController;
+    StaffMenuOrderController staffMenuOrderController;
+
+    private void initializeAdminEditMenuScene(){
+        adminEditMenuController = new AdminEditMenuController();
+    }
+    private void initializeFoodRequestHubScene(){
+        foodRequestHubController = new FoodRequestHubController();
+    }
+    private void initializeMapDirectoryScene(){
+        mapDirectoryController = new MapDirectoryController();
+    }
+    private void initializeReportsScene(){
+        reportsController = new ReportsController();
+    }
+    private void initializeStaffIntoPopupScene(){
+        staffIntoPopupController = new StaffIntoPopupController();
+    }
+    private void initializeStaffMenuOrderScene(){
+        staffMenuOrderController = new StaffMenuOrderController();
+    }
+
+
 
     ////////////////
     /* Main scene */
