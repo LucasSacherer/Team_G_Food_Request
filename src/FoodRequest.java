@@ -16,6 +16,7 @@ public class FoodRequest extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("boundary/fxml/foodRequestHub.fxml"));
         GodController godController = new GodController();
         loader.setController(godController);
+        godController.initialize();
         Parent root = loader.load();
         primaryStage.setTitle("B&W Path Finding");
         primaryStage.setScene(new Scene(root, 800, 600));

@@ -26,8 +26,8 @@ public class GodController {
     MenuItemManager menuItemManager = new MenuItemManager(databaseGargoyle);
     NodeManager nodeManager = new NodeManager(databaseGargoyle);
     WorkerManager workerManager = new WorkerManager(databaseGargoyle);
-    FoodRequestManager foodRequestManager = new FoodRequestManager( databaseGargoyle,  nodeManager,
-             workerManager,  menuItemManager,  foodLogManager);
+    FoodRequestManager foodRequestManager = new FoodRequestManager(databaseGargoyle, nodeManager,
+            workerManager, menuItemManager, foodLogManager);
 
 
     /* Entities */
@@ -37,7 +37,9 @@ public class GodController {
 
 
     ///////////////////////
-    /** FXML Attributes **/
+    /**
+     * FXML Attributes
+     **/
     ///////////////////////
     /* Edit Menu */
     @FXML
@@ -46,7 +48,7 @@ public class GodController {
     @FXML
     private JFXButton editMenuBack;
 
-        /* Worker Tab */
+    /* Worker Tab */
     @FXML
     private JFXTextField usernameId;
 
@@ -60,11 +62,11 @@ public class GodController {
     private JFXTreeTableView<Worker> workersTable;
 
     @FXML
-    private TreeTableColumn<Worker,String> workerIDColumn;
+    private TreeTableColumn<Worker, String> workerIDColumn;
 
     @FXML
-    private TreeTableColumn<Worker,String> usernameColumn;
-        /* Menu Tab */
+    private TreeTableColumn<Worker, String> usernameColumn;
+    /* Menu Tab */
     @FXML
     private JFXTextField foodName, stockAvailable, calories;
 
@@ -81,16 +83,16 @@ public class GodController {
     private JFXTreeTableView<MenuItem> menuTable;
 
     @FXML
-    private TreeTableColumn<MenuItem,String> foodNameColumn;
+    private TreeTableColumn<MenuItem, String> foodNameColumn;
 
     @FXML
-    private TreeTableColumn<MenuItem,String> descriptionColumn;
+    private TreeTableColumn<MenuItem, String> descriptionColumn;
 
     @FXML
-    private TreeTableColumn<MenuItem,String> stockAvailableColumn;
+    private TreeTableColumn<MenuItem, Integer> stockAvailableColumn;
 
     @FXML
-    private TreeTableColumn<MenuItem,String> caloriesColumn;
+    private TreeTableColumn<MenuItem, Integer> caloriesColumn;
 
         /* Requests Tab */
 
@@ -99,32 +101,32 @@ public class GodController {
     private JFXTextArea requestOrder;
 
     @FXML
-    private JFXButton  deleteRequest, deleteAllRequest, exportRequest, confirmRequests;
+    private JFXButton deleteRequest, deleteAllRequest, exportRequest, confirmRequests;
 
 
     @FXML
     private JFXTreeTableView<FoodRequest> requestsTable;
 
     @FXML
-    private TreeTableColumn<FoodRequest,String> requestNameColumn;
+    private TreeTableColumn<FoodRequest, String> requestNameColumn;
 
     @FXML
-    private TreeTableColumn<FoodRequest,String> timeCreatedColumn;
+    private TreeTableColumn<FoodRequest, String> timeCreatedColumn;
 
     @FXML
-    private TreeTableColumn<FoodRequest,String> timeCompletedColumn;
+    private TreeTableColumn<FoodRequest, String> timeCompletedColumn;
 
     @FXML
-    private TreeTableColumn<FoodRequest,String> requestTypeColumn;
+    private TreeTableColumn<FoodRequest, String> requestTypeColumn;
 
     @FXML
-    private TreeTableColumn<FoodRequest,String> descriptionRequestColumn;
+    private TreeTableColumn<FoodRequest, String> descriptionRequestColumn;
 
     @FXML
-    private TreeTableColumn<FoodRequest,String> locationColumn;
+    private TreeTableColumn<FoodRequest, String> locationColumn;
 
     @FXML
-    private TreeTableColumn<FoodRequest,String> assignedWorkerColumn;
+    private TreeTableColumn<FoodRequest, String> assignedWorkerColumn;
 
     /* Request Hub */
     @FXML
@@ -162,27 +164,40 @@ public class GodController {
     @FXML
     private JFXButton menuOrderBack;
 
-    /** Organize Functions by Scene **/
-
+    /**
+     * Organize Functions by Scene
+     **/
 
 
     @FXML
-    private void staffMenuOrderToHub() throws IOException { sceneSwitcher.toFoodRequestHub(this, staffMenuOrderPane); }
+    private void staffMenuOrderToHub() throws IOException {
+        sceneSwitcher.toFoodRequestHub(this, staffMenuOrderPane);
+    }
 
     @FXML
-    private void adminEditToHub() throws IOException { sceneSwitcher.toFoodRequestHub(this, adminEditPane); }
+    private void adminEditToHub() throws IOException {
+        sceneSwitcher.toFoodRequestHub(this, adminEditPane);
+    }
 
     @FXML
-    private void reportsToHub() throws IOException { sceneSwitcher.toFoodRequestHub(this, reportPane); }
+    private void reportsToHub() throws IOException {
+        sceneSwitcher.toFoodRequestHub(this, reportPane);
+    }
 
     @FXML
-    private void hubToStaffMenuOrder() throws IOException { sceneSwitcher.toStaffMenuOrder(this, foodRequestHubPane); }
+    private void hubToStaffMenuOrder() throws IOException {
+        sceneSwitcher.toStaffMenuOrder(this, foodRequestHubPane);
+    }
 
     @FXML
-    private void hubToAdminEdit() throws IOException { sceneSwitcher.toAdminEditMenu(this, foodRequestHubPane); }
+    private void hubToAdminEdit() throws IOException {
+        sceneSwitcher.toAdminEditMenu(this, foodRequestHubPane);
+    }
 
     @FXML
-    private void hubToReports() throws IOException { sceneSwitcher.toReports(this, foodRequestHubPane); }
+    private void hubToReports() throws IOException {
+        sceneSwitcher.toReports(this, foodRequestHubPane);
+    }
 
 
     /* Scene Commandments */
@@ -193,25 +208,50 @@ public class GodController {
     StaffIntoPopupController staffIntoPopupController;
     StaffMenuOrderController staffMenuOrderController;
 
-    private void initializeAdminEditMenuScene(){
-        adminEditMenuController = new AdminEditMenuController();
-    }
-    private void initializeFoodRequestHubScene(){
-        foodRequestHubController = new FoodRequestHubController();
-    }
-    private void initializeMapDirectoryScene(){
-        mapDirectoryController = new MapDirectoryController();
-    }
-    private void initializeReportsScene(){
-        reportsController = new ReportsController();
-    }
-    private void initializeStaffIntoPopupScene(){
-        staffIntoPopupController = new StaffIntoPopupController();
-    }
-    private void initializeStaffMenuOrderScene(){
-        staffMenuOrderController = new StaffMenuOrderController();
+    public void initialize(){
+        initializeAdminEditMenuScene();
+        initializeFoodRequestHubScene();
+        initializeMapDirectoryScene();
+        initializeReportsScene();
+        initializeStaffIntoPopupScene();
+        initializeStaffMenuOrderScene();
+
     }
 
+
+    private void initializeAdminEditMenuScene() {
+        adminEditMenuController = new AdminEditMenuController(databaseGargoyle, nodeManager, foodLogManager, menuItemManager, workerManager,
+                foodRequestManager, usernameId, workerID, workersTable,
+                workerIDColumn, usernameColumn,
+                foodName, stockAvailable, calories,
+                descriptionItem, vegan, diabetic, gluttenFree, menuTable, foodNameColumn, descriptionColumn, stockAvailableColumn,
+                caloriesColumn, requestOrder,
+                requestsTable, requestNameColumn,
+                timeCreatedColumn, timeCompletedColumn,
+                requestTypeColumn, descriptionRequestColumn,
+                locationColumn, assignedWorkerColumn);
+        adminEditMenuController.initialize();
+    }
+
+    private void initializeFoodRequestHubScene() {
+        foodRequestHubController = new FoodRequestHubController();
+    }
+
+    private void initializeMapDirectoryScene() {
+        mapDirectoryController = new MapDirectoryController();
+    }
+
+    private void initializeReportsScene() {
+        reportsController = new ReportsController();
+    }
+
+    private void initializeStaffIntoPopupScene() {
+        staffIntoPopupController = new StaffIntoPopupController();
+    }
+
+    private void initializeStaffMenuOrderScene() {
+        staffMenuOrderController = new StaffMenuOrderController();
+    }
 
 
     //////////////////////
@@ -219,11 +259,17 @@ public class GodController {
     //////////////////////
 
     @FXML
-    private void selectEmployeeToAssign() { foodRequestHubController.selectEmployeeToAssign(); }
+    private void selectEmployeeToAssign() {
+        foodRequestHubController.selectEmployeeToAssign();
+    }
 
     @FXML
-    private void assignEmployee(){ foodRequestHubController.assignEmployee();}
+    private void assignEmployee() {
+        foodRequestHubController.assignEmployee();
+    }
 
     @FXML
-    private void completeOrder(){ foodRequestHubController.completeOrder();}
+    private void completeOrder() {
+        foodRequestHubController.completeOrder();
+    }
 }

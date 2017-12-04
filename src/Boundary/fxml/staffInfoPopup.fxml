@@ -37,9 +37,9 @@
             </TreeTableView>
          </center>
          <top>
-            <Label text="Food Information" underline="true" BorderPane.alignment="CENTER">
+            <Label text="Food Information" BorderPane.alignment="CENTER">
                <font>
-                  <Font size="30.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
                <padding>
                   <Insets bottom="20.0" />
