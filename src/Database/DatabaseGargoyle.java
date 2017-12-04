@@ -60,6 +60,7 @@ public class DatabaseGargoyle {
     public void createTables() {
         TableCreator tableCreator = new TableCreator(this.statement);
         tableCreator.createMenuItemTable(this.connection);
+        tableCreator.createWorkerTable();
         tableCreator.createNodeTable(this.connection);
         tableCreator.createFoodRequestTable();
         tableCreator.createFoodOrderTable();
@@ -114,5 +115,9 @@ public class DatabaseGargoyle {
         }
     }
 
-
+    /**
+     * Returns the list of managers
+     * @return
+     */
+    public ArrayList<EntityManager> getManagers() {return managers; }
 }

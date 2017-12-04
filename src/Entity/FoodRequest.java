@@ -10,16 +10,18 @@ public class FoodRequest {
     private String type;
     private String description;
     private Node node;
+    private Worker assignedWorker;
     private List<MenuItem> order;
 
     public FoodRequest(String name, LocalDateTime timeCreated, LocalDateTime timeCompleted,
-                       String type, String description, Node node, List<MenuItem> order) {
+                       String type, String description, Node node, Worker worker, List<MenuItem> order) {
         this.name = name;
         this.timeCreated = timeCreated;
         this.timeCompleted = timeCompleted;
         this.type = type;
         this.description = description;
         this.node = node;
+        this.assignedWorker = worker;
         this.order = order;
     }
 

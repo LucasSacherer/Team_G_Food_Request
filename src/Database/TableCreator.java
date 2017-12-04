@@ -64,7 +64,6 @@ public class TableCreator {
                     " teamAssigned varchar(10) NOT NULL\n)");
             System.out.println("Node table created!");
             //Insert all Nodes to the table
-
             try {
                 insertCSVToDatabase(defaultNodesPath, connection,"NODE");
             } catch (FileNotFoundException e) {
@@ -73,6 +72,22 @@ public class TableCreator {
             }
         } catch (SQLException e) {
             System.out.println("Node table already exists");
+        }
+    }
+
+    public void createWorkerTable() {
+        //Create the table and add in the default nodes
+        try {
+            statement.execute("CREATE TABLE worker (\n" +
+                    " workerID VARCHAR(250) PRIMARY KEY,\n" +
+                    " username VARCHAR(250) NOT NULL\n)");
+            System.out.println("Worker table created!");
+            //Insert default workers to the table
+            statement.executeUpdate("INSERT INTO WORKER VALUES ('worker1','worker1Username')");
+            statement.executeUpdate("INSERT INTO WORKER VALUES ('worker2','worker2Username')");
+        } catch (SQLException e) {
+            System.out.println("Worker table already exists");
+            e.printStackTrace();
         }
     }
 
@@ -88,14 +103,15 @@ public class TableCreator {
                     " type VARCHAR(250) NOT NULL,\n" +
                     " description VARCHAR(250) NOT NULL,\n" +
                     " nodeID VARCHAR(20) NOT NULL,\n" +
+                    " workerID VARCHAR(20),\n" +
                     " CONSTRAINT foodRequest_PK PRIMARY KEY (name, timeCreated),\n" +
                     " CONSTRAINT foodNodeID_FK FOREIGN KEY (nodeID) REFERENCES NODE(nodeID))");
             System.out.println("FoodRequest table created!");
-            statement.executeUpdate("INSERT INTO FOODREQUEST VALUES ('food1','1960-01-01 23:03:20','1960-01-01 23:03:20','type1', 'description1','GRETL03501')");
-            statement.executeUpdate("INSERT INTO FOODREQUEST VALUES ('food2','1960-01-01 23:03:20','1961-01-01 23:03:20','type2', 'description1','GSTAI00501')");
+            statement.executeUpdate("INSERT INTO FOODREQUEST VALUES ('food1','1960-01-01 23:03:20','1960-01-01 23:03:20','type1', 'description1','GRETL03501', 'worker1')");
+            statement.executeUpdate("INSERT INTO FOODREQUEST VALUES ('food2','1960-01-01 23:03:20','1961-01-01 23:03:20','type2', 'description1','GSTAI00501', null)");
         } catch (SQLException e) {
             System.out.println("FoodRequest table already exists");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -116,7 +132,7 @@ public class TableCreator {
             statement.executeUpdate("INSERT INTO FOODORDER VALUES ('food2','1960-01-01 23:03:20','Ice Cream')");
         } catch (SQLException e) {
             System.out.println("FoodOrder table already exists");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -132,7 +148,7 @@ public class TableCreator {
             System.out.println("FoodLog table created!");
         } catch (SQLException e) {
             System.out.println("FoodLog table already exists");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
