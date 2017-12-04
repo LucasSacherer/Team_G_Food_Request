@@ -101,12 +101,12 @@
                               <HBox prefHeight="180.0" prefWidth="767.0" spacing="49.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0">
                                  <children>
                                     <JFXComboBox fx:id="employeeToAssign" layoutX="1000.0" layoutY="1000.0" prefHeight="31.0" prefWidth="151.0" promptText="Employee" />
-                                    <JFXButton fx:id="assignButton" alignment="CENTER" buttonType="RAISED" prefHeight="31.0" prefWidth="151.0" text="Assign" />
+                                    <JFXButton fx:id="assignButton" alignment="CENTER" buttonType="RAISED" onAction="#assignEmployee" prefHeight="31.0" prefWidth="151.0" text="Assign" />
                                  </children>
                               </HBox>
                            </children>
                         </AnchorPane>
-                        <JFXButton fx:id="completeOrder" buttonType="RAISED" prefHeight="31.0" prefWidth="151.0" text="Complete Order" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                        <JFXButton fx:id="completeOrderButton" buttonType="RAISED" onAction="#completeOrder" prefHeight="31.0" prefWidth="151.0" text="Complete Order" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
                         <Label text="Orders to Assign" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="20.0" />
