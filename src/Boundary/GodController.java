@@ -162,7 +162,7 @@ public class GodController {
     private Pane staffMenuOrderPane;
 
     @FXML
-    private JFXButton addMenuItemButton, cancelMenuItemButton, checkoutRequestButton,destinationPopupButton,deleteFoodItem;
+    private JFXButton addMenuItemButton, cancelMenuItemButton, checkoutRequestButton,destinationPopupButton,deleteFoodItem, informationButton;
 
     @FXML
     private JFXComboBox selectQuantityCombo;
@@ -277,12 +277,12 @@ public class GodController {
     private void assignEmployee() {
         foodRequestHubController.assignEmployee();
     }
-//    @FXML
-//    private void completeOrder(){ foodRequestHubController.completeOrder();}
+    @FXML
+    private void completeOrder(){ foodRequestHubController.completeOrder();}
 
-    //////////////////////
-    /* Food Request Hub */
-    //////////////////////
+    ////////////////
+    /* Menu Order */
+    ////////////////
 
     @FXML
     private void selectDietaryRestriction() { staffMenuOrderController.selectDietaryRestriction(); }
@@ -304,5 +304,8 @@ public class GodController {
 
     @FXML
     private void destinationPopup(){ staffMenuOrderController.destinationPopup();}
+
+    @FXML
+    private void information(){ staffMenuOrderController.information();}
 
 }

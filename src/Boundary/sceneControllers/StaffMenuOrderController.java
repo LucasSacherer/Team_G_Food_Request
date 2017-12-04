@@ -10,4 +10,5 @@ public class StaffMenuOrderController {
     public void destinationPopup(){}
     public void deleteFoodItemFromCart(){}
     public void selectDietaryRestriction(){}
+    public void information(){}
 }
