@@ -7,6 +7,7 @@ import Entity.MenuItem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class FoodLogManager implements EntityManager {
             databaseGargoyle.createConnection();
             databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODLOG VALUES (" +
                     "'" + item.getFoodName() + "', " +
-                    "'" + foodRequest.getTimeCreated() + "', " +
+                    "'" + Timestamp.valueOf(foodRequest.getTimeCreated()) + "', " +
                     "'" + foodRequest.getNode().getNodeID() + "')");
             databaseGargoyle.destroyConnection();
         }

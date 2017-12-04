@@ -180,7 +180,39 @@ public class FoodRequestManager implements EntityManager{
      * @return
      */
     public List<FoodRequest> getCompleted(){
-        return null;
+        List<FoodRequest> completed = new ArrayList<>();
+        String name, type, description, nodeID, workerID;
+        LocalDateTime timeCreated, timeCompleted;
+        Node node;
+        Worker worker;
+        List<MenuItem> order;
+
+        databaseGargoyle.createConnection();
+        ResultSet rs = databaseGargoyle.executeQueryOnDatabase("SELECT * FROM FOODREQUEST");
+        try {
+            while (rs.next()){
+                name = rs.getString("NAME");
+                timeCreated = rs.getTimestamp("TIMECREATED").toLocalDateTime();
+                timeCompleted = rs.getTimestamp("TIMECOMPLETED").toLocalDateTime();
+                type = rs.getString("TYPE");
+                description = rs.getString("DESCRIPTION");
+                nodeID = rs.getString("NODEID");
+                workerID = rs.getString("WORKERID");
+                node = nodeManager.getNode(nodeID);
+                if (workerID != null){
+                    worker = workerManager.getWorkerByID(workerID);
+                } else worker = null;
+                order = getFoodOrders(name, Timestamp.valueOf(timeCreated));
+                if(!timeCreated.equals(timeCompleted)) {
+                    completed.add(new FoodRequest(name, timeCreated, timeCompleted, type, description, node, worker, order));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to get food requests from database!");
+            e.printStackTrace();
+        }
+        databaseGargoyle.destroyConnection();
+        return completed;
     }
 
     /**
@@ -244,7 +276,7 @@ public class FoodRequestManager implements EntityManager{
         for (MenuItem item: original.getOrder()){
             databaseGargoyle.createConnection();
             databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODORDER VALUES (" +
-                    "'" + original.getName() + "','"+ Timestamp.valueOf(original.getTimeCreated()) + "','" + item + "')");
+                    "'" + original.getName() + "','"+ Timestamp.valueOf(original.getTimeCreated()) + "','" + item.getFoodName() + "')");
             databaseGargoyle.destroyConnection();
         }
     }
