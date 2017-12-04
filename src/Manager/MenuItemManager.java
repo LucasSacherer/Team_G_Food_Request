@@ -99,4 +99,6 @@ public class MenuItemManager implements EntityManager {
     public List<MenuItem> getMenuItems(){
         return menuItems;
     }
+
+    public void modifyMenuItem(MenuItem modified){}
 }

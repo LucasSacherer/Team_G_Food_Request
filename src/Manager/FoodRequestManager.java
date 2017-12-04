@@ -206,12 +206,13 @@ public class FoodRequestManager implements EntityManager{
                 "AND TIMECREATED = '" + Timestamp.valueOf(fReq.getTimeCreated()) + "'");
         databaseGargoyle.destroyConnection();
     }
+    /*
     public List<FoodRequest> getUnassignedRequests(String name){
 
     }
     public List<FoodRequest> getAssignedRequests(){
 
-    }
+    }*/
 
     /**
      * Gets the food request according to the name given

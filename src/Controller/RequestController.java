@@ -23,7 +23,7 @@ public class RequestController {
     }
     protected boolean validateRequest(FoodRequest fReq){
         //Check that nothing in null other than worker
-        if(fReq.getName() != null){
+        if(fReq.getName()!= null&& fReq.getTimeCreated()!= null && fReq.getNode()!= null){
             return true;
         }else return false;
     }
@@ -35,13 +35,14 @@ public class RequestController {
 
 
     public void deleteRequest(FoodRequest fReq) {
-        //Check to make sure the request exists
+        //check that request exists
         if (fm.getFoodRequest(fReq.getName()) != null) {
             fm.deleteRequest(fReq);
         }
+
     }
     public void completeRequest(FoodRequest fReq){
-        //First confiurm that the request exists
+        //check that request exists
         if (fm.getFoodRequest(fReq.getName()) != null){
             fm.completeRequest(fReq);
         }
