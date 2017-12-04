@@ -127,7 +127,7 @@ public class FoodRequestManagerTests {
         assertEquals("type", testReq.getType());
         assertEquals("description", testReq.getDescription());
         assertEquals("IHALL01303", testReq.getNode().getNodeID());
-        assertEquals(null, testReq.getAssignedWorker());
+        assertEquals("worker1", testReq.getAssignedWorker().getWorkerID());
         assertEquals(2, testReq.getOrder().size());
         assertTrue(testReq.getOrder().contains(menuItemManager.getMenuItemByName("Pudding")));
         assertTrue(testReq.getOrder().contains(menuItemManager.getMenuItemByName("Chicken")));

@@ -129,7 +129,7 @@ public class FoodRequestManager implements EntityManager{
                 "'" + fReq.getType() + "'," +
                 "'" + fReq.getDescription() + "'," +
                 "'" + fReq.getNode().getNodeID() + "'," +
-                "null)");
+                "'" + fReq.getAssignedWorker().getWorkerID() + "')");
         databaseGargoyle.destroyConnection();
 
         //Add all food items to the FOODORDER table

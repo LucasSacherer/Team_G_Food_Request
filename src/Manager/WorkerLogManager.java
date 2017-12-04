@@ -6,6 +6,7 @@ import Entity.WorkerLog;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class WorkerLogManager implements EntityManager{
         databaseGargoyle.executeUpdateOnDatabase("INSERT INTO WORKERLOG VALUES (" +
                 "'" + foodRequest.getName() + "', " +
                 "'" + foodRequest.getAssignedWorker().getWorkerID() + "', " +
-                "'" + foodRequest.getTimeCreated() + "', " +
+                "'" + Timestamp.valueOf(foodRequest.getTimeCreated()) + "', " +
                 "'" + Timestamp.valueOf(LocalDateTime.now()) + "')");
         databaseGargoyle.destroyConnection();
     }
