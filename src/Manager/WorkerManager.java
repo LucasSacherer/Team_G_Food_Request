@@ -86,4 +86,12 @@ public class WorkerManager implements EntityManager{
         }
         return null;
     }
+
+    /**
+     * Returns the worker list
+     * @return
+     */
+    public List<Worker> getWorkers() {
+        return workers;
+    }
 }
