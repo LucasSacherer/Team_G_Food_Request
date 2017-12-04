@@ -81,12 +81,12 @@ public class MenuItemManager implements EntityManager {
     public void modifyMenuItem(MenuItem modified){
         databaseGargoyle.createConnection();
         databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
-                "DESCRIPTION = '" + modified.getDescription() + "' " +
-                "STOCKAVAILABLE = '" + modified.getStockAvailable() + "' " +
-                "CALORIES = '" + modified.getStockAvailable() + "' " +
-                "ISVEGAN = '" + modified.getVegan().toString() + "' " +
-                "ISDIABETIC = '" + modified.getDiabetic() + "' " +
-                "ISGLUTTENFREE = '" + modified.getGluttenFree() + "' " +
+                "DESCRIPTION = '" + modified.getDescription() + "', " +
+                "STOCKAVAILABLE = " + modified.getStockAvailable() + ", " +
+                "CALORIES = " + modified.getCalories() + ", " +
+                "ISVEGAN = '" + modified.getVegan().toString() + "', " +
+                "ISDIABETIC = '" + modified.getDiabetic().toString() + "', " +
+                "ISGLUTTENFREE = '" + modified.getGluttenFree().toString() + "' " +
                 "WHERE FOODNAME = '" + modified.getFoodName() + "'");
         databaseGargoyle.destroyConnection();
     }

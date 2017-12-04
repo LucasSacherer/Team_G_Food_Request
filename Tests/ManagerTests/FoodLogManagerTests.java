@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class FoodLogManagerTests {
 
     @Test
-    public void testUpdateAdnGetFoodLog() {
+    public void testUpdateAndGetFoodLog() {
         DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
         FoodLogManager foodLogManager = new FoodLogManager(databaseGargoyle);
 
