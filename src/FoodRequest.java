@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 public class FoodRequest extends Application {
 
+    public FoodRequest(){}
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Load the Database
@@ -21,7 +22,6 @@ public class FoodRequest extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
-
 
     public void run(int xcoord, int ycoord, int windwoWidth, int windowLength, String cssPath, String destNodeID,
                     String originNode) throws ServiceException {
