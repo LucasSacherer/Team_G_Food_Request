@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-
+<AnchorPane fx:id="foodRequestHubPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton fx:id="toAdminEdit" layoutX="41.0" layoutY="216.0" onAction="#hubToAdminEdit" prefHeight="84.0" prefWidth="284.0" text="ADMIN EDIT" />
+      <JFXButton fx:id="toStaffMenuOrder" layoutX="41.0" layoutY="318.0" onAction="#hubToStaffMenuOrder" prefHeight="84.0" prefWidth="284.0" text="STAFF MENU ORDER" />
+      <JFXButton fx:id="toReports" layoutX="41.0" layoutY="436.0" onAction="#hubToReports" prefHeight="84.0" prefWidth="284.0" text="REPORTS" />
+   </children>
 </AnchorPane>
