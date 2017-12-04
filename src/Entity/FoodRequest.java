@@ -49,6 +49,8 @@ public class FoodRequest {
         return node;
     }
 
+    public Worker getAssignedWorker() { return assignedWorker; }
+
     public List<MenuItem> getOrder() {
         return order;
     }

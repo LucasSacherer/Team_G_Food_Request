@@ -206,4 +206,18 @@ public class FoodRequestManager implements EntityManager{
                 "AND TIMECREATED = '" + Timestamp.valueOf(fReq.getTimeCreated()) + "'");
         databaseGargoyle.destroyConnection();
     }
+
+    /**
+     * Gets the food request according to the name given
+     * @param foodName
+     * @return
+     */
+    public FoodRequest getFoodRequest(String foodName){
+        for (FoodRequest foodRequest: requests){
+            if (foodRequest.getName().equals(foodName)){
+                return foodRequest;
+            }
+        }
+        return null;
+    }
 }
