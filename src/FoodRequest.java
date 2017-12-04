@@ -16,7 +16,7 @@ public class FoodRequest extends Application {
         databaseGargoyle.destroyConnection();
 
         //Load the UI
-        Parent root = FXMLLoader.load(getClass().getResource("Boundary/sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Boundary/fxml/sample.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
