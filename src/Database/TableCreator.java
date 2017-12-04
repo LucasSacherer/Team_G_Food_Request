@@ -91,6 +91,7 @@ public class TableCreator {
         }
     }
 
+
     /**
      * Creates the FoodRequest table and adds a few test requests
      */
@@ -145,6 +146,19 @@ public class TableCreator {
                     " foodName VARCHAR(250) NOT NULL,\n" +
                     " timeCreated TIMESTAMP NOT NULL, \n" +
                     " nodeID VARCHAR(250) NOT NULL\n)");
+            System.out.println("FoodLog table created!");
+        } catch (SQLException e) {
+            System.out.println("FoodLog table already exists");
+            //e.printStackTrace();
+        }
+    }
+
+    public void createWorkerLogTable() {
+        try {
+            statement.execute("CREATE TABLE workerLog (\n" +
+                    " requestName VARCHAR(250) NOT NULL,\n" +
+                    " timeCreated TIMESTAMP NOT NULL, \n" +
+                    " timeCompleted TIMESTAMP NOT NULL\n)");
             System.out.println("FoodLog table created!");
         } catch (SQLException e) {
             System.out.println("FoodLog table already exists");
