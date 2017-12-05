@@ -1,5 +1,8 @@
 package Boundary.sceneControllers;
 
+import Controller.MenuController;
+import Controller.RequestController;
+import Controller.WorkerController;
 import Database.DatabaseGargoyle;
 import Entity.FoodRequest;
 import Entity.MenuItem;
@@ -28,6 +31,11 @@ public class AdminEditMenuController {
     private WorkerManager workerManager;
     private FoodRequestManager foodRequestManager;
     private WorkerLogManager workerLogManager;
+
+    /* Controllers */
+    private MenuController menuController;
+    private WorkerController workerController;
+    private RequestController requestController;
 
     /*Worker Tab */
     private JFXTextField username;
@@ -77,7 +85,8 @@ public class AdminEditMenuController {
                                    TreeTableColumn<FoodRequest,String> timeCreatedColumn, TreeTableColumn<FoodRequest,String> timeCompletedColumn,
                                    TreeTableColumn<FoodRequest,String> requestTypeColumn, TreeTableColumn<FoodRequest,String> descriptionRequestColumn,
                                    TreeTableColumn<FoodRequest,String> locationColumn, TreeTableColumn<FoodRequest,String> assignedWorkerColumn,
-                                   TreeTableColumn<MenuItem,String> veganColumn,TreeTableColumn<MenuItem,String> diabeticColumn,TreeTableColumn<MenuItem,String> gluttenFreeColumn){
+                                   TreeTableColumn<MenuItem,String> veganColumn,TreeTableColumn<MenuItem,String> diabeticColumn,TreeTableColumn<MenuItem,String> gluttenFreeColumn,
+                                    MenuController menuController, WorkerController workerController, RequestController requestController){
         this.databaseGargoyle = databaseGargoyle;
         this.nodeManager = nodeManager;
         this.foodLogManager = foodLogManager;
@@ -114,6 +123,9 @@ public class AdminEditMenuController {
         this.veganColumn = veganColumn;
         this.diabeticColumn = diabeticColumn;
         this.gluttenFreeColumn = gluttenFreeColumn;
+        this.workerController = workerController;
+        this.requestController = requestController;
+        this.menuController = menuController;
 
 
     }

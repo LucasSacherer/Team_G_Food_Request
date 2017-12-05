@@ -1,6 +1,7 @@
 package Boundary;
 
 import Boundary.sceneControllers.*;
+import Controller.*;
 import Database.DatabaseGargoyle;
 import Entity.FoodRequest;
 import Entity.MenuItem;
@@ -55,6 +56,14 @@ public class GodController {
 
 
     /* Entities */
+
+    /* Controllers */
+    CartController cartController = new CartController();
+    DirectoryController directoryController = new DirectoryController(nodeManager);
+    MenuController menuController = new MenuController(menuItemManager);
+    RequestController requestController = new RequestController(foodRequestManager,workerLogManager,foodLogManager);
+    SearchEngine searchEngine = new SearchEngine(nodeManager);
+    WorkerController workerController = new WorkerController(workerManager);
 
     /* Scene Switcher */
     SceneSwitcher sceneSwitcher = new SceneSwitcher();
@@ -401,7 +410,7 @@ public class GodController {
                 requestsTable, requestNameColumn,
                 timeCreatedColumn, timeCompletedColumn,
                 requestTypeColumn, descriptionRequestColumn,
-                locationColumn, assignedWorkerColumn, veganColumn, diabeticColumn, gluttenFreeColumn);
+                locationColumn, assignedWorkerColumn, veganColumn, diabeticColumn, gluttenFreeColumn, menuController, workerController, requestController);
     }
 
     private void initializeFoodRequestHubScene() {
