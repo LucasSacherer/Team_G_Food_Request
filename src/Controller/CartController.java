@@ -19,6 +19,7 @@ public class CartController {
 
     public void clearItems(){
         cart.clear();
+
     }
 
     public HashMap<String,Integer> getItems(){
