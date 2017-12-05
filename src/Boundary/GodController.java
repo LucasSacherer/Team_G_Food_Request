@@ -17,9 +17,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -183,6 +188,99 @@ public class GodController {
     @FXML
     private JFXButton reportsBack;
 
+    @FXML
+    private PieChart userOrderCreatePieChart;
+
+    @FXML
+    private PieChart userOrderCompletePieChart;
+
+    @FXML
+    private JFXTreeTableView<?> userOrderFrequencyTable;
+
+    @FXML
+    private TreeTableColumn<?, ?> userNameFColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> userIDFColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> userOrderFColumn;
+
+    @FXML
+    private JFXTreeTableView<?> userCreation;
+
+    @FXML
+    private TreeTableColumn<?, ?> userNameCColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> userIDCColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> userOrderCreatedCColumn1;
+
+    @FXML
+    private TreeTableColumn<?, ?> userOrderCompleteCColumn11;
+
+    @FXML
+    private PieChart itemFrequencyOrderPieChart;
+
+    @FXML
+    private PieChart itemRestrictionsPieChart;
+
+    @FXML
+    private JFXTreeTableView<?> itemFrequencyOrderTable;
+
+    @FXML
+    private TreeTableColumn<?, ?> itemNameFColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> itemDescriptionFColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> totalQuantityOrderedFColumn;
+
+    @FXML
+    private JFXTreeTableView<?> itemRestrictionsTable;
+
+    @FXML
+    private TreeTableColumn<?, ?> itemNameRColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> itemVeganRColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> itemDiabeticRColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> itemGlutenRColumn;
+
+    @FXML
+    private ImageView heatMapImageView;
+
+    @FXML
+    private Canvas heatMapCanvas;
+
+    @FXML
+    private JFXTreeTableView<?> requestReportTable;
+
+    @FXML
+    private TreeTableColumn<?, ?> orderNameColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> orderLocationColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> orderWorkerColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> orderDescriptionColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> orderTimeCreatedColumn;
+
+    @FXML
+    private TreeTableColumn<?, ?> orderTimeCompletedColumn;
+
     /* Staff Info Popup */
     @FXML
     private Pane foodInfoPane;
@@ -332,6 +430,7 @@ public class GodController {
     }
 
 
+
     //////////////////////
     /* Food Request Hub */
     //////////////////////
@@ -349,6 +448,15 @@ public class GodController {
     @FXML
     private void completeOrder() {
         foodRequestHubController.completeOrder();
+    }
+
+    /////////////
+    /* Reports */
+    /////////////
+
+    @FXML
+    public void reportsToHub(ActionEvent event) {
+        reportsController.reportsToHub();
     }
 
     ////////////////
