@@ -185,6 +185,18 @@ public class AdminEditMenuController {
             gluttenfree.setSelected(selectedMenuItem.getValue().getGluttenFree());
         }
     }
+    private void addMenu() {
+
+    }
+    private void deleteMenu() {
+
+    }
+    private void editMenu() {
+
+    }
+    private void clearMenu(){
+
+    }
     private void initializeRequestsTab(){
         foodRequestManager.update();
 
@@ -236,6 +248,15 @@ public class AdminEditMenuController {
         }
 
     }
+    private void deleteRequest() {
+
+    }
+    private void deleteAllRequests() {
+
+    }
+    private void cancelRequest() {
+
+    }
     private void initializeWorkerTab(){
          workerManager.update();
 
@@ -263,6 +284,24 @@ public class AdminEditMenuController {
             username.setText(selectedWorker.getValue().getUsername());
             workerID.setText(selectedWorker.getValue().getWorkerID());
         }
+    }
+    private void addWorker() {
+        try {
+            workerController.addWorker( new Worker(workerID.getText(),username.getText()));
+        }catch (Exception e) {
+            System.out.println("Textfields are empty");
+        }
+
+
+    }
+    private void deleteWorker() {
+
+    }
+    private void editWorker() {
+
+    }
+    private void clearWorker(){
+
     }
 
 }
