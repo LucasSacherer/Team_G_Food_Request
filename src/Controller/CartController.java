@@ -5,22 +5,24 @@ import Entity.MenuItem;
 import java.util.HashMap;
 
 public class CartController {
-    HashMap<MenuItem,Integer> cart = new HashMap<>();
+    HashMap<String,Integer> cart = new HashMap<>();
     public CartController(){}
 
-    public void addItemToCart(MenuItem item){
-        if (cart.containsKey(item)){
-            cart.put(item,cart.get(item)+1);
+    public void addItemToCart(MenuItem item, int qty){
+        if (cart.containsKey(item.getFoodName())){
+            cart.put(item.getFoodName(),cart.get(item)+qty);
         }
         else{
-            cart.put(item,1);
+            cart.put(item.getFoodName(),qty);
         }
     }
+
     public void clearItems(){
         cart.clear();
+
     }
 
-    public HashMap<MenuItem,Integer> getItems(){
+    public HashMap<String,Integer> getItems(){
         return cart;
     }
 
