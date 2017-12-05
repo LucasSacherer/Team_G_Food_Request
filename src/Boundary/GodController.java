@@ -155,17 +155,6 @@ public class GodController {
 
     /* Staff Info Popup */
 
-    @FXML
-    private JFXTreeTableView<MenuItem> foodMenu;
-
-    @FXML
-    private TreeTableColumn<MenuItem, String> foodItemName;
-
-    @FXML
-    private TreeTableColumn<MenuItem, Integer> foodItemNutritionFacts;
-
-    @FXML
-    private TreeTableColumn<MenuItem, String> foodItemDescription;
 
 
     /* Staff Menu Order */
