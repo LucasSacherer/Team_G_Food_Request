@@ -114,4 +114,21 @@ public class MenuItemManager implements EntityManager {
     public List<MenuItem> getMenuItems(){
         return menuItems;
     }
+
+    /**
+     * Modifies the menu item
+     * @param modified
+     */
+    public void modifyMenuItem(MenuItem modified){
+        databaseGargoyle.createConnection();
+        databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
+                "DESCRIPTION = '" + modified.getDescription() + "', " +
+                "STOCKAVAILABLE = " + modified.getStockAvailable() + ", " +
+                "CALORIES = " + modified.getCalories() + ", " +
+                "ISVEGAN = '" + modified.getVegan().toString() + "', " +
+                "ISDIABETIC = '" + modified.getDiabetic().toString() + "', " +
+                "ISGLUTTENFREE = '" + modified.getGluttenFree().toString() + "' " +
+                "WHERE FOODNAME = '" + modified.getFoodName() + "'");
+        databaseGargoyle.destroyConnection();
+    }
 }

@@ -88,9 +88,10 @@ public class TableCreator {
             statement.executeUpdate("INSERT INTO WORKER VALUES ('worker2','worker2Username')");
         } catch (SQLException e) {
             System.out.println("Worker table already exists");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
+
 
     /**
      * Creates the FoodRequest table and adds a few test requests
@@ -147,8 +148,27 @@ public class TableCreator {
                     " timeCreated TIMESTAMP NOT NULL, \n" +
                     " nodeID VARCHAR(250) NOT NULL\n)");
             System.out.println("FoodLog table created!");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Milk','1969-01-01 23:03:20', 'GRETL03501')");
         } catch (SQLException e) {
             System.out.println("FoodLog table already exists");
+            //e.printStackTrace();
+        }
+    }
+
+    /**
+     * Creates the WorkerLog
+     */
+    public void createWorkerLogTable() {
+        try {
+            statement.execute("CREATE TABLE workerLog (\n" +
+                    " requestName VARCHAR(250) NOT NULL,\n" +
+                    " workerID VARCHAR(250) NOT NULL,\n" +
+                    " timeCreated TIMESTAMP NOT NULL, \n" +
+                    " timeCompleted TIMESTAMP NOT NULL\n)");
+            System.out.println("WorkerLog table created!");
+            statement.executeUpdate("INSERT INTO WORKERLOG VALUES ('requestName', 'workerID', '1969-01-01 23:03:20', '1969-02-01 23:03:20')");
+        } catch (SQLException e) {
+            System.out.println("WorkerLog table already exists");
             //e.printStackTrace();
         }
     }

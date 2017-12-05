@@ -129,7 +129,7 @@ public class FoodRequestManager implements EntityManager{
                 "'" + fReq.getType() + "'," +
                 "'" + fReq.getDescription() + "'," +
                 "'" + fReq.getNode().getNodeID() + "'," +
-                "null)");
+                "'" + fReq.getAssignedWorker().getWorkerID() + "')");
         databaseGargoyle.destroyConnection();
 
         //Add all food items to the FOODORDER table
@@ -142,11 +142,6 @@ public class FoodRequestManager implements EntityManager{
             }
         }
 
-        //Update the Menu Item stock counts
-        for (MenuItem item: fReq.getOrder()){
-            menuItemManager.removeStock(item, 1);
-        }
-
         //Add its order to the food log
         foodLogManager.addFoodLog(fReq);
     }
@@ -157,11 +152,6 @@ public class FoodRequestManager implements EntityManager{
      * @param fReq
      */
     public void deleteRequest(FoodRequest fReq){
-        //Update the Menu Item stock counts
-        for (MenuItem item: fReq.getOrder()){
-            menuItemManager.addStock(item, 1);
-        }
-
         //Remove all food orders of this request from the database
         databaseGargoyle.createConnection();
         databaseGargoyle.executeUpdateOnDatabase("DELETE FROM FOODORDER " +
@@ -190,7 +180,39 @@ public class FoodRequestManager implements EntityManager{
      * @return
      */
     public List<FoodRequest> getCompleted(){
-        return null;
+        List<FoodRequest> completed = new ArrayList<>();
+        String name, type, description, nodeID, workerID;
+        LocalDateTime timeCreated, timeCompleted;
+        Node node;
+        Worker worker;
+        List<MenuItem> order;
+
+        databaseGargoyle.createConnection();
+        ResultSet rs = databaseGargoyle.executeQueryOnDatabase("SELECT * FROM FOODREQUEST");
+        try {
+            while (rs.next()){
+                name = rs.getString("NAME");
+                timeCreated = rs.getTimestamp("TIMECREATED").toLocalDateTime();
+                timeCompleted = rs.getTimestamp("TIMECOMPLETED").toLocalDateTime();
+                type = rs.getString("TYPE");
+                description = rs.getString("DESCRIPTION");
+                nodeID = rs.getString("NODEID");
+                workerID = rs.getString("WORKERID");
+                node = nodeManager.getNode(nodeID);
+                if (workerID != null){
+                    worker = workerManager.getWorkerByID(workerID);
+                } else worker = null;
+                order = getFoodOrders(name, Timestamp.valueOf(timeCreated));
+                if(!timeCreated.equals(timeCompleted)) {
+                    completed.add(new FoodRequest(name, timeCreated, timeCompleted, type, description, node, worker, order));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to get food requests from database!");
+            e.printStackTrace();
+        }
+        databaseGargoyle.destroyConnection();
+        return completed;
     }
 
     /**
@@ -206,6 +228,13 @@ public class FoodRequestManager implements EntityManager{
                 "AND TIMECREATED = '" + Timestamp.valueOf(fReq.getTimeCreated()) + "'");
         databaseGargoyle.destroyConnection();
     }
+    /*
+    public List<FoodRequest> getUnassignedRequests(String name){
+
+    }
+    public List<FoodRequest> getAssignedRequests(){
+
+    }*/
 
     /**
      * Gets the food request according to the name given
@@ -219,5 +248,36 @@ public class FoodRequestManager implements EntityManager{
             }
         }
         return null;
+    }
+
+    /**
+     * FOR TESTING ONLY
+     * @param original
+     */
+    public void revertFoodRequest(FoodRequest original){
+        //Update the request in the database
+        databaseGargoyle.createConnection();
+        databaseGargoyle.executeUpdateOnDatabase("UPDATE FOODREQUEST SET " +
+                "TIMECOMPLETED = '" + Timestamp.valueOf(original.getTimeCompleted()) + "', " +
+                "TYPE = '" + original.getType() + "', " +
+                "DESCRIPTION = '" + original.getDescription() + "', " +
+                "NODEID = '" + original.getNode().getNodeID() + "', " +
+                "WORKERID = '" + original.getAssignedWorker().getWorkerID() + "' " +
+                "WHERE NAME = '" + original.getName() + "' " +
+                "AND TIMECREATED = '" + Timestamp.valueOf(original.getTimeCreated()) + "'");
+        databaseGargoyle.destroyConnection();
+
+        //Remove all FOODORERS of this request in the DB and add the new ones
+        databaseGargoyle.createConnection();
+        databaseGargoyle.executeUpdateOnDatabase("DELETE FROM FOODORDER " +
+                "WHERE REQUESTNAME = '" + original.getName() +"' " +
+                "AND TIMECREATED = '" + Timestamp.valueOf(original.getTimeCreated()) + "'");
+        databaseGargoyle.destroyConnection();
+        for (MenuItem item: original.getOrder()){
+            databaseGargoyle.createConnection();
+            databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODORDER VALUES (" +
+                    "'" + original.getName() + "','"+ Timestamp.valueOf(original.getTimeCreated()) + "','" + item.getFoodName() + "')");
+            databaseGargoyle.destroyConnection();
+        }
     }
 }
