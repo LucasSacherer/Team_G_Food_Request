@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 public class FoodRequest extends Application {
 
+    public FoodRequest(){}
     @Override
     public void start(Stage primaryStage) throws Exception{
         DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
@@ -32,7 +33,6 @@ public class FoodRequest extends Application {
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
-
 
     public void run(int xcoord, int ycoord, int windwoWidth, int windowLength, String cssPath, String destNodeID,
                     String originNode) throws ServiceException {
