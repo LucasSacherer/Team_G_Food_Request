@@ -68,12 +68,13 @@ public class SearchEngine {
         String word = wd.toLowerCase();
         List<Node> places = places();
         List<String> wordList =  new ArrayList<>();
-        for(String s: wordList){
-            s = s.toLowerCase();
-        }
+
         for(Node n: places){
-            wordList.add(n.getShortName());
+            wordList.add(n.getShortName().toLowerCase());
         }
+
+        System.out.println(wordList);
+
         List<Node> results = new ArrayList<>();
         double fuzzyness = 0.5;//basically the allowed error - adjust as needed
         List<Integer> matches = new ArrayList<Integer>();

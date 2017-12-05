@@ -33,6 +33,27 @@ public class SearchEngineTest {
 
         System.out.println(names);
 
+    }
+
+    @Test
+    public void testLowerCafe(){
+        DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
+        FoodLogManager foodLogManager = new FoodLogManager(databaseGargoyle);
+        NodeManager nodeManager = new NodeManager(databaseGargoyle);
+        MenuItemManager menuItemManager = new MenuItemManager(databaseGargoyle);
+        databaseGargoyle.attachManager(foodLogManager);
+        databaseGargoyle.attachManager(nodeManager);
+        databaseGargoyle.attachManager(menuItemManager);
+        databaseGargoyle.notifyManagers();
+        SearchEngine se = new SearchEngine(nodeManager);
+        List<Node> answer = (se.Search("cafe"));
+        List<String> names = new ArrayList<>();
+        for(Node n: answer){
+            names.add(n.getShortName());
+        }
+
+        System.out.println(names);
+
 
 
     }
