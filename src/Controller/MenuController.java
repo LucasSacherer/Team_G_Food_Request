@@ -64,6 +64,15 @@ public class MenuController {
     }
 
     public void addMenuItem(MenuItem newItem){
+        if(newItem.getFoodName().contains(",") || (newItem.getDescription().contains(","))){
+            //prompt user to remove commas
+        }
+        else if((!(newItem.getStockAvailable()>0)&&(newItem.getStockAvailable()< 2147483647))||!((newItem.getPrice() > 0)&&(newItem.getPrice()< 2147483647))){
+            //promt user to type in valid stock and or calories value
+        }
+        else{
+
+        }
           //call addMenuItem from mim
     }
 }
