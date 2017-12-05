@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkerManager implements EntityManager{
-
     private List<Worker> workers;
     private DatabaseGargoyle databaseGargoyle;
 
@@ -88,6 +87,10 @@ public class WorkerManager implements EntityManager{
         return null;
     }
 
+    /**
+     * Returns the worker list
+     * @return
+     */
     public List<Worker> getWorkers() {
         return workers;
     }

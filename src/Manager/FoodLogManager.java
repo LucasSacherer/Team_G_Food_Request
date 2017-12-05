@@ -1,17 +1,48 @@
 package Manager;
 
 import Database.DatabaseGargoyle;
+import Entity.FoodLog;
 import Entity.FoodRequest;
 import Entity.MenuItem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FoodLogManager {
+public class FoodLogManager implements EntityManager {
     private DatabaseGargoyle databaseGargoyle;
+    private List<FoodLog> foodLog;
 
     public FoodLogManager(DatabaseGargoyle databaseGargoyle) {
+        this.foodLog = new ArrayList<>();
         this.databaseGargoyle = databaseGargoyle;
+    }
+
+    /**
+     * Updates the food log to be up to date with the database
+     */
+    public void update(){
+        String foodName, nodeID;
+        LocalDateTime timeCreated;
+        foodLog.clear();
+
+        databaseGargoyle.createConnection();
+        ResultSet rs = databaseGargoyle.executeQueryOnDatabase("SELECT * FROM FOODLOG");
+        try {
+            while (rs.next()) {
+                foodName = rs.getString("FOODNAME");
+                timeCreated = rs.getTimestamp("TIMECREATED").toLocalDateTime();
+                nodeID = rs.getString("NODEID");
+                foodLog.add(new FoodLog(foodName, timeCreated, nodeID));
+            }
+        }catch (SQLException ex){
+            System.out.println("Failed to update the Food Log!");
+            ex.printStackTrace();
+        }
+        databaseGargoyle.destroyConnection();
     }
 
     /**
@@ -22,31 +53,18 @@ public class FoodLogManager {
         for (MenuItem item: foodRequest.getOrder()){
             databaseGargoyle.createConnection();
             databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODLOG VALUES (" +
-                    "'" + foodRequest.getName() + "', " +
-                    "'" + foodRequest.getTimeCreated() + "', " +
+                    "'" + item.getFoodName() + "', " +
+                    "'" + Timestamp.valueOf(foodRequest.getTimeCreated()) + "', " +
                     "'" + foodRequest.getNode().getNodeID() + "')");
             databaseGargoyle.destroyConnection();
         }
     }
 
     /**
-     * Returns the number of times the given food name appears in the foodlogs
-     * @param foodName
+     * Returns the food log
      * @return
      */
-    public int getCountOfFood(String foodName){
-        databaseGargoyle.createConnection();
-        ResultSet rs = databaseGargoyle.executeQueryOnDatabase("SELECT COUNT(*) " +
-                "FROM FOODLOG " +
-                "WHERE FOODNAME = '" + foodName + "'");
-        databaseGargoyle.destroyConnection();
-        try {
-            if (rs.next()){
-                return rs.getInt(0);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
+    public List<FoodLog> getFoodLog() {
+        return foodLog;
     }
 }
