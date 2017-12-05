@@ -42,7 +42,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setElevatorOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -64,7 +64,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setRestroomOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -86,7 +86,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setStairsOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -108,7 +108,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setDepartmentsOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -130,7 +130,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setLabsOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -152,7 +152,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setInfoDesksOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -174,7 +174,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setConferenceOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -196,7 +196,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setExitOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -218,7 +218,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setShopsOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -240,7 +240,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false" onAction="#setNonMedicalOrigin" text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -281,7 +281,7 @@
                                                                 <Font size="16.0" />
                                                             </font>
                                                         </JFXTextField>
-                                                        <JFXButton buttonType="RAISED" cancelButton="true" onAction="#resetOrigin" text="X" />
+                                                        <JFXButton buttonType="RAISED" cancelButton="true"  text="X" />
                                                     </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT">
@@ -298,7 +298,7 @@
                                                         </JFXTextField>
                                                     </children>
                                                 </HBox>
-                                                <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#directoryNavigate" prefHeight="75.0" prefWidth="78.0" text="Navigate">
+                                                <JFXButton contentDisplay="GRAPHIC_ONLY"  prefHeight="75.0" prefWidth="78.0" text="Navigate">
                                                     <font>
                                                         <Font name="System Bold" size="18.0" />
                                                     </font>
