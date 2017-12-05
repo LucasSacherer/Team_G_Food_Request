@@ -1,5 +1,6 @@
 import Boundary.GodController;
 import Database.DatabaseGargoyle;
+import com.sun.javafx.css.StyleManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,8 +26,10 @@ public class FoodRequest extends Application {
         loader.setController(godController);
         godController.initialize();
         Parent root = loader.load();
+        Scene scene = new Scene(root,800,600);
         primaryStage.setTitle("B&W Path Finding");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("/boundary/APIStyle.css").toExternalForm());
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
