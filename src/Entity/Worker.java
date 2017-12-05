@@ -1,6 +1,8 @@
 package Entity;
 
-public class Worker {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Worker extends RecursiveTreeObject<Worker> {
     public String workerID;
     public String username;
 

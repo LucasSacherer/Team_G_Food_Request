@@ -1,6 +1,8 @@
 package Entity;
 
-public class MenuItem {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class MenuItem extends RecursiveTreeObject<MenuItem> {
     private String foodName;
     private String description;
     private int stockAvailable;

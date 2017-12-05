@@ -1,3 +1,4 @@
+import Boundary.GodController;
 import Database.DatabaseGargoyle;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,16 +11,23 @@ public class FoodRequest extends Application {
     public FoodRequest(){}
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //Load the Database
         DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
         databaseGargoyle.createConnection();
         databaseGargoyle.createTables();
         databaseGargoyle.destroyConnection();
 
-        //Load the UI
-        Parent root = FXMLLoader.load(getClass().getResource("Boundary/fxml/sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+//        Parent root = FXMLLoader.load(getClass().getResource("Boundary/fxml/foodRequestHub.fxml"));
+//        primaryStage.setTitle("Hello World");
+//        primaryStage.setScene(new Scene(root, 300, 275));
+//        primaryStage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("boundary/fxml/foodRequestHub.fxml"));
+        GodController godController = new GodController();
+        loader.setController(godController);
+        godController.initialize();
+        Parent root = loader.load();
+        primaryStage.setTitle("B&W Path Finding");
+        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
@@ -28,3 +36,4 @@ public class FoodRequest extends Application {
         launch();
     }
 }
+
