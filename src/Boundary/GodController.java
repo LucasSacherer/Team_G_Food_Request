@@ -50,6 +50,8 @@ public class GodController {
     WorkerManager workerManager = new WorkerManager(databaseGargoyle);
     FoodRequestManager foodRequestManager = new FoodRequestManager(databaseGargoyle, nodeManager,
             workerManager, menuItemManager, foodLogManager);
+    WorkerLogManager workerLogManager = new WorkerLogManager(databaseGargoyle);
+
 
 
     /* Entities */
@@ -385,12 +387,13 @@ public class GodController {
         initializeReportsScene();
         initializeStaffIntoPopupScene();
         initializeStaffMenuOrderScene();
+        initializeObservers();
     }
 
 
     private void initializeAdminEditMenuScene() {
         adminEditMenuController = new AdminEditMenuController(databaseGargoyle, nodeManager, foodLogManager, menuItemManager, workerManager,
-                foodRequestManager, username, workerID, workersTable,
+                foodRequestManager, workerLogManager, username, workerID, workersTable,
                 workerIDColumn, usernameColumn,
                 foodName, stockAvailable, calories,
                 descriptionItem, vegan, diabetic, gluttenfree, menuTable, foodNameColumn, descriptionColumn, stockAvailableColumn,
@@ -516,6 +519,15 @@ public class GodController {
         } catch (Exception e) {
             System.out.println("Cant load Menu Info");
         }
+    }
+    void initializeObservers(){
+        databaseGargoyle.attachManager(foodLogManager);
+        databaseGargoyle.attachManager(menuItemManager);
+        databaseGargoyle.attachManager(nodeManager);
+        databaseGargoyle.attachManager(workerManager);
+        databaseGargoyle.attachManager(foodRequestManager);
+        databaseGargoyle.attachManager(workerManager);
+        databaseGargoyle.notifyManagers();
     }
 
     @FXML
