@@ -76,7 +76,7 @@ public class SearchEngineTest {
         System.out.println(names);
 
 
-        List<Node> answer2 = (se.Search("Cafe"));
+        List<Node> answer2 = (se.Search("ATM"));
         List<String> names2 = new ArrayList<>();
         for(Node n: answer2){
             names2.add(n.getShortName());
