@@ -71,8 +71,14 @@ public class MenuController {
             //promt user to type in valid stock and or calories value
         }
         else{
-
+            //call addMenuItem from mim
+            mim.addMenuItem(newItem);
         }
-          //call addMenuItem from mim
+    }
+
+    public void removeMenuItem(MenuItem delete){
+        if(mim.getMenuItemByName(delete.getFoodName()) != null){
+            mim.removeMenuItem(delete);
+        }
     }
 }
