@@ -10,9 +10,10 @@ public class MenuItem extends RecursiveTreeObject<MenuItem> {
     private Boolean isVegan;
     private Boolean isDiabetic;
     private Boolean isGluttenFree;
+    private int price;
 
     public MenuItem(String foodName, String description, int stockAvailable,
-                    int calories, Boolean isVegan, Boolean isDiabetic, Boolean isGluttenFree) {
+                    int calories, Boolean isVegan, Boolean isDiabetic, Boolean isGluttenFree, int price) {
         this.foodName = foodName;
         this.description = description;
         this.stockAvailable = stockAvailable;
@@ -20,6 +21,7 @@ public class MenuItem extends RecursiveTreeObject<MenuItem> {
         this.isVegan = isVegan;
         this.isDiabetic = isDiabetic;
         this.isGluttenFree = isGluttenFree;
+        this.price = price;
     }
 
     public String getFoodName() {
@@ -49,4 +51,6 @@ public class MenuItem extends RecursiveTreeObject<MenuItem> {
     public Boolean getGluttenFree() {
         return isGluttenFree;
     }
+
+    public int getPrice() { return price; }
 }

@@ -1,14 +1,14 @@
-Burger,Hamburger with cheese tomato and lettuce,50,350,FALSE,FALSE,FALSE
-Pizza,Slice of cheese pizza,40,250,FALSE,FALSE,FALSE
-Soup,Bowl of vegetable soup,60,200,TRUE,TRUE,TRUE
-Fruit,Bowl of fresh fruit,30,150,TRUE,TRUE,TRUE
-Ice Cream,Vanilla ice cream cup,30,250,FALSE,FALSE,TRUE
-Pudding,Hospital pudding,30,200,TRUE,FALSE,TRUE
-Cereal,Bowl of cereal and milk,40,200,FALSE,TRUE,FALSE
-Water,Bottled water,100,0,TRUE,TRUE,TRUE
-Apple Juice,Bottle of apple juice,25,50,TRUE,TRUE,TRUE
-Candy,Halloween milk chocolate,0,100,FALSE,FALSE,TRUE
-Vegan Cupcake,Vegan chocolate cupcake,10,200,TRUE,FALSE,FALSE
-Milk,Small carton of milk,45,100,FALSE,TRUE,TRUE
-Fruit bread,Bread with nuts and fruit in it,35,175,TRUE,TRUE,FALSE
-Chicken,Grilled chicken breast,35,200,FALSE,TRUE,TRUE
+Burger,Hamburger with cheese tomato and lettuce,50,350,FALSE,FALSE,FALSE,5
+Pizza,Slice of cheese pizza,40,250,FALSE,FALSE,FALSE,2
+Soup,Bowl of vegetable soup,60,200,TRUE,TRUE,TRUE,3
+Fruit,Bowl of fresh fruit,30,150,TRUE,TRUE,TRUE,2
+Ice Cream,Vanilla ice cream cup,30,250,FALSE,FALSE,TRUE,2
+Pudding,Hospital pudding,30,200,TRUE,FALSE,TRUE,2
+Cereal,Bowl of cereal and milk,40,200,FALSE,TRUE,FALSE,2
+Water,Bottled water,100,0,TRUE,TRUE,TRUE,1
+Apple Juice,Bottle of apple juice,25,50,TRUE,TRUE,TRUE,1
+Candy,Halloween milk chocolate,0,100,FALSE,FALSE,TRUE,1
+Vegan Cupcake,Vegan chocolate cupcake,10,200,TRUE,FALSE,FALSE,2
+Milk,Small carton of milk,45,100,FALSE,TRUE,TRUE,1
+Fruit bread,Bread with nuts and fruit in it,35,175,TRUE,TRUE,FALSE,3
+Chicken,Grilled chicken breast,35,200,FALSE,TRUE,TRUE,5
