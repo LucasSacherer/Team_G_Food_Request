@@ -28,11 +28,11 @@
             </ImageView>
          </right>
          <center>
-            <TreeTableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TreeTableView fx:id="foodMenu" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TreeTableColumn prefWidth="174.99998474121094" text="Food Item" />
-                <TreeTableColumn prefWidth="182.00001525878906" text="Nutrition Facts" />
-                  <TreeTableColumn prefWidth="705.3333435058594" text="Desciption" />
+                <TreeTableColumn fx:id="foodItemName" prefWidth="174.99998474121094" text="Food Item" />
+                <TreeTableColumn fx:id="foodItemNutritionFacts" prefWidth="182.00001525878906" text="Nutrition Facts" />
+                  <TreeTableColumn fx:id="foodItemDescription" prefWidth="705.3333435058594" text="Desciption" />
               </columns>
             </TreeTableView>
          </center>

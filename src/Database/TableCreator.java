@@ -87,7 +87,7 @@ public class TableCreator {
             statement.executeUpdate("INSERT INTO WORKER VALUES ('worker2','worker2Username')");
         } catch (SQLException e) {
             System.out.println("Worker table already exists");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
