@@ -21,7 +21,7 @@ public class MenuItemManager implements EntityManager {
      */
     public void update() {
         String foodName, description;
-        int stockAvailable, calories;
+        int stockAvailable, calories, price;
         Boolean isVegan, isDiabetic, isGluttenFree;
 
         menuItems.clear();
@@ -43,7 +43,8 @@ public class MenuItemManager implements EntityManager {
                 if (rs.getString("ISGLUTTENFREE").equalsIgnoreCase("true")){
                     isGluttenFree = true;
                 } else isGluttenFree = false;
-                menuItems.add(new MenuItem(foodName, description, stockAvailable, calories, isVegan, isDiabetic, isGluttenFree));
+                price = rs.getInt("PRICE");
+                menuItems.add(new MenuItem(foodName, description, stockAvailable, calories, isVegan, isDiabetic, isGluttenFree, price));
             }
         } catch (SQLException e) {
             System.out.println("Failed to get Menu Items from database!");
@@ -75,6 +76,20 @@ public class MenuItemManager implements EntityManager {
         databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
                 "STOCKAVAILABLE = '" + (menuItem.getStockAvailable()-amount) + "' " +
                 "WHERE FOODNAME = '" + menuItem.getFoodName() + "'");
+        databaseGargoyle.destroyConnection();
+    }
+
+    public void addMenuItem(MenuItem newMenuItem){
+        databaseGargoyle.createConnection();
+        databaseGargoyle.executeUpdateOnDatabase("INSERT INTO MENUITEM VALUES (" +
+                "'" + newMenuItem.getFoodName() + "', " +
+                "'" + newMenuItem.getDescription() + "', " +
+                "'" + newMenuItem.getStockAvailable() + "', " +
+                "'" + newMenuItem.getCalories() + "', " +
+                "'" + newMenuItem.getVegan() + "', " +
+                "'" + newMenuItem.getDiabetic() + "', " +
+                "'" + newMenuItem.getGluttenFree() + "', " +
+                "'" + newMenuItem.getPrice() + "')");
         databaseGargoyle.destroyConnection();
     }
 
