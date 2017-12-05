@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -133,10 +134,13 @@
                               <Font size="30.0" />
                            </font>
                         </JFXButton>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
+                        <ImageView fitHeight="182.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
                            <image>
                               <Image url="@../Pictures/BWH.png" />
                            </image>
+                           <GridPane.margin>
+                              <Insets left="120.0" top="30.0" />
+                           </GridPane.margin>
                         </ImageView>
                         <Label text="Food Request Hub" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                            <font>
