@@ -73,7 +73,7 @@ public class GodController {
     private Label workerID;
 
     @FXML
-    private JFXButton addWorker, cancelWorker, deleteWorker, deleteAllWorkers, exportWorkers;
+    private JFXButton addWorker, cancelWorker, deleteWorker, editWorker, exportWorkers;
 
     @FXML
     private JFXTreeTableView<Worker> workersTable = new JFXTreeTableView<Worker>();
@@ -91,7 +91,7 @@ public class GodController {
     private JFXTextArea descriptionItem;
 
     @FXML
-    private JFXButton addItem, cancelItem, deleteItem, deleteAllItem, exportItem;
+    private JFXButton addItem, cancelItem, deleteItem, editItem, exportItem;
 
     @FXML
     private JFXToggleButton vegan, diabetic, gluttenfree;
