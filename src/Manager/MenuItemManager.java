@@ -54,42 +54,31 @@ public class MenuItemManager implements EntityManager {
     }
 
     /**
-     * Adds the amount specified to the stock count of the menu item specified
-     * @param menuItem
-     * @param amount
+     * Adds a new menu item to the database
+     * @param newMenuItem
      */
-    public void addStock(MenuItem menuItem, int amount){
-        databaseGargoyle.createConnection();
-        databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
-                "STOCKAVAILABLE = '" + (menuItem.getStockAvailable()+amount) + "' " +
-                "WHERE FOODNAME = '" + menuItem.getFoodName() + "'");
-        databaseGargoyle.destroyConnection();
-    }
-
-    /**
-     * Removes the amount specified to the stock count of the menu item specified
-     * @param menuItem
-     * @param amount
-     */
-    public void removeStock(MenuItem menuItem, int amount){
-        databaseGargoyle.createConnection();
-        databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
-                "STOCKAVAILABLE = '" + (menuItem.getStockAvailable()-amount) + "' " +
-                "WHERE FOODNAME = '" + menuItem.getFoodName() + "'");
-        databaseGargoyle.destroyConnection();
-    }
-
     public void addMenuItem(MenuItem newMenuItem){
         databaseGargoyle.createConnection();
         databaseGargoyle.executeUpdateOnDatabase("INSERT INTO MENUITEM VALUES (" +
                 "'" + newMenuItem.getFoodName() + "', " +
                 "'" + newMenuItem.getDescription() + "', " +
-                "'" + newMenuItem.getStockAvailable() + "', " +
-                "'" + newMenuItem.getCalories() + "', " +
+                "" + newMenuItem.getStockAvailable() + ", " +
+                "" + newMenuItem.getCalories() + ", " +
                 "'" + newMenuItem.getVegan() + "', " +
                 "'" + newMenuItem.getDiabetic() + "', " +
                 "'" + newMenuItem.getGluttenFree() + "', " +
-                "'" + newMenuItem.getPrice() + "')");
+                "" + newMenuItem.getPrice() + ")");
+        databaseGargoyle.destroyConnection();
+    }
+
+    /**
+     * Removes a menu item from the database
+     * @param oldMenuItem
+     */
+    public void removeMenuItem(MenuItem oldMenuItem){
+        databaseGargoyle.createConnection();
+        databaseGargoyle.executeUpdateOnDatabase("DELETE FROM MENUITEM WHERE " +
+                "FOODNAME = '" + oldMenuItem.getFoodName() + "'");
         databaseGargoyle.destroyConnection();
     }
 
