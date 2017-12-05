@@ -8,19 +8,21 @@ import java.util.*;
 
 public class SearchEngine {
     NodeManager nm;
+    DirectoryController dc;
 
     public SearchEngine(NodeManager nm){
         this.nm = nm;
+        dc = new DirectoryController(nm);
     }
-
-    DirectoryController dc = new DirectoryController(nm);
 
     private  List<Node> places(){
         HashMap<String,ObservableList<Node>>  directory = dc.getDirectory();
+        List<Node> locations = new ArrayList<>();
         Collection<ObservableList<Node>> nodeCollection = directory.values();
-        Node[] nodes = nodeCollection.toArray(new Node[0]);
-        List<Node> places = Arrays.asList(nodes);
-        return places;
+        for (ObservableList<Node> n : nodeCollection){
+            locations.addAll(n);
+        }
+        return locations;
     }
     //put list of list into lists of names
 
@@ -62,8 +64,8 @@ public class SearchEngine {
         return d[str1.length][ str2.length];
     }
 
-
-    public  List<Node> Search(String word){
+    public  List<Node> Search(String wd){
+        String word = wd.toLowerCase();
         List<Node> places = places();
         List<String> wordList =  new ArrayList<>();
         for(Node n: places){
@@ -72,26 +74,31 @@ public class SearchEngine {
         List<Node> results = new ArrayList<>();
         double fuzzyness = 0.5;//basically the allowed error - adjust as needed
         List<Integer> matches = new ArrayList<Integer>();
+        while (results.size() < 6) {
+            for (int i = 0; i < wordList.size(); i++) {
+                String s = wordList.get(i);
+                // Calculate the Levenshtein-distance:
+                int levenshteinDistance = LevenshteinDistance(word, s);
 
-        for (int i = 0; i < wordList.size(); i++){
-            String s = wordList.get(i);
-            // Calculate the Levenshtein-distance:
-            int levenshteinDistance = LevenshteinDistance(word, s);
+                // Length of the longer string:
+                int length = Math.max(word.length(), s.length());
 
-            // Length of the longer string:
-            int length = Math.max(word.length(), s.length());
+                // Calculate the score:
+                double score = 1.0 - (double) levenshteinDistance / length;
 
-            // Calculate the score:
-            double score = 1.0 - (double)levenshteinDistance / length;
-
-            // Match?
-            if (score > fuzzyness) {
-                matches.add(i);
+                // Match?
+                if (score > fuzzyness & (!matches.contains(i))) {
+                    matches.add(i);
+                }
             }
+            if(fuzzyness > 0.3 ){
+                fuzzyness -= 0.1;
+            }
+            else break;
         }
-
-        for (int i : matches){
-            Node node = places.get(i);
+        for ( int i = 0; i < 6; i++){
+            int m = matches.get(i);
+            Node node = places.get(m);
             results.add(node);
         }
         return results;
