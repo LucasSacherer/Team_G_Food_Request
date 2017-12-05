@@ -68,6 +68,9 @@ public class SearchEngine {
         String word = wd.toLowerCase();
         List<Node> places = places();
         List<String> wordList =  new ArrayList<>();
+        for(String s: wordList){
+            s = s.toLowerCase();
+        }
         for(Node n: places){
             wordList.add(n.getShortName());
         }

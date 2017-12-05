@@ -51,11 +51,10 @@ public class FoodRequest extends RecursiveTreeObject<FoodRequest> {
     public Node getNode() {
         return node;
     }
+
     public Worker getAssignedWorker() {
         return assignedWorker;
     }
-
-    public Worker getAssignedWorker() { return assignedWorker; }
 
     public List<MenuItem> getOrder() {
         return order;
