@@ -119,19 +119,19 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <JFXButton fx:id="toAdminEdit" buttonType="RAISED" onAction="#hubToAdminEdit" prefHeight="84.0" prefWidth="284.0" styleClass="buttonNeutral" text="ADMIN EDIT" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <JFXButton fx:id="toAdminEdit" buttonType="RAISED" onAction="#hubToAdminEdit" styleClass="buttonNeutralBig" text="ADMIN EDIT" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="toReports" buttonType="RAISED" onAction="#hubToReports" prefHeight="84.0" prefWidth="284.0" styleClass="buttonNeutral" text="REPORTS" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <JFXButton fx:id="toReports" buttonType="RAISED" onAction="#hubToReports" styleClass="buttonNeutralBig" text="REPORTS" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="toStaffMenuOrder" buttonType="RAISED" onAction="#hubToStaffMenuOrder" prefHeight="77.0" prefWidth="385.0" styleClass="buttonNeutralBig" stylesheets="@../APIStyle.css" text="STAFF MENU ORDER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <JFXButton fx:id="toStaffMenuOrder" buttonType="RAISED" onAction="#hubToStaffMenuOrder" styleClass="buttonNeutralBig" stylesheets="@../APIStyle.css" text="STAFF MENU ORDER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </JFXButton>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
