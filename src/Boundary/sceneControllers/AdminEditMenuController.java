@@ -21,12 +21,14 @@ import java.awt.event.MouseEvent;
 public class AdminEditMenuController {
     private DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
 
-    private NodeManager nodeManager = new NodeManager(databaseGargoyle);
-    private FoodLogManager foodLogManager = new FoodLogManager(databaseGargoyle);
-    private MenuItemManager menuItemManager = new MenuItemManager(databaseGargoyle);
-    private WorkerManager workerManager = new WorkerManager(databaseGargoyle);
-    private FoodRequestManager foodRequestManager = new FoodRequestManager( databaseGargoyle,  nodeManager,
-             workerManager,  menuItemManager,  foodLogManager);
+    /* Managers */
+    private NodeManager nodeManager;
+    private FoodLogManager foodLogManager;
+    private MenuItemManager menuItemManager;
+    private WorkerManager workerManager;
+    private FoodRequestManager foodRequestManager;
+    private WorkerLogManager workerLogManager;
+
     /*Worker Tab */
     private JFXTextField username;
     private Label workerID;
@@ -65,7 +67,7 @@ public class AdminEditMenuController {
     private Worker worker;
 
     public AdminEditMenuController(DatabaseGargoyle databaseGargoyle,NodeManager nodeManager,FoodLogManager foodLogManager,MenuItemManager menuItemManager,WorkerManager workerManager,
-                                   FoodRequestManager foodRequestManager, JFXTextField username, Label workerID, JFXTreeTableView<Worker> workersTable,
+                                   FoodRequestManager foodRequestManager, WorkerLogManager workerLogManager, JFXTextField username, Label workerID, JFXTreeTableView<Worker> workersTable,
                                    TreeTableColumn<Worker,String> workerIDColumn, TreeTableColumn<Worker,String> usernameColumn,
                                    JFXTextField foodName,JFXTextField stockAvailable,JFXTextField calories,
                                    JFXTextArea descriptionItem, JFXToggleButton vegan,JFXToggleButton diabetic,JFXToggleButton gluttenfree, JFXTreeTableView<MenuItem> menuTable,
@@ -82,6 +84,7 @@ public class AdminEditMenuController {
         this.menuItemManager = menuItemManager;
         this.workerManager = workerManager;
         this.foodRequestManager = foodRequestManager;
+        this.workerLogManager = workerLogManager;
         this.username = username;
         this.workerID = workerID;
         this.workersTable = workersTable;
