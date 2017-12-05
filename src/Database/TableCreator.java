@@ -31,7 +31,8 @@ public class TableCreator {
                     " calories INTEGER NOT NULL,\n" +
                     " isVegan  VARCHAR(10) NOT NULL,\n" +
                     " isDiabetic VARCHAR(10) NOT NULL,\n" +
-                    " isGluttenFree VARCHAR(10) NOT NULL\n)");
+                    " isGluttenFree VARCHAR(10) NOT NULL," +
+                    " price INTEGER NOT NULL\n)");
             System.out.println("MenuItem table created!");
             //Insert all Nodes to the table
             try {
@@ -202,7 +203,7 @@ public class TableCreator {
                     query.setString(8,array[7]);
                     query.setString(9,array[8]);
                 } else if (table.equals("MENUITEM")) {
-                    query = connection.prepareStatement("INSERT INTO MENUITEM VALUES (?,?,?,?,?,?,?)");
+                    query = connection.prepareStatement("INSERT INTO MENUITEM VALUES (?,?,?,?,?,?,?,?)");
                     query.setString(1, array[0]);
                     query.setString(2, array[1]);
                     query.setString(3, array[2]);
@@ -210,6 +211,7 @@ public class TableCreator {
                     query.setString(5, array[4]);
                     query.setString(6, array[5]);
                     query.setString(7, array[6]);
+                    query.setString(8, array[7]);
                 }
                 query.executeUpdate();
             } catch (SQLException e){
