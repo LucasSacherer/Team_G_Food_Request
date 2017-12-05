@@ -31,7 +31,7 @@ public class CartControllerTest {
         MenuItem cake = new MenuItem("cake","chocolate cake", 3,50,true,false,false,3);
         cc.addItemToCart(cake, 3);
         System.out.println(cc.getItems().size());
-        int qty = cc.getItems().get(cake);
+        int qty = cc.getItems().get(cake.getFoodName());
         System.out.println(qty);
     }
 }
