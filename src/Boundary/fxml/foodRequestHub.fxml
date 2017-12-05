@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -106,7 +105,7 @@
                   </GridPane>
                   <Separator orientation="VERTICAL" prefHeight="1080.0" prefWidth="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children></AnchorPane>
-            <JFXDrawer fx:id="drawer">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <GridPane fx:id="grid" prefHeight="1080.0" prefWidth="398.0" stylesheets="@../APIStyle.css">
                      <columnConstraints>
@@ -147,7 +146,7 @@
                      </children>
                   </GridPane>
                </children>
-            </JFXDrawer>
+            </AnchorPane>
          </children>
       </GridPane>
    </children>
