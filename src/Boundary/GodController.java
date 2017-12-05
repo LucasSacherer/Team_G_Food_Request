@@ -55,7 +55,7 @@ public class GodController {
 
     /* Worker Tab */
     @FXML
-    private JFXTextField usernameId;
+    private JFXTextField username;
 
     @FXML
     private Label workerID;
@@ -82,7 +82,7 @@ public class GodController {
     private JFXButton addItem, cancelItem, deleteItem, deleteAllItem, exportItem;
 
     @FXML
-    private JFXToggleButton vegan, diabetic, gluttenFree;
+    private JFXToggleButton vegan, diabetic, gluttenfree;
 
     @FXML
     private JFXTreeTableView<MenuItem> menuTable = new JFXTreeTableView<MenuItem>();
@@ -258,10 +258,10 @@ public class GodController {
 
     private void initializeAdminEditMenuScene() {
         adminEditMenuController = new AdminEditMenuController(databaseGargoyle, nodeManager, foodLogManager, menuItemManager, workerManager,
-                foodRequestManager, usernameId, workerID, workersTable,
+                foodRequestManager, username, workerID, workersTable,
                 workerIDColumn, usernameColumn,
                 foodName, stockAvailable, calories,
-                descriptionItem, vegan, diabetic, gluttenFree, menuTable, foodNameColumn, descriptionColumn, stockAvailableColumn,
+                descriptionItem, vegan, diabetic, gluttenfree, menuTable, foodNameColumn, descriptionColumn, stockAvailableColumn,
                 caloriesColumn, requestOrder,
                 requestsTable, requestNameColumn,
                 timeCreatedColumn, timeCompletedColumn,

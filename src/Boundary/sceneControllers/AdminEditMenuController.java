@@ -16,6 +16,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 
+import java.awt.event.MouseEvent;
+
 public class AdminEditMenuController {
     private DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
 
@@ -26,7 +28,7 @@ public class AdminEditMenuController {
     private FoodRequestManager foodRequestManager = new FoodRequestManager( databaseGargoyle,  nodeManager,
              workerManager,  menuItemManager,  foodLogManager);
     /*Worker Tab */
-    private JFXTextField usernameId;
+    private JFXTextField username;
     private Label workerID;
     private JFXTreeTableView<Worker> workersTable;
     private TreeTableColumn<Worker,String> workerIDColumn;
@@ -34,7 +36,7 @@ public class AdminEditMenuController {
     /* Menu Tab */
     private JFXTextField foodName, stockAvailable, calories;
     private JFXTextArea descriptionItem;
-    private JFXToggleButton vegan, diabetic, gluttenFree;
+    private JFXToggleButton vegan, diabetic, gluttenfree;
     private JFXTreeTableView<MenuItem> menuTable;
     private TreeTableColumn<MenuItem,String> foodNameColumn;
     private TreeTableColumn<MenuItem,String> descriptionColumn;
@@ -63,10 +65,10 @@ public class AdminEditMenuController {
     private Worker worker;
 
     public AdminEditMenuController(DatabaseGargoyle databaseGargoyle,NodeManager nodeManager,FoodLogManager foodLogManager,MenuItemManager menuItemManager,WorkerManager workerManager,
-                                   FoodRequestManager foodRequestManager, JFXTextField usernameId, Label workerID, JFXTreeTableView<Worker> workersTable,
+                                   FoodRequestManager foodRequestManager, JFXTextField username, Label workerID, JFXTreeTableView<Worker> workersTable,
                                    TreeTableColumn<Worker,String> workerIDColumn, TreeTableColumn<Worker,String> usernameColumn,
                                    JFXTextField foodName,JFXTextField stockAvailable,JFXTextField calories,
-                                   JFXTextArea descriptionItem, JFXToggleButton vegan,JFXToggleButton diabetic,JFXToggleButton gluttenFree, JFXTreeTableView<MenuItem> menuTable,
+                                   JFXTextArea descriptionItem, JFXToggleButton vegan,JFXToggleButton diabetic,JFXToggleButton gluttenfree, JFXTreeTableView<MenuItem> menuTable,
                                    TreeTableColumn<MenuItem,String> foodNameColumn, TreeTableColumn<MenuItem,String> descriptionColumn, TreeTableColumn<MenuItem,Integer> stockAvailableColumn,
                                    TreeTableColumn<MenuItem,Integer> caloriesColumn, JFXTextArea requestOrder,
                                    JFXTreeTableView<FoodRequest> requestsTable, TreeTableColumn<FoodRequest,String> requestNameColumn,
@@ -80,7 +82,7 @@ public class AdminEditMenuController {
         this.menuItemManager = menuItemManager;
         this.workerManager = workerManager;
         this.foodRequestManager = foodRequestManager;
-        this.usernameId = usernameId;
+        this.username = username;
         this.workerID = workerID;
         this.workersTable = workersTable;
         this.workerIDColumn = workerIDColumn;
@@ -91,7 +93,7 @@ public class AdminEditMenuController {
         this.descriptionItem = descriptionItem;
         this.vegan = vegan;
         this.diabetic = diabetic;
-        this.gluttenFree = gluttenFree;
+        this.gluttenfree = gluttenfree;
         this.menuTable = menuTable;
         this.foodNameColumn = foodNameColumn;
         this.descriptionColumn = descriptionColumn;
@@ -147,8 +149,26 @@ public class AdminEditMenuController {
 
         menuTable.setRoot(menuRoot);
         menuTable.setShowRoot(false);
+        menuTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() > 1) {
+                onEditMenu();
+            }
+        });
+
+        }
 
 
+    private void onEditMenu() {
+        if (menuTable.getSelectionModel().getSelectedItem() != null) {
+            TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
+            foodName.setText(selectedMenuItem.getValue().getFoodName());
+            stockAvailable.setText("" + selectedMenuItem.getValue().getStockAvailable());
+            calories.setText("" + selectedMenuItem.getValue().getCalories());
+            descriptionItem.setText(selectedMenuItem.getValue().getDescription());
+            vegan.setSelected(selectedMenuItem.getValue().getVegan());
+            diabetic.setSelected(selectedMenuItem.getValue().getDiabetic());
+            gluttenfree.setSelected(selectedMenuItem.getValue().getGluttenFree());
+        }
     }
     private void initializeRequestsTab(){
         foodRequestManager.update();
@@ -187,6 +207,18 @@ public class AdminEditMenuController {
 
         requestsTable.setRoot(requestsRoot);
         requestsTable.setShowRoot(false);
+        requestsTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() > 1) {
+                onEditRequests();
+            }
+        });
+
+    }
+    private void onEditRequests() {
+        if (requestsTable.getSelectionModel().getSelectedItem() != null) {
+            TreeItem<FoodRequest> selectedFoodRequest = requestsTable.getSelectionModel().getSelectedItem();
+            requestOrder.setText(selectedFoodRequest.getValue().getOrder().toString());
+        }
 
     }
     private void initializeWorkerTab(){
@@ -202,7 +234,20 @@ public class AdminEditMenuController {
 
         workersTable.setRoot(workerRoot);
         workersTable.setShowRoot(false);
+        workersTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() > 1) {
+                onEditWorkers();
+            }
+        });
 
+    }
+
+    private void onEditWorkers() {
+        if (workersTable.getSelectionModel().getSelectedItem() != null) {
+            TreeItem<Worker> selectedWorker = workersTable.getSelectionModel().getSelectedItem();
+            username.setText(selectedWorker.getValue().getUsername());
+            workerID.setText(selectedWorker.getValue().getWorkerID());
+        }
     }
 
 }
