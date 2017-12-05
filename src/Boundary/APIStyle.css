@@ -20,6 +20,14 @@
     -fx-pref-width: 300;
     -fx-pref-height: 70;
 }
+.buttonNeutralBig {
+    -fx-background-color: #003da6;
+    -fx-text-fill: white;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-pref-width: 450;
+    -fx-pref-height: 70;
+}
 .buttonAdd {
     -fx-background-color: #5ea459;
     -fx-text-fill: white;

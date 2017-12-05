@@ -7,20 +7,32 @@ import Entity.MenuItem;
 import Entity.Worker;
 import Manager.*;
 import com.jfoenix.controls.*;
+import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.sun.xml.internal.bind.v2.TODO;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GodController {
     /* Database Gargoyle */
@@ -168,7 +180,20 @@ public class GodController {
     private JFXButton reportsBack;
 
     /* Staff Info Popup */
+    @FXML
+    private Pane foodInfoPane;
 
+    @FXML
+    private JFXTreeTableView<MenuItem> foodInfoTable = new JFXTreeTableView<MenuItem>();
+
+    @FXML
+    private TreeTableColumn<MenuItem,String> foodItemInfoColumn = new TreeTableColumn<MenuItem,String>();
+
+    @FXML
+    private TreeTableColumn<MenuItem,Integer> nutritionColumn = new TreeTableColumn<MenuItem,Integer>();
+
+    @FXML
+    private TreeTableColumn<MenuItem,String> foodInfoDescription = new TreeTableColumn<MenuItem,String>();
 
 
     /* Staff Menu Order */
@@ -196,6 +221,15 @@ public class GodController {
     @FXML
     private TreeTableColumn<MenuItem,Integer> priceColumn, priceOrderColumn;
 
+
+    @FXML
+    private JFXDrawer drawer;
+
+    @FXML
+    private GridPane grid;
+
+    @FXML
+    private JFXHamburger hamburger;
 
 
     /** Organize Functions by Scene **/
@@ -237,6 +271,8 @@ public class GodController {
     }
 
 
+
+
     /* Scene Commandments */
     AdminEditMenuController adminEditMenuController;
     FoodRequestHubController foodRequestHubController;
@@ -245,14 +281,13 @@ public class GodController {
     StaffIntoPopupController staffIntoPopupController;
     StaffMenuOrderController staffMenuOrderController;
 
-    public void initialize(){
+    public void initialize() {
         initializeAdminEditMenuScene();
         initializeFoodRequestHubScene();
         initializeMapDirectoryScene();
         initializeReportsScene();
         initializeStaffIntoPopupScene();
         initializeStaffMenuOrderScene();
-
     }
 
 
@@ -282,7 +317,10 @@ public class GodController {
     }
 
     private void initializeStaffIntoPopupScene() {
-        staffIntoPopupController = new StaffIntoPopupController();
+        staffIntoPopupController = new StaffIntoPopupController(foodInfoTable,foodItemInfoColumn,
+                  nutritionColumn, foodInfoDescription,
+                 databaseGargoyle, menuItemManager);
+
     }
 
     private void initializeStaffMenuOrderScene() {
@@ -335,8 +373,9 @@ public class GodController {
     private void information(){ staffMenuOrderController.information();}
 
     @FXML
-    void handleButtonAction (ActionEvent event){
+    void menuInfoPopup (ActionEvent event){
         try {
+            staffIntoPopupController.initializeStaffInfo();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/boundary/fxml/staffInfoPopup.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
