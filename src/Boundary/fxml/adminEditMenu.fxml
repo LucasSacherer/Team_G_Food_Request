@@ -43,22 +43,22 @@
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXButton fx:id="addWorker" layoutX="42.0" layoutY="292.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonAdd" text="Add">
+                              <JFXButton fx:id="addWorker" layoutX="44.0" layoutY="292.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Add">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="cancelWorker" layoutX="245.0" layoutY="292.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Cancel">
+                              <JFXButton fx:id="cancelWorker" layoutX="245.0" layoutY="292.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Cancel">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="deleteWorker" layoutX="38.0" layoutY="365.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Delete">
+                              <JFXButton fx:id="deleteWorker" layoutX="245.0" layoutY="363.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Delete">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="deleteAllWorkers" layoutX="247.0" layoutY="362.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Delete All">
+                              <JFXButton fx:id="editWorker" layoutX="44.0" layoutY="363.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Edit">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -96,7 +96,7 @@
                      <content>
                         <AnchorPane prefHeight="0.0" prefWidth="0.0">
                            <children>
-                              <Label alignment="CENTER" layoutX="104.0" layoutY="30.0" prefHeight="80.0" prefWidth="228.0" text="Edit Item">
+                              <Label alignment="CENTER" layoutX="112.0" layoutY="30.0" prefHeight="80.0" prefWidth="228.0" text="Edit Item">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -106,27 +106,27 @@
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXButton fx:id="addItem" layoutX="51.0" layoutY="575.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonAdd" text="Add">
+                              <JFXButton fx:id="addItem" layoutX="51.0" layoutY="575.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Add">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="cancelItem" layoutX="264.0" layoutY="572.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Cancel">
+                              <JFXButton fx:id="cancelItem" layoutX="264.0" layoutY="575.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Cancel">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="deleteItem" layoutX="50.0" layoutY="646.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Delete">
+                              <JFXButton fx:id="deleteItem" layoutX="264.0" layoutY="646.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Delete">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="deleteAllItem" layoutX="263.0" layoutY="646.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Delete All">
+                              <JFXButton fx:id="editItem" layoutX="51.0" layoutY="646.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Edit ">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="exportMenu" layoutX="84.0" layoutY="711.0" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Menu CSV">
+                              <JFXButton fx:id="exportMenu" layoutX="109.0" layoutY="712.0" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Menu CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

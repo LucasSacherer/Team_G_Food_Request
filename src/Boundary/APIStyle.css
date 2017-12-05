@@ -11,30 +11,33 @@
     -fx-text-fill: white;
     -fx-font-size: 40; /* all the same except this newly added one */
     -fx-pref-width: 629;
+    -fx-min-width: inherit;
+    -fx-min-width: inherit;
 }
 .buttonNeutral {
     -fx-background-color: #003da6;
     -fx-text-fill: white;
     -fx-background-radius: 30;
     -fx-background-insets: 0,1,1;
-    -fx-pref-width: 300;
-    -fx-pref-height: 70;
 }
+.buttonNeutralBig {
+    -fx-background-color: #003da6;
+    -fx-text-fill: white;
+    -fx-background-radius: 30;
+    -fx-background-insets: 0, 1, 1;
+}
+
 .buttonAdd {
     -fx-background-color: #5ea459;
     -fx-text-fill: white;
     -fx-background-radius: 30;
     -fx-background-insets: 0,1,1;
-    -fx-pref-width: 160;
-    -fx-pref-height: 40;
 }
 .buttonDelete {
     -fx-background-color: #ff716a;
     -fx-text-fill: white;
     -fx-background-radius: 30;
     -fx-background-insets: 0,1,1;
-    -fx-pref-width: 160;
-    -fx-pref-height: 40;
 }
 
 .textfield {
