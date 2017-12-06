@@ -101,7 +101,7 @@ public class GodController {
     private TreeTableColumn<Worker, String> usernameColumn = new TreeTableColumn<Worker, String>();
     /* Menu Tab */
     @FXML
-    private JFXTextField foodName, stockAvailable, calories;
+    private JFXTextField foodName, stockAvailable, calories, priceEditText;
 
     @FXML
     private JFXTextArea descriptionItem;
@@ -139,6 +139,8 @@ public class GodController {
     @FXML
     private TreeTableColumn<MenuItem, String> gluttenFreeColumn = new TreeTableColumn<MenuItem, String>();
     ;
+    @FXML
+    private TreeTableColumn<MenuItem, Integer> priceEditColumn = new TreeTableColumn<>();
 
         /* Requests Tab */
 
@@ -410,7 +412,7 @@ public class GodController {
                 requestsTable, requestNameColumn,
                 timeCreatedColumn, timeCompletedColumn,
                 requestTypeColumn, descriptionRequestColumn,
-                locationColumn, assignedWorkerColumn, veganColumn, diabeticColumn, gluttenFreeColumn, menuController, workerController, requestController);
+                locationColumn, assignedWorkerColumn, veganColumn, diabeticColumn, gluttenFreeColumn, menuController, workerController, requestController,priceEditColumn,priceEditText);
     }
 
     private void initializeFoodRequestHubScene() {
@@ -514,6 +516,44 @@ public class GodController {
     private void information() {
         staffMenuOrderController.information();
     }
+
+    //////////////////////
+    /* Admin Edit */
+    //////////////////////
+
+        /*Worker Tab */
+    @FXML
+    private void removeWorker(){adminEditMenuController.deleteWorker();}
+
+    @FXML
+    private void clearWorker(){adminEditMenuController.clearWorker();}
+
+    @FXML
+    private void editWorker(){adminEditMenuController.editWorker();}
+
+        /*Request Tab */
+    @FXML
+    private void deleteRequest() {adminEditMenuController.deleteRequest();}
+
+    @FXML
+    private void deleteAllRequests() {adminEditMenuController.deleteAllRequests();}
+
+    @FXML
+    private void cancelRequest() {adminEditMenuController.cancelRequest();}
+
+    @FXML
+    private void addMenuEditItem(){adminEditMenuController.addMenu();}
+
+    @FXML
+    private void removeMenuEditItem() {adminEditMenuController.deleteMenu();}
+
+    @FXML
+    private void cancelMenuEditItem() {adminEditMenuController.clearMenu();}
+
+    @FXML
+    private void editMenuEditItem() {adminEditMenuController.editMenu();}
+
+
 
     @FXML
     void menuInfoPopup(ActionEvent event) {
