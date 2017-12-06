@@ -1,9 +1,11 @@
 package Boundary;
 
 import Boundary.sceneControllers.*;
+import Controller.*;
 import Database.DatabaseGargoyle;
 import Entity.*;
 import Entity.MenuItem;
+import Entity.Worker;
 import Manager.*;
 import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -34,6 +36,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,6 +59,14 @@ public class GodController {
 
     /* Entities */
 
+    /* Controllers */
+    CartController cartController = new CartController();
+    DirectoryController directoryController = new DirectoryController(nodeManager);
+    MenuController menuController = new MenuController(menuItemManager);
+    RequestController requestController = new RequestController(foodRequestManager,workerLogManager,foodLogManager);
+    SearchEngine searchEngine = new SearchEngine(nodeManager);
+    WorkerController workerController = new WorkerController(workerManager);
+
     /* Scene Switcher */
     SceneSwitcher sceneSwitcher = new SceneSwitcher();
 
@@ -65,6 +76,8 @@ public class GodController {
      * FXML Attributes
      **/
     ///////////////////////
+
+
     /* Edit Menu */
     @FXML
     private Pane adminEditPane;
@@ -92,7 +105,7 @@ public class GodController {
     private TreeTableColumn<Worker, String> usernameColumn = new TreeTableColumn<Worker, String>();
     /* Menu Tab */
     @FXML
-    private JFXTextField foodName, stockAvailable, calories;
+    private JFXTextField foodName, stockAvailable, calories, priceEditText;
 
     @FXML
     private JFXTextArea descriptionItem;
@@ -130,6 +143,8 @@ public class GodController {
     @FXML
     private TreeTableColumn<MenuItem, String> gluttenFreeColumn = new TreeTableColumn<MenuItem, String>();
     ;
+    @FXML
+    private TreeTableColumn<MenuItem, Integer> priceEditColumn = new TreeTableColumn<>();
 
         /* Requests Tab */
 
@@ -173,10 +188,44 @@ public class GodController {
     private JFXButton toAdminEdit, toStaffMenuOrder, toReports, assignButton, completeOrderButton;
 
     @FXML
-    private JFXListView ordersToAssign, assignOrderItems, ordersAssigned, assignedOrderItems;
+    private JFXComboBox employeeToAssign;
 
     @FXML
-    private JFXComboBox employeeToAssign;
+    private JFXTreeTableView<FoodRequest> ordersAsssignTable = new JFXTreeTableView<>();
+
+    @FXML
+    private TreeTableColumn<FoodRequest, String> orderNameAssignColumn = new TreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<FoodRequest, String> timeOrderedColumn = new TreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<FoodRequest, String> descriptionAssignColumn = new TreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<FoodRequest, String> locationAssignColumn = new TreeTableColumn<>();
+
+    @FXML
+    private JFXTextArea unassignedOrderInfo;
+
+    @FXML
+    private JFXTreeTableView<FoodRequest> assignedOrdersTable = new JFXTreeTableView<>();
+
+    @FXML
+    private TreeTableColumn<FoodRequest, String> orderNameAssignedColumn = new TreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<FoodRequest, String> timeOrderedAssignedColumn = new TreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<FoodRequest, String> locationAssignedColumn = new TreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<FoodRequest, String> assignedEmployeeColumn = new TreeTableColumn<>();
+
+    @FXML
+    private JFXTextArea assignedOrdersInfo;
+
 
 
     /* Map Directory */
@@ -209,7 +258,7 @@ public class GodController {
     private TreeTableColumn<?, ?> userOrderFColumn;
 
     @FXML
-    private JFXTreeTableView<?> userCreation;
+    private JFXTreeTableView<?> userCreationFColumn;
 
     @FXML
     private TreeTableColumn<?, ?> userNameCColumn;
@@ -332,28 +381,31 @@ public class GodController {
     private JFXButton addMenuItemButton, cancelMenuItemButton, checkoutRequestButton, destinationPopupButton, deleteFoodItem, informationButton;
 
     @FXML
-    private JFXComboBox selectQuantityCombo;
+    private JFXTextField selectQuantity;
 
     @FXML
-    private JFXTextField menuItemOrder, itemPrice, destination;
+    private JFXTextField menuItemOrder, itemPrice;
+
+    @FXML
+    private Label destination;
 
     @FXML
     private JFXTreeTableView<MenuItem> menuOrderTable = new JFXTreeTableView<>();
 
     @FXML
-    private JFXTreeTableView<MenuItem> myOrderTable = new JFXTreeTableView<>();
+    private JFXTreeTableView<CartItem> myOrderTable = new JFXTreeTableView<>();
 
     @FXML
     private TreeTableColumn<MenuItem, String> foodItemColumn = new TreeTableColumn<>();
 
     @FXML
-    private TreeTableColumn<MenuItem, String> foodItemOrderColumn = new TreeTableColumn<>();
+    private TreeTableColumn<CartItem,String> foodItemOrderColumn = new TreeTableColumn<>();
 
     @FXML
     private TreeTableColumn<MenuItem, Integer> priceColumn = new TreeTableColumn<>();
 
     @FXML
-    private TreeTableColumn<MenuItem, Integer> priceOrderColumn = new TreeTableColumn<>();
+    private TreeTableColumn<CartItem,Integer> priceOrderColumn = new TreeTableColumn<>();
 
 
     /**
@@ -396,6 +448,20 @@ public class GodController {
         reportsController.initialize();
     }
 
+    @FXML
+    private void mapDirectoryPopup(ActionEvent event) throws IOException {
+        sceneSwitcher.toMapDirectoryPopup();
+
+    }
+
+    @FXML
+    private void menuInfoPopup(ActionEvent event) throws IOException {
+        sceneSwitcher.toMenuInfoPopup();
+        staffIntoPopupController.initializeStaffInfo();
+    }
+
+
+
 
     /* Scene Commandments */
     AdminEditMenuController adminEditMenuController;
@@ -426,11 +492,16 @@ public class GodController {
                 requestsTable, requestNameColumn,
                 timeCreatedColumn, timeCompletedColumn,
                 requestTypeColumn, descriptionRequestColumn,
-                locationColumn, assignedWorkerColumn, veganColumn, diabeticColumn, gluttenFreeColumn);
+                locationColumn, assignedWorkerColumn, veganColumn, diabeticColumn, gluttenFreeColumn, menuController, workerController, requestController,priceEditColumn,priceEditText);
     }
 
     private void initializeFoodRequestHubScene() {
-        foodRequestHubController = new FoodRequestHubController();
+        foodRequestHubController = new FoodRequestHubController( requestController,  employeeToAssign,  ordersAsssignTable,
+                  orderNameAssignColumn,   timeOrderedColumn,   descriptionAssignColumn,
+                  locationAssignColumn,  unassignedOrderInfo,  assignedOrdersTable,   orderNameAssignedColumn,
+                  timeOrderedAssignedColumn,   locationAssignedColumn,
+                  assignedEmployeeColumn, assignedOrdersInfo, workerController);
+        foodRequestHubController.initialize();
     }
 
     private void initializeMapDirectoryScene() {
@@ -443,19 +514,19 @@ public class GodController {
     }
 
     private void initializeStaffIntoPopupScene() {
-        staffIntoPopupController = new StaffIntoPopupController(foodInfoTable, foodItemInfoColumn,
-                nutritionColumn, foodInfoDescription,
-                databaseGargoyle, menuItemManager);
+//        staffIntoPopupController = new StaffIntoPopupController(foodInfoTable, foodItemInfoColumn,
+//                nutritionColumn, foodInfoDescription,
+//                databaseGargoyle, menuItemManager, menuController);
 
     }
 
     private void initializeStaffMenuOrderScene() {
         staffMenuOrderController = new StaffMenuOrderController(databaseGargoyle,
                 nodeManager, foodLogManager, menuItemManager, workerManager,
-                foodRequestManager, selectQuantityCombo, menuItemOrder, itemPrice, destination,
+                foodRequestManager, selectQuantity, menuItemOrder, itemPrice, destination,
                 menuOrderTable, myOrderTable,
                 foodItemColumn, foodItemOrderColumn,
-                priceColumn, priceOrderColumn);
+                priceColumn, priceOrderColumn, menuController,  cartController, requestController);
     }
 
 
@@ -502,10 +573,6 @@ public class GodController {
         staffMenuOrderController.deleteFoodItemFromCart();
     }
 
-    @FXML
-    private void selectQuantity() {
-        staffMenuOrderController.selectQuantity();
-    }
 
     @FXML
     private void addMenuItem() {
@@ -522,30 +589,56 @@ public class GodController {
         staffMenuOrderController.checkoutRequest();
     }
 
+    //////////////////////
+    /* Admin Edit */
+    //////////////////////
+
+        /*Worker Tab */
     @FXML
-    private void destinationPopup() {
-        staffMenuOrderController.destinationPopup();
-    }
+    private void removeWorker(){adminEditMenuController.deleteWorker();}
 
     @FXML
-    private void information() {
-        staffMenuOrderController.information();
-    }
+    private void clearWorker(){adminEditMenuController.clearWorker();}
 
     @FXML
-    void menuInfoPopup(ActionEvent event) {
-        try {
-            staffIntoPopupController.initializeStaffInfo();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/boundary/fxml/staffInfoPopup.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Menu Info");
-            stage.setScene(new Scene(root1, 1280, 720));
-            stage.show();
-        } catch (Exception e) {
-            System.out.println("Cant load Menu Info");
-        }
-    }
+    private void editWorker(){adminEditMenuController.editWorker();}
+
+    @FXML
+    private void addWorker(){adminEditMenuController.addWorker();}
+
+    @FXML
+    private void exportWorkers(){adminEditMenuController.exportWorkerLogs();}
+
+        /*Request Tab */
+    @FXML
+    private void deleteRequest() {adminEditMenuController.deleteRequest();}
+
+    @FXML
+    private void deleteAllRequests() {adminEditMenuController.deleteAllRequests();}
+
+    @FXML
+    private void cancelRequest() {adminEditMenuController.cancelRequest();}
+
+    @FXML
+    private void exportRequests() {adminEditMenuController.exportFoodLogs();}
+
+        /*Menu Tab */
+
+    @FXML
+    private void addMenuEditItem(){adminEditMenuController.addMenu();}
+
+    @FXML
+    private void removeMenuEditItem() {adminEditMenuController.deleteMenu();}
+
+    @FXML
+    private void cancelMenuEditItem() {adminEditMenuController.clearMenu();}
+
+    @FXML
+    private void editMenuEditItem() {adminEditMenuController.editMenu();}
+
+    @FXML
+    private void exportMenu() {adminEditMenuController.exportMenuItems();}
+
     void initializeObservers(){
         databaseGargoyle.attachManager(foodLogManager);
         databaseGargoyle.attachManager(menuItemManager);
@@ -556,16 +649,6 @@ public class GodController {
         databaseGargoyle.notifyManagers();
     }
 
-    @FXML
-    void mapDirectoryPopup(ActionEvent event) throws IOException {
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/boundary/fxml/mapDirectory.fxml"));
-            Parent root2 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Directory");
-            stage.setScene(new Scene(root2, 600, 300));
-            stage.show();
-    }
 
 }
 

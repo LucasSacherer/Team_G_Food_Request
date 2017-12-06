@@ -1,6 +1,7 @@
 package ManagerTests;
 
 import Database.DatabaseGargoyle;
+import Entity.CartItem;
 import Entity.FoodRequest;
 import Entity.MenuItem;
 import Manager.*;
@@ -44,10 +45,10 @@ public class WorkerLogManagerTests {
         databaseGargoyle.attachManager(workerLogManager);
         databaseGargoyle.notifyManagers();
 
-        ArrayList<MenuItem> originalOrder = new ArrayList<>();
-        originalOrder.add(menuItemManager.getMenuItemByName("Milk"));
-        originalOrder.add(menuItemManager.getMenuItemByName("Cereal"));
-        originalOrder.add(menuItemManager.getMenuItemByName("Fruit"));
+        ArrayList<CartItem> originalOrder = new ArrayList<>();
+        originalOrder.add(new CartItem("Milk", 1));
+        originalOrder.add(new CartItem("Cereal", 1));
+        originalOrder.add(new CartItem("Fruit", 1));
         Timestamp time = Timestamp.valueOf("1960-01-01 23:03:20.000000000");
 
         //Before the addition, note how big the food log is

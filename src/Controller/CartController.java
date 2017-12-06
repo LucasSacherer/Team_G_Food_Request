@@ -1,29 +1,33 @@
 package Controller;
 
+import Entity.CartItem;
 import Entity.MenuItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class CartController {
-    HashMap<String,Integer> cart = new HashMap<>();
+    ArrayList<CartItem> cartItems = new ArrayList<>();
     public CartController(){}
 
-    public void addItemToCart(MenuItem item, int qty){
-        if (cart.containsKey(item.getFoodName())){
-            cart.put(item.getFoodName(),cart.get(item)+qty);
+    public void addItemToCart(CartItem item){
+        if (cartItems.contains(item.getFoodNameCart())){
+            item.setQuantity(item.getQuantity() + 1);
         }
         else{
-            cart.put(item.getFoodName(),qty);
+            cartItems.add(item);
         }
     }
+    public void getItemFromCart (String foodName){}
 
     public void clearItems(){
-        cart.clear();
+        cartItems.clear();
 
     }
 
-    public HashMap<String,Integer> getItems(){
-        return cart;
+    public List<CartItem> getItems(){
+        return cartItems;
     }
 
 }

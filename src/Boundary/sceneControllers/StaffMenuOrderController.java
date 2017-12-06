@@ -1,22 +1,33 @@
 package Boundary.sceneControllers;
 
+import Controller.CartController;
+import Controller.MenuController;
+import Controller.RequestController;
+import Controller.WorkerController;
 import Database.DatabaseGargoyle;
+import Entity.CartItem;
+import Entity.FoodRequest;
 import Entity.MenuItem;
 import Entity.Node;
 import Manager.*;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.sun.xml.internal.bind.v2.TODO;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.input.MouseEvent;
+import sun.swing.MenuItemCheckIconFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class StaffMenuOrderController {
     private DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
@@ -28,33 +39,45 @@ public class StaffMenuOrderController {
     private FoodRequestManager foodRequestManager = new FoodRequestManager(databaseGargoyle, nodeManager,
             workerManager, menuItemManager, foodLogManager);
 
-    private JFXComboBox selectQuantityCombo;
-    private JFXTextField menuItemOrder, itemPrice, destination;
+    /* Controllers */
+    private MenuController menuController;
+    private CartController cartController;
+    private RequestController requestController;
+
+    private JFXTextField selectQuantity;
+    private JFXTextField menuItemOrder, itemPrice;
+    private Label destination;
     private JFXTreeTableView<MenuItem> menuOrderTable;
-    private JFXTreeTableView<MenuItem> myOrderTable;
-    private TreeTableColumn<MenuItem, String> foodItemColumn, foodItemOrderColumn;
-    private TreeTableColumn<MenuItem, Integer> priceColumn, priceOrderColumn;
+    private JFXTreeTableView<CartItem> myOrderTable;
+    private TreeTableColumn<MenuItem, String> foodItemColumn;
+    private TreeTableColumn<CartItem,String> foodItemOrderColumn;
+    private TreeTableColumn<MenuItem, Integer> priceColumn;
+    private TreeTableColumn<CartItem,Integer> priceOrderColumn;
 
     private MenuItem item;
+    private Node node;
+
+    private CartItem cartItem;
 
     private TreeItem<MenuItem> menuRoot = new TreeItem<>(item);
-    private TreeItem<MenuItem> orderRoot = new TreeItem<>();
+    private TreeItem<CartItem> orderRoot = new TreeItem<>();
     private List<MenuItem> addedItems = new ArrayList<>();
 
 
     public StaffMenuOrderController(DatabaseGargoyle databaseGargoyle,
                                     NodeManager nodeManager, FoodLogManager foodLogManager, MenuItemManager menuItemManager, WorkerManager workerManager,
-                                    FoodRequestManager foodRequestManager, JFXComboBox selectQuantityCombo, JFXTextField menuItemOrder, JFXTextField itemPrice, JFXTextField destination,
-                                    JFXTreeTableView<MenuItem> menuOrderTable, JFXTreeTableView<MenuItem> myOrderTable,
-                                    TreeTableColumn<MenuItem, String> foodItemColumn, TreeTableColumn<MenuItem, String> foodItemOrderColumn,
-                                    TreeTableColumn<MenuItem, Integer> priceColumn, TreeTableColumn<MenuItem, Integer> priceOrderColumn) {
+                                    FoodRequestManager foodRequestManager, JFXTextField selectQuantity, JFXTextField menuItemOrder, JFXTextField itemPrice, Label destination,
+                                    JFXTreeTableView<MenuItem> menuOrderTable, JFXTreeTableView<CartItem> myOrderTable,
+                                    TreeTableColumn<MenuItem, String> foodItemColumn, TreeTableColumn<CartItem,String> foodItemOrderColumn,
+                                    TreeTableColumn<MenuItem, Integer> priceColumn, TreeTableColumn<CartItem,Integer> priceOrderColumn,
+                                     MenuController menuController, CartController cartController, RequestController requestController) {
         this.databaseGargoyle = databaseGargoyle;
         this.nodeManager = nodeManager;
         this.foodLogManager = foodLogManager;
         this.menuItemManager = menuItemManager;
         this.workerManager = workerManager;
         this.foodRequestManager = foodRequestManager;
-        this.selectQuantityCombo = selectQuantityCombo;
+        this.selectQuantity = selectQuantity;
         this.menuItemOrder = menuItemOrder;
         this.itemPrice = itemPrice;
         this.destination = destination;
@@ -64,6 +87,9 @@ public class StaffMenuOrderController {
         this.foodItemOrderColumn = foodItemOrderColumn;
         this.priceColumn = priceColumn;
         this.priceOrderColumn = priceOrderColumn;
+        this.menuController = menuController;
+        this.cartController = cartController;
+        this.requestController = requestController;
     }
 
     public void initialize() {
@@ -73,16 +99,15 @@ public class StaffMenuOrderController {
     }
 
     private void initializeMenuTable() {
-        menuItemManager.update();
 
-        for (MenuItem menuItem : menuItemManager.getMenuItems()) {
+        for (MenuItem menuItem : menuController.getAvailableMenu()){
             menuRoot.getChildren().add(new TreeItem<MenuItem>(menuItem));
         }
         foodItemColumn.setCellValueFactory(
                 (TreeTableColumn.CellDataFeatures<MenuItem, String> param) -> new ReadOnlyStringWrapper(param.getValue().getValue().getFoodName()));
         //TODO -> Return price instead of null
         priceColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<MenuItem, Integer> param) -> null);
+                (TreeTableColumn.CellDataFeatures<MenuItem, Integer> param) -> new ReadOnlyObjectWrapper(param.getValue().getValue().getPrice()));
 
         menuOrderTable.setRoot(menuRoot);
         menuOrderTable.setShowRoot(false);
@@ -99,21 +124,21 @@ public class StaffMenuOrderController {
             TreeItem<MenuItem> selectedMenuItem = menuOrderTable.getSelectionModel().getSelectedItem();
             menuItemOrder.setText(selectedMenuItem.getValue().getFoodName());
             //TODO -> Return price instead of null
-            itemPrice.setText("YOU HAVE NO PRICE");
+            itemPrice.setText("" + selectedMenuItem.getValue().getPrice() + "$");
 
         }
     }
 
     private void initializeOrderTable() {
 
-        for (MenuItem menuItem : addedItems) {
-            orderRoot.getChildren().add(new TreeItem<MenuItem>(menuItem));
+        for (CartItem cartItem : cartController.getItems() ) {
+            orderRoot.getChildren().add(new TreeItem<>(cartItem));
         }
         foodItemOrderColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<MenuItem, String> param) -> new ReadOnlyStringWrapper(param.getValue().getValue().getFoodName()));
+                (TreeTableColumn.CellDataFeatures<CartItem, String> param) -> new ReadOnlyStringWrapper(param.getValue().getValue().getFoodNameCart()));
         //TODO -> Return price instead of null
         priceOrderColumn.setCellValueFactory(
-                (TreeTableColumn.CellDataFeatures<MenuItem, Integer> param) -> null);
+                (TreeTableColumn.CellDataFeatures<CartItem, Integer> param) -> new ReadOnlyObjectWrapper(param.getValue().getValue().getQuantity()));
 
         myOrderTable.setRoot(orderRoot);
         myOrderTable.setShowRoot(false);
@@ -129,27 +154,45 @@ public class StaffMenuOrderController {
     }
 
 
-    public void selectQuantity() {
-    }
-
     public void addMenuItem() {
+        TreeItem<MenuItem> selectedMenuItem = menuOrderTable.getSelectionModel().getSelectedItem();
+        cartItem = new CartItem(selectedMenuItem.getValue().getFoodName(),Integer.parseInt(selectQuantity.getText()));
+        cartController.addItemToCart(cartItem);
+        orderRoot.getChildren().add(new TreeItem<>(cartItem));
+        cancelMenuItem();
     }
 
     public void cancelMenuItem() {
+        selectQuantity.setText(selectQuantity.getPromptText());
+        menuItemOrder.setText(selectQuantity.getPromptText());
+        itemPrice.setText(itemPrice.getPromptText());
+        destination.setText("Destination");
     }
 
     public void checkoutRequest() {
-    }
+        orderRoot.getChildren().clear();
+        System.out.println("Hello");
+        FoodRequest foodRequest = new FoodRequest(cartItem.getFoodNameCart(), LocalDateTime.now(),LocalDateTime.now(),"Food","This is a food Request",
+                node,null,cartController.getItems());
+        foodRequestManager.addRequest(foodRequest);
+        cartController.clearItems();
 
-    public void destinationPopup() {
+        initializeOrderTable();
+        cancelMenuItem();
+
     }
 
     public void deleteFoodItemFromCart() {
+        TreeItem<CartItem> selectedMenuItem = myOrderTable.getSelectionModel().getSelectedItem();
+        cartController.getItems().remove(selectedMenuItem);
+        orderRoot.getChildren().remove(selectedMenuItem);
     }
 
     public void selectDietaryRestriction() {
     }
 
     public void information() {
+    }
+    public void destinationPopup() {
     }
 }
