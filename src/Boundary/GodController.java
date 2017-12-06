@@ -245,32 +245,32 @@ public class GodController {
     @FXML
     private PieChart userOrderCompletePieChart;
 
-    @FXML
-    private JFXTreeTableView<?> userOrderFrequencyTable;
-
-    @FXML
-    private TreeTableColumn<?, ?> userNameFColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userIDFColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userOrderFColumn;
-
-    @FXML
-    private JFXTreeTableView<?> userCreationFColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userNameCColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userIDCColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userOrderCreatedCColumn1;
-
-    @FXML
-    private TreeTableColumn<?, ?> userOrderCompleteCColumn11;
+//    @FXML
+//    private JFXTreeTableView<?> userOrderFrequencyTable;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userNameFColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userIDFColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userOrderFColumn;
+//
+//    @FXML
+//    private JFXTreeTableView<> userCreationFColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userNameCColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userIDCColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userOrderCreatedCColumn1;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userOrderCompleteCColumn11;
 
     @FXML
     private PieChart itemFrequencyOrderPieChart;
@@ -554,10 +554,6 @@ public class GodController {
     /* Reports */
     /////////////
 
-    @FXML
-    public void reportsToHub(ActionEvent event) {
-        reportsController.reportsToHub();
-    }
 
     ////////////////
     /* Menu Order */
