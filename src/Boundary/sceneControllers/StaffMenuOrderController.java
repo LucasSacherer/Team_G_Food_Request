@@ -1,5 +1,9 @@
 package Boundary.sceneControllers;
 
+import Controller.CartController;
+import Controller.MenuController;
+import Controller.RequestController;
+import Controller.WorkerController;
 import Database.DatabaseGargoyle;
 import Entity.MenuItem;
 import Entity.Node;
@@ -14,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.input.MouseEvent;
+import sun.swing.MenuItemCheckIconFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,11 @@ public class StaffMenuOrderController {
     private WorkerManager workerManager = new WorkerManager(databaseGargoyle);
     private FoodRequestManager foodRequestManager = new FoodRequestManager(databaseGargoyle, nodeManager,
             workerManager, menuItemManager, foodLogManager);
+
+    /* Controllers */
+    private MenuController menuController;
+    private CartController cartController;
+    private RequestController requestController;
 
     private JFXComboBox selectQuantityCombo;
     private JFXTextField menuItemOrder, itemPrice, destination;
@@ -47,7 +57,8 @@ public class StaffMenuOrderController {
                                     FoodRequestManager foodRequestManager, JFXComboBox selectQuantityCombo, JFXTextField menuItemOrder, JFXTextField itemPrice, JFXTextField destination,
                                     JFXTreeTableView<MenuItem> menuOrderTable, JFXTreeTableView<MenuItem> myOrderTable,
                                     TreeTableColumn<MenuItem, String> foodItemColumn, TreeTableColumn<MenuItem, String> foodItemOrderColumn,
-                                    TreeTableColumn<MenuItem, Integer> priceColumn, TreeTableColumn<MenuItem, Integer> priceOrderColumn) {
+                                    TreeTableColumn<MenuItem, Integer> priceColumn, TreeTableColumn<MenuItem, Integer> priceOrderColumn,
+                                     MenuController menuController, CartController cartController, RequestController requestController) {
         this.databaseGargoyle = databaseGargoyle;
         this.nodeManager = nodeManager;
         this.foodLogManager = foodLogManager;
@@ -64,6 +75,9 @@ public class StaffMenuOrderController {
         this.foodItemOrderColumn = foodItemOrderColumn;
         this.priceColumn = priceColumn;
         this.priceOrderColumn = priceOrderColumn;
+        this.menuController = menuController;
+        this.cartController = cartController;
+        this.requestController = requestController;
     }
 
     public void initialize() {
@@ -73,9 +87,8 @@ public class StaffMenuOrderController {
     }
 
     private void initializeMenuTable() {
-        menuItemManager.update();
 
-        for (MenuItem menuItem : menuItemManager.getMenuItems()) {
+        for (MenuItem menuItem : menuController.getAvailableMenu()){
             menuRoot.getChildren().add(new TreeItem<MenuItem>(menuItem));
         }
         foodItemColumn.setCellValueFactory(

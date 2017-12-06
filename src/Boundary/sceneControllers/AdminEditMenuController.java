@@ -200,12 +200,14 @@ public class AdminEditMenuController {
                Integer.parseInt(stockAvailable.getText()),Integer.parseInt(calories.getText()),
                 vegan.isSelected(),diabetic.isSelected(),gluttenfree.isSelected(),Integer.parseInt(priceEditText.getText()));
         menuRoot.getChildren().add(new TreeItem<>(newMenuItem));
+        clearMenu();
 
     }
     public void deleteMenu() {
         TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
         menuController.removeMenuItem(selectedMenuItem.getValue());
         menuRoot.getChildren().remove(selectedMenuItem);
+        clearMenu();
 
     }
     public void editMenu() {
@@ -217,6 +219,7 @@ public class AdminEditMenuController {
 
         menuRoot.getChildren().remove(selectedItem);
         menuRoot.getChildren().add(new TreeItem<>(modifiedItem));
+        clearMenu();
 
     }
 
@@ -286,6 +289,8 @@ public class AdminEditMenuController {
         TreeItem<FoodRequest> selectedFoodRequest = requestsTable.getSelectionModel().getSelectedItem();
         requestController.deleteRequest(selectedFoodRequest.getValue());
         requestsRoot.getChildren().remove(selectedFoodRequest);
+        cancelRequest();
+
 
     }
     public void deleteAllRequests() {
@@ -327,6 +332,7 @@ public class AdminEditMenuController {
     public void addWorker() {
         workerController.addWorker(username.getText());
         workerRoot.getChildren().add(new TreeItem<>(workerController.getWorkerbyName(username.getText())));
+        clearWorker();
 
     }
     public void deleteWorker() {
@@ -335,6 +341,7 @@ public class AdminEditMenuController {
         username.setText(username.getPromptText());
         workerID.setText("Worker ID");
         workerRoot.getChildren().remove(selectedWorker);
+        clearWorker();
 
     }
     public void editWorker() {
@@ -347,6 +354,7 @@ public class AdminEditMenuController {
 
         workerRoot.getChildren().remove(selectedWorker);
         workerRoot.getChildren().add(new TreeItem<>(modifiedWorker));
+        clearWorker();
 
     }
     public void clearWorker(){

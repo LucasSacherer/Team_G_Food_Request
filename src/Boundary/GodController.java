@@ -440,7 +440,7 @@ public class GodController {
                 foodRequestManager, selectQuantityCombo, menuItemOrder, itemPrice, destination,
                 menuOrderTable, myOrderTable,
                 foodItemColumn, foodItemOrderColumn,
-                priceColumn, priceOrderColumn);
+                priceColumn, priceOrderColumn, menuController,  cartController, requestController);
     }
 
 
