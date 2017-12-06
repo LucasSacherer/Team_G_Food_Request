@@ -17,10 +17,6 @@ public class FoodRequest extends Application {
         databaseGargoyle.createTables();
         databaseGargoyle.destroyConnection();
 
-//        Parent root = FXMLLoader.load(getClass().getResource("Boundary/fxml/foodRequestHub.fxml"));
-//        primaryStage.setTitle("Hello World");
-//        primaryStage.setScene(new Scene(root, 300, 275));
-//        primaryStage.show();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("boundary/fxml/foodRequestHub.fxml"));
         GodController godController = new GodController();
         loader.setController(godController);

@@ -353,6 +353,8 @@ public class GodController {
     @FXML
     private TreeTableColumn<Slice, Integer> menuFoodOrdersColumn = new JFXTreeTableColumn<>();
 
+
+
     @FXML
     private PieChart orderItemsPieChart = new PieChart();
 
@@ -408,6 +410,7 @@ public class GodController {
     private TreeTableColumn<CartItem,Integer> priceOrderColumn = new TreeTableColumn<>();
 
 
+
     /**
      * Organize Functions by Scene
      **/
@@ -434,6 +437,7 @@ public class GodController {
     private void hubToStaffMenuOrder() throws IOException {
         sceneSwitcher.toStaffMenuOrder(this, foodRequestHubPane);
         staffMenuOrderController.initialize();
+
     }
 
     @FXML

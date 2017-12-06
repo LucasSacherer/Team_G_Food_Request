@@ -51,7 +51,7 @@
                                     <PieChart layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <JFXTreeTableView prefHeight="400.0" prefWidth="960.0">
+                                          <JFXTreeTableView fx:id="foodOrders" prefHeight="400.0" prefWidth="960.0">
                                              <columns>
                                                 <TreeTableColumn fx:id="menuFoodColumn" prefWidth="459.0" text="Food" />
                                                 <TreeTableColumn fx:id="menuFoodOrdersColumn" minWidth="0.0" prefWidth="500.0" text="# of Orders" />
@@ -59,16 +59,7 @@
                                           </JFXTreeTableView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                       <children>
-                                          <JFXTreeTableView prefHeight="400.0" prefWidth="959.0">
-                                             <columns>
-                                                <TreeTableColumn prefWidth="463.0" text="Food Type" />
-                                                <TreeTableColumn prefWidth="495.0" text="# of Orders" />
-                                             </columns>
-                                          </JFXTreeTableView>
-                                       </children>
-                                    </AnchorPane>
+                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                                     <PieChart fx:id="orderItemsPieChart" GridPane.columnIndex="1" />
                                     <PieChart fx:id="orderedTypesPieChart" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
