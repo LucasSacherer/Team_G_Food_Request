@@ -3,8 +3,7 @@ package Boundary;
 import Boundary.sceneControllers.*;
 import Controller.*;
 import Database.DatabaseGargoyle;
-import Entity.CartItem;
-import Entity.FoodRequest;
+import Entity.*;
 import Entity.MenuItem;
 import Entity.Worker;
 import Manager.*;
@@ -54,6 +53,7 @@ public class GodController {
     FoodRequestManager foodRequestManager = new FoodRequestManager(databaseGargoyle, nodeManager,
             workerManager, menuItemManager, foodLogManager);
     WorkerLogManager workerLogManager = new WorkerLogManager(databaseGargoyle);
+    ImageManager imageManager = new ImageManager();
 
 
 
@@ -245,32 +245,32 @@ public class GodController {
     @FXML
     private PieChart userOrderCompletePieChart;
 
-    @FXML
-    private JFXTreeTableView<?> userOrderFrequencyTable;
-
-    @FXML
-    private TreeTableColumn<?, ?> userNameFColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userIDFColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userOrderFColumn;
-
-    @FXML
-    private JFXTreeTableView<?> userCreationFColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userNameCColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userIDCColumn;
-
-    @FXML
-    private TreeTableColumn<?, ?> userOrderCreatedCColumn1;
-
-    @FXML
-    private TreeTableColumn<?, ?> userOrderCompleteCColumn11;
+//    @FXML
+//    private JFXTreeTableView<?> userOrderFrequencyTable;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userNameFColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userIDFColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userOrderFColumn;
+//
+//    @FXML
+//    private JFXTreeTableView<> userCreationFColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userNameCColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userIDCColumn;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userOrderCreatedCColumn1;
+//
+//    @FXML
+//    private TreeTableColumn<?, ?> userOrderCompleteCColumn11;
 
     @FXML
     private PieChart itemFrequencyOrderPieChart;
@@ -331,6 +331,30 @@ public class GodController {
 
     @FXML
     private TreeTableColumn<?, ?> orderTimeCompletedColumn;
+
+    @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private JFXTreeTableView<DensityNode> reportsTable = new JFXTreeTableView<>();
+
+    @FXML
+    private TreeTableColumn<DensityNode, String> locationRequestsColumn = new JFXTreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<DensityNode, Integer> numberRequestsColumn = new JFXTreeTableColumn<>();
+
+    @FXML
+    private JFXTreeTableView<Slice> foodOrders = new JFXTreeTableView<>();
+
+    @FXML
+    private TreeTableColumn<Slice, String> menuFoodColumn = new JFXTreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<Slice, Integer> menuFoodOrdersColumn = new JFXTreeTableColumn<>();
+
+    @FXML
+    private PieChart orderItemsPieChart = new PieChart();
 
     /* Staff Info Popup */
     @FXML
@@ -421,6 +445,7 @@ public class GodController {
     @FXML
     private void hubToReports() throws IOException {
         sceneSwitcher.toReports(this, foodRequestHubPane);
+        reportsController.initialize();
     }
 
     @FXML
@@ -484,7 +509,8 @@ public class GodController {
     }
 
     private void initializeReportsScene() {
-        reportsController = new ReportsController();
+        reportsController = new ReportsController(scrollPane, imageManager,foodLogManager,nodeManager,reportsTable,locationRequestsColumn,numberRequestsColumn,
+                foodOrders,menuFoodColumn,menuFoodOrdersColumn,orderItemsPieChart);
     }
 
     private void initializeStaffIntoPopupScene() {
@@ -524,10 +550,6 @@ public class GodController {
     /* Reports */
     /////////////
 
-    @FXML
-    public void reportsToHub(ActionEvent event) {
-        reportsController.reportsToHub();
-    }
 
     ////////////////
     /* Menu Order */
