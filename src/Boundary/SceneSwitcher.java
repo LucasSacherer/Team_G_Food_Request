@@ -1,9 +1,12 @@
 package Boundary;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -46,6 +49,26 @@ public class SceneSwitcher {
 
     public void toStaffMenuOrder(GodController g, Pane from) throws IOException {
         switchScene(g, from, staffMenuOrderLoc);
+    }
+
+    public void toMapDirectoryPopup(GodController g) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(mapDirectoryLoc));
+        fxmlLoader.setController(g);
+        Parent root2 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Directory");
+        stage.setScene(new Scene(root2, 600, 300));
+        stage.show();
+    }
+
+    public void toMenuInfoPopup(GodController g) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(staffInfoPopupLoc));
+        fxmlLoader.setController(g);
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Menu Info");
+        stage.setScene(new Scene(root1, 1280, 720));
+        stage.show();
     }
 }
 

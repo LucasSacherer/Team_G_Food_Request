@@ -14,10 +14,10 @@ public class FoodRequest extends RecursiveTreeObject<FoodRequest> {
     private Node node;
 
     private Worker assignedWorker;
-    private List<MenuItem> order;
+    private List<CartItem> order;
 
     public FoodRequest(String name, LocalDateTime timeCreated, LocalDateTime timeCompleted,
-                       String type, String description, Node node, Worker worker, List<MenuItem> order) {
+                       String type, String description, Node node, Worker worker, List<CartItem> order) {
         this.name = name;
         this.timeCreated = timeCreated;
         this.timeCompleted = timeCompleted;
@@ -56,7 +56,7 @@ public class FoodRequest extends RecursiveTreeObject<FoodRequest> {
         return assignedWorker;
     }
 
-    public List<MenuItem> getOrder() {
+    public List<CartItem> getOrder() {
         return order;
     }
 

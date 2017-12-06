@@ -3,6 +3,7 @@ package Boundary;
 import Boundary.sceneControllers.*;
 import Controller.*;
 import Database.DatabaseGargoyle;
+import Entity.CartItem;
 import Entity.FoodRequest;
 import Entity.MenuItem;
 import Entity.Worker;
@@ -36,6 +37,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -319,28 +321,31 @@ public class GodController {
     private JFXButton addMenuItemButton, cancelMenuItemButton, checkoutRequestButton, destinationPopupButton, deleteFoodItem, informationButton;
 
     @FXML
-    private JFXComboBox selectQuantityCombo;
+    private JFXTextField selectQuantity;
 
     @FXML
-    private JFXTextField menuItemOrder, itemPrice, destination;
+    private JFXTextField menuItemOrder, itemPrice;
+
+    @FXML
+    private Label destination;
 
     @FXML
     private JFXTreeTableView<MenuItem> menuOrderTable = new JFXTreeTableView<>();
 
     @FXML
-    private JFXTreeTableView<MenuItem> myOrderTable = new JFXTreeTableView<>();
+    private JFXTreeTableView<CartItem> myOrderTable = new JFXTreeTableView<>();
 
     @FXML
     private TreeTableColumn<MenuItem, String> foodItemColumn = new TreeTableColumn<>();
 
     @FXML
-    private TreeTableColumn<MenuItem, String> foodItemOrderColumn = new TreeTableColumn<>();
+    private TreeTableColumn<CartItem,String> foodItemOrderColumn = new TreeTableColumn<>();
 
     @FXML
     private TreeTableColumn<MenuItem, Integer> priceColumn = new TreeTableColumn<>();
 
     @FXML
-    private TreeTableColumn<MenuItem, Integer> priceOrderColumn = new TreeTableColumn<>();
+    private TreeTableColumn<CartItem,Integer> priceOrderColumn = new TreeTableColumn<>();
 
 
     /**
@@ -381,6 +386,15 @@ public class GodController {
     private void hubToReports() throws IOException {
         sceneSwitcher.toReports(this, foodRequestHubPane);
     }
+
+    @FXML
+    private void mapDirectoryPopup(ActionEvent event) throws IOException {sceneSwitcher.toMapDirectoryPopup(new GodController());
+    }
+
+    @FXML
+    private void menuInfoPopup(ActionEvent event) throws IOException {sceneSwitcher.toMenuInfoPopup(new GodController());}
+
+
 
 
     /* Scene Commandments */
@@ -430,14 +444,14 @@ public class GodController {
     private void initializeStaffIntoPopupScene() {
         staffIntoPopupController = new StaffIntoPopupController(foodInfoTable, foodItemInfoColumn,
                 nutritionColumn, foodInfoDescription,
-                databaseGargoyle, menuItemManager);
+                databaseGargoyle, menuItemManager, menuController);
 
     }
 
     private void initializeStaffMenuOrderScene() {
         staffMenuOrderController = new StaffMenuOrderController(databaseGargoyle,
                 nodeManager, foodLogManager, menuItemManager, workerManager,
-                foodRequestManager, selectQuantityCombo, menuItemOrder, itemPrice, destination,
+                foodRequestManager, selectQuantity, menuItemOrder, itemPrice, destination,
                 menuOrderTable, myOrderTable,
                 foodItemColumn, foodItemOrderColumn,
                 priceColumn, priceOrderColumn, menuController,  cartController, requestController);
@@ -487,10 +501,6 @@ public class GodController {
         staffMenuOrderController.deleteFoodItemFromCart();
     }
 
-    @FXML
-    private void selectQuantity() {
-        staffMenuOrderController.selectQuantity();
-    }
 
     @FXML
     private void addMenuItem() {
@@ -505,16 +515,6 @@ public class GodController {
     @FXML
     private void checkoutRequest() {
         staffMenuOrderController.checkoutRequest();
-    }
-
-    @FXML
-    private void destinationPopup() {
-        staffMenuOrderController.destinationPopup();
-    }
-
-    @FXML
-    private void information() {
-        staffMenuOrderController.information();
     }
 
     //////////////////////
@@ -567,22 +567,6 @@ public class GodController {
     @FXML
     private void exportMenu() {adminEditMenuController.exportMenuItems();}
 
-
-
-    @FXML
-    void menuInfoPopup(ActionEvent event) {
-        try {
-            staffIntoPopupController.initializeStaffInfo();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/boundary/fxml/staffInfoPopup.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Menu Info");
-            stage.setScene(new Scene(root1, 1280, 720));
-            stage.show();
-        } catch (Exception e) {
-            System.out.println("Cant load Menu Info");
-        }
-    }
     void initializeObservers(){
         databaseGargoyle.attachManager(foodLogManager);
         databaseGargoyle.attachManager(menuItemManager);
@@ -593,16 +577,6 @@ public class GodController {
         databaseGargoyle.notifyManagers();
     }
 
-    @FXML
-    void mapDirectoryPopup(ActionEvent event) throws IOException {
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/boundary/fxml/mapDirectory.fxml"));
-            Parent root2 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Directory");
-            stage.setScene(new Scene(root2, 600, 300));
-            stage.show();
-    }
 
 }
 

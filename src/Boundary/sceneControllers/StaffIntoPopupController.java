@@ -1,5 +1,6 @@
 package Boundary.sceneControllers;
 
+import Controller.MenuController;
 import Database.DatabaseGargoyle;
 import Entity.MenuItem;
 import Manager.MenuItemManager;
@@ -15,6 +16,7 @@ public class StaffIntoPopupController {
     private TreeTableColumn<MenuItem, String> foodItemInfoColumn;
     private TreeTableColumn<MenuItem, Integer> nutritionColumn;
     private TreeTableColumn<MenuItem, String> foodInfoDescription;
+    private MenuController menuController;
 
     DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
     MenuItemManager menuItemManager = new MenuItemManager(databaseGargoyle);
@@ -24,20 +26,20 @@ public class StaffIntoPopupController {
 
     public StaffIntoPopupController(JFXTreeTableView<MenuItem> foodInfoTable, TreeTableColumn<MenuItem, String> foodItemInfoColumn,
                                     TreeTableColumn<MenuItem, Integer> nutritionColumn, TreeTableColumn<MenuItem, String> foodInfoDescription,
-                                    DatabaseGargoyle databaseGargoyle, MenuItemManager menuItemManager) {
+                                    DatabaseGargoyle databaseGargoyle, MenuItemManager menuItemManager, MenuController menuController) {
         this.foodInfoTable = foodInfoTable;
         this.foodItemInfoColumn = foodItemInfoColumn;
         this.nutritionColumn = nutritionColumn;
         this.foodInfoDescription = foodInfoDescription;
         this.databaseGargoyle = databaseGargoyle;
         this.menuItemManager = menuItemManager;
+        this.menuController = menuController;
     }
 
 
     public void initializeStaffInfo() {
-        menuItemManager.update();
 
-        for (MenuItem menuItem : menuItemManager.getMenuItems()) {
+        for (MenuItem menuItem : menuController.getAvailableMenu()) {
             foodInfoRoot.getChildren().add(new TreeItem<MenuItem>(menuItem));
 
         }

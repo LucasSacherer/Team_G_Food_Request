@@ -302,7 +302,7 @@ public class AdminEditMenuController {
 
     }
     public void deleteAllRequests() {
-        requestsRoot.getChildren().removeAll();
+        requestsRoot.getChildren().clear();
 
     }
     public void cancelRequest() {

@@ -1,6 +1,7 @@
 package ManagerTests;
 
 import Database.DatabaseGargoyle;
+import Entity.CartItem;
 import Entity.FoodRequest;
 import Entity.MenuItem;
 import Manager.*;
@@ -57,8 +58,8 @@ public class FoodRequestManagerTests {
         assertEquals("GRETL03501", req.getNode().getNodeID());
         assertEquals("worker1", req.getAssignedWorker().getWorkerID());
         assertEquals(3, req.getOrder().size());
-        assertTrue(req.getOrder().contains(menuItemManager.getMenuItemByName("Milk")));
-        assertTrue(req.getOrder().contains(menuItemManager.getMenuItemByName("Cereal")));
+        assertEquals("Fruit", req.getOrder().get(0).getFoodNameCart());
+        assertEquals("Cereal", req.getOrder().get(1).getFoodNameCart());
     }
 
     @Test
@@ -75,10 +76,10 @@ public class FoodRequestManagerTests {
         databaseGargoyle.attachManager(foodRequestManager);
         databaseGargoyle.notifyManagers();
 
-        ArrayList<MenuItem> originalOrder = new ArrayList<>();
-        originalOrder.add(menuItemManager.getMenuItemByName("Milk"));
-        originalOrder.add(menuItemManager.getMenuItemByName("Cereal"));
-        originalOrder.add(menuItemManager.getMenuItemByName("Fruit"));
+        ArrayList<CartItem> originalOrder = new ArrayList<>();
+        originalOrder.add(new CartItem("Milk", 1));
+        originalOrder.add(new CartItem("Cereal", 1));
+        originalOrder.add(new CartItem("Fruit", 1));
         Timestamp time = Timestamp.valueOf("1960-01-01 23:03:20.000000000");
 
         //Test that before completing the request, the times are equal
@@ -114,9 +115,9 @@ public class FoodRequestManagerTests {
         databaseGargoyle.notifyManagers();
 
         Timestamp time = Timestamp.valueOf("1960-01-01 23:03:20.000000000");
-        ArrayList<MenuItem> order = new ArrayList<>();
-        order.add(menuItemManager.getMenuItemByName("Pudding"));
-        order.add(menuItemManager.getMenuItemByName("Chicken"));
+        ArrayList<CartItem> order = new ArrayList<>();
+        order.add(new CartItem("Pudding", 1));
+        order.add(new CartItem("Chicken", 1));
         FoodRequest request = new FoodRequest("name", time.toLocalDateTime(), time.toLocalDateTime(),
                 "type", "description", nodeManager.getNode("IHALL01303"),
                 workerManager.getWorkerByID("worker1"), order);
@@ -129,8 +130,8 @@ public class FoodRequestManagerTests {
         assertEquals("IHALL01303", testReq.getNode().getNodeID());
         assertEquals("worker1", testReq.getAssignedWorker().getWorkerID());
         assertEquals(2, testReq.getOrder().size());
-        assertTrue(testReq.getOrder().contains(menuItemManager.getMenuItemByName("Pudding")));
-        assertTrue(testReq.getOrder().contains(menuItemManager.getMenuItemByName("Chicken")));
+        assertEquals("Pudding", testReq.getOrder().get(0).getFoodNameCart());
+        assertEquals("Chicken", testReq.getOrder().get(1).getFoodNameCart());
 
         //Revert changes
         foodRequestManager.deleteRequest(request);
