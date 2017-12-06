@@ -72,9 +72,7 @@ public class SearchEngine {
         for(Node n: places){
             wordList.add(n.getShortName().toLowerCase());
         }
-
-        System.out.println(wordList);
-
+        //System.out.println(wordList);
         List<Node> results = new ArrayList<>();
         double fuzzyness = 0.5;//basically the allowed error - adjust as needed
         List<Integer> matches = new ArrayList<Integer>();
@@ -83,14 +81,10 @@ public class SearchEngine {
                 String s = wordList.get(i);
                 // Calculate the Levenshtein-distance:
                 int levenshteinDistance = LevenshteinDistance(word, s);
-
                 // Length of the longer string:
                 int length = Math.max(word.length(), s.length());
-
                 // Calculate the score:
                 double score = 1.0 - (double) levenshteinDistance / length;
-
-                // Match?
                 if (score > fuzzyness & (!matches.contains(i))) {
                     matches.add(i);
                 }
@@ -105,6 +99,27 @@ public class SearchEngine {
             Node node = places.get(m);
             results.add(node);
         }
-        return results;
+        List<Node> letterStarts = new ArrayList<>();
+        List<Integer> remove = new ArrayList<>();
+
+        for (int i = 0; i < results.size();i++){
+            Node n = results.get(i);
+            if(n.getShortName().toLowerCase().contains(word)){
+                letterStarts.add(n);
+                remove.add(i);
+            }
+        }
+
+        List<Node> answer = new LinkedList<>();
+
+        for (int j = 0; j < letterStarts.size();j++){
+            answer.add(letterStarts.get(j));
+        }
+       for (int k = 0; k < results.size(); k++){
+           if(!remove.contains(k)){
+               answer.add(results.get(k));
+           }
+       }
+        return answer;
     }
 }

@@ -3,11 +3,11 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -31,7 +31,7 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <GridPane prefHeight="1080.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <GridPane prefHeight="1080.0" prefWidth="374.0" stylesheets="@../APIStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -46,39 +46,57 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </JFXButton>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                        <AnchorPane prefHeight="495.0" prefWidth="374.0" GridPane.rowIndex="1">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="448.0" prefWidth="374.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                              <VBox alignment="CENTER" layoutY="65.0" prefHeight="652.0" prefWidth="374.0" spacing="50.0" AnchorPane.bottomAnchor="-269.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
                                  <children>
-                                    <JFXTextField fx:id="menuItem" editable="false" promptText="Item" />
-                                    <JFXTextField fx:id="itemPrice" editable="false" layoutX="10.0" layoutY="35.0" promptText="Price" />
+                                    <JFXTextField fx:id="menuItemOrder" editable="false" promptText="Item" styleClass="textfield">
+                                       <VBox.margin>
+                                          <Insets left="100.0" right="100.0" />
+                                       </VBox.margin></JFXTextField>
+                                    <JFXTextField fx:id="itemPrice" editable="false" layoutX="10.0" layoutY="35.0" promptText="Price" styleClass="textfield">
+                                       <VBox.margin>
+                                          <Insets left="100.0" right="100.0" />
+                                       </VBox.margin></JFXTextField>
                                     <JFXComboBox fx:id="selectQuantityCombo" layoutX="10.0" layoutY="10.0" onAction="#selectQuantity" promptText="Quantity" />
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
                                        <children>
-                                          <JFXButton fx:id="addMenuItemButton" buttonType="RAISED" onAction="#addMenuItem" prefHeight="31.0" prefWidth="121.0" text="Add" />
-                                          <JFXButton fx:id="cancelMenuItemButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#cancelMenuItem" prefHeight="31.0" prefWidth="121.0" text="Cancel" />
+                                          <JFXButton fx:id="addMenuItemButton" buttonType="RAISED" onAction="#addMenuItem" prefHeight="31.0" prefWidth="121.0" styleClass="buttonAdd" text="Add">
+                                             <HBox.margin>
+                                                <Insets right="50.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
+                                          <JFXButton fx:id="cancelMenuItemButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#cancelMenuItem" prefHeight="31.0" prefWidth="121.0" styleClass="buttonDelete" text="Cancel">
+                                             <HBox.margin>
+                                                <Insets right="50.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
                                        </children>
                                        <padding>
                                           <Insets left="60.0" />
                                        </padding>
                                     </HBox>
-                                    <JFXButton fx:id="checkoutRequestButton" buttonType="RAISED" onAction="#checkoutRequest" prefHeight="31.0" prefWidth="121.0" text="Checkout" />
+                                    <JFXButton fx:id="destinationPopupButton" buttonType="RAISED" onAction="#mapDirectoryPopup" prefHeight="31.0" prefWidth="121.0" styleClass="buttonNeutralBig" text="Destination" />
+                                    <JFXTextField fx:id="destination" editable="false">
+                                       <padding>
+                                          <Insets left="100.0" right="100.0" />
+                                       </padding>
+                                    </JFXTextField>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                    <JFXButton fx:id="checkoutRequestButton" buttonType="RAISED" onAction="#checkoutRequest" prefHeight="39.0" prefWidth="153.0" styleClass="buttonNeutralBig" text="Checkout">
+                                       <VBox.margin>
+                                          <Insets right="30.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></JFXButton>
                                  </children>
                               </VBox>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                           <children>
-                              <VBox alignment="CENTER" prefHeight="517.0" prefWidth="374.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
-                                       <children>
-                                          <JFXButton fx:id="destinationPopupButton" buttonType="RAISED" onAction="#destinationPopup" prefHeight="31.0" prefWidth="121.0" text="Destination" />
-                                          <JFXTextField fx:id="destination" editable="false" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
+                              <Label layoutX="53.0" prefHeight="45.0" prefWidth="269.0" text="Order Menu Item">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>
@@ -90,9 +108,9 @@
                   <Separator layoutX="14.0" layoutY="-8.0" orientation="VERTICAL" prefHeight="1080.0" prefWidth="0.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="-8.0" />
                   <BorderPane prefHeight="1080.0" prefWidth="1546.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <center>
-                        <VBox prefHeight="1080.0" prefWidth="1546.0" spacing="10.0" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="922.0" prefWidth="1323.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                              <HBox alignment="CENTER" prefHeight="113.0" prefWidth="1146.0" spacing="50.0">
                                  <padding>
                                     <Insets top="25.0" />
                                  </padding>
@@ -101,46 +119,49 @@
                                        <font>
                                           <Font size="20.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
                                     </Label>
-                                    <JFXButton fx:id="informationButton" buttonType="RAISED" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="121.0" text="Information" />
-                                    <JFXComboBox fx:id="dietaryRestrictions" onAction="#selectDietaryRestriction" promptText="Dietary Restrictions" />
+                                    <JFXComboBox fx:id="dietaryRestrictionsCombo" onAction="#selectDietaryRestriction" promptText="Dietary Restrictions" />
+                                    <JFXButton fx:id="informationButton" buttonType="RAISED" onAction="#menuInfoPopup" prefHeight="31.0" prefWidth="121.0" styleClass="buttonNeutralBig" stylesheets="@../APIStyle.css" text="Information" />
                                  </children>
                               </HBox>
-                              <TreeTableView fx:id="hubMenuTable" prefHeight="200.0" prefWidth="200.0">
-                                <columns>
-                                  <TreeTableColumn fx:id="foodItemColumn" prefWidth="565.0" text="Food Item" />
-                                  <TreeTableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="580.0" text="Price" />
-                                </columns>
-                              </TreeTableView>
+                              <JFXTreeTableView fx:id="menuOrderTable" prefHeight="428.0" prefWidth="1323.0">
+                                 <columns>
+                                    <TreeTableColumn fx:id="foodItemColumn" prefWidth="705.0" text="Food Item" />
+                                    <TreeTableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="616.0" text="Price" />
+                                 </columns>
+                              </JFXTreeTableView>
                               <Label alignment="CENTER" text="My Order">
                                  <VBox.margin>
-                                    <Insets left="500.0" />
+                                    <Insets left="450.0" />
                                  </VBox.margin>
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <TreeTableView fx:id="orderTable" prefHeight="200.0" prefWidth="200.0">
-                                <columns>
-                                  <TreeTableColumn fx:id="foodItemOrderColumn" prefWidth="551.0" text="Food Item" />
-                                  <TreeTableColumn fx:id="priceOrderColumn" prefWidth="594.0" text="Price" />
-                                </columns>
-                              </TreeTableView>
-                              <JFXButton fx:id="deleteFoodItem" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#deleteFoodItemFromCart" prefHeight="31.0" prefWidth="121.0" text="Delete Food Item" />
+                              <JFXTreeTableView fx:id="myOrderTable">
+                                 <columns>
+                                    <TreeTableColumn fx:id="foodItemOrderColumn" prefWidth="699.0" text="Food Item" />
+                                    <TreeTableColumn fx:id="priceOrderColumn" prefWidth="621.0" text="Price" />
+                                 </columns>
+                              </JFXTreeTableView>
+                              <JFXButton fx:id="deleteFoodItem" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#deleteFoodItemFromCart" prefHeight="31.0" prefWidth="121.0" styleClass="buttonDelete" stylesheets="@../APIStyle.css" text="Delete Food Item" />
                            </children>
                         </VBox>
                      </center>
                      <left>
-                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #003da6;" BorderPane.alignment="CENTER" />
+                        <Pane prefHeight="805.0" prefWidth="87.0" style="-fx-background-color: #003da6;" BorderPane.alignment="CENTER" />
                      </left>
                      <right>
-                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #003da6;" BorderPane.alignment="CENTER" />
+                        <Pane prefHeight="805.0" prefWidth="136.0" style="-fx-background-color: #003da6;" BorderPane.alignment="CENTER" />
                      </right>
                      <bottom>
-                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #003da6;" BorderPane.alignment="CENTER" />
+                        <Pane prefHeight="75.0" prefWidth="1546.0" style="-fx-background-color: #003da6;" BorderPane.alignment="CENTER" />
                      </bottom>
                      <top>
-                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #003da6;" BorderPane.alignment="CENTER" />
+                        <Pane prefHeight="75.0" prefWidth="1546.0" style="-fx-background-color: #003da6;" BorderPane.alignment="CENTER" />
                      </top>
                   </BorderPane>
                </children></AnchorPane>
