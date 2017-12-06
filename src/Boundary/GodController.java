@@ -68,7 +68,7 @@ public class GodController {
     WorkerController workerController = new WorkerController(workerManager);
 
     /* Scene Switcher */
-    SceneSwitcher sceneSwitcher = new SceneSwitcher();
+    SceneSwitcher sceneSwitcher = new SceneSwitcher(new StaffIntoPopupController(), new MapDirectoryController(directoryController));
 
 
     ///////////////////////
@@ -452,6 +452,7 @@ public class GodController {
         initializeReportsScene();
         initializeStaffIntoPopupScene();
         initializeStaffMenuOrderScene();
+        System.out.println("Observers initialized");
         initializeObservers();
     }
 

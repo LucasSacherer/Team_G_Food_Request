@@ -34,7 +34,7 @@ public class MapDirectoryController {
     public void initialize() {
         initializeDirectory();
         initializeDirectoryListeners();
-        origin = null; // directoryController.getDirectory().get("Elevators").get(0); //TODO we want this to be the cafeteria
+        origin = directoryController.getDirectory().get("Shops, Food, Phones").get(0); //TODO we want this to be the cafeteria
     }
 
     @FXML

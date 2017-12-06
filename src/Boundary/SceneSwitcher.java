@@ -24,15 +24,17 @@ public class SceneSwitcher {
     private final String staffInfoPopupLoc = "/boundary/fxml/staffInfoPopup.fxml";
     private final String staffMenuOrderLoc = "/boundary/fxml/staffMenuOrder.fxml";
 
-    private DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
 
-    private NodeManager nodeManager = new NodeManager(databaseGargoyle);
+    private final StaffIntoPopupController staffInfoPopupController;
 
-    private DirectoryController directoryController = new DirectoryController(nodeManager);
+    private final MapDirectoryController mapDirectoryController;
 
-    private final StaffIntoPopupController staffInfoPopupController = new StaffIntoPopupController();
+    public SceneSwitcher(StaffIntoPopupController staffIntoPopupController, MapDirectoryController mapDirectoryController) {
+        this.staffInfoPopupController = staffIntoPopupController;
+        this.mapDirectoryController = mapDirectoryController;
+    }
 
-    private final MapDirectoryController mapDirectoryController = new MapDirectoryController(directoryController);
+//
 
     public void switchScene(GodController g, Pane from, String to) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(to));
