@@ -12,10 +12,22 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 
 public class StaffIntoPopupController {
-    private JFXTreeTableView<MenuItem> foodInfoTable;
-    private TreeTableColumn<MenuItem, String> foodItemInfoColumn;
-    private TreeTableColumn<MenuItem, Integer> nutritionColumn;
-    private TreeTableColumn<MenuItem, String> foodInfoDescription;
+    @FXML
+    private JFXTreeTableView<MenuItem> foodInfoTable = new JFXTreeTableView<>();
+
+    @FXML
+    private TreeTableColumn<MenuItem, String> foodItemInfoColumn = new TreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<MenuItem, Integer> nutritionColumn = new TreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<MenuItem, String> foodInfoDescription = new TreeTableColumn<>();
+
+//    private JFXTreeTableView<MenuItem> foodInfoTable;
+//    private TreeTableColumn<MenuItem, String> foodItemInfoColumn;
+//    private TreeTableColumn<MenuItem, Integer> nutritionColumn;
+//    private TreeTableColumn<MenuItem, String> foodInfoDescription;
     private MenuController menuController;
 
     DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
@@ -24,16 +36,7 @@ public class StaffIntoPopupController {
     TreeItem<MenuItem> foodInfoRoot = new TreeItem<>();
 
 
-    public StaffIntoPopupController(JFXTreeTableView<MenuItem> foodInfoTable, TreeTableColumn<MenuItem, String> foodItemInfoColumn,
-                                    TreeTableColumn<MenuItem, Integer> nutritionColumn, TreeTableColumn<MenuItem, String> foodInfoDescription,
-                                    DatabaseGargoyle databaseGargoyle, MenuItemManager menuItemManager, MenuController menuController) {
-        this.foodInfoTable = foodInfoTable;
-        this.foodItemInfoColumn = foodItemInfoColumn;
-        this.nutritionColumn = nutritionColumn;
-        this.foodInfoDescription = foodInfoDescription;
-        this.databaseGargoyle = databaseGargoyle;
-        this.menuItemManager = menuItemManager;
-        this.menuController = menuController;
+    public StaffIntoPopupController() {
     }
 
 

@@ -2,10 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -44,22 +46,36 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                            <children>
-                              <JFXListView fx:id="ordersToAssign" layoutX="184.0" layoutY="100.0" prefHeight="420.0" prefWidth="767.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                              <JFXTreeTableView fx:id="ordersAsssignTable" layoutX="7.0" prefHeight="400.0" prefWidth="758.0">
+                                 <columns>
+                                    <TreeTableColumn fx:id="orderNameAssignColumn" prefWidth="164.0" text="Order Name" />
+                                    <TreeTableColumn fx:id="timeOrderedColumn" minWidth="0.0" prefWidth="177.0" text="Time Ordered" />
+                                    <TreeTableColumn fx:id="descriptionAssignColumn" maxWidth="247.0" prefWidth="247.0" text="Description" />
+                                    <TreeTableColumn fx:id="locationAssignColumn" minWidth="0.0" prefWidth="169.0" text="Location" />
+                                 </columns>
+                              </JFXTreeTableView>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" layoutY="226.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
-                              <JFXListView fx:id="assignOrderItems" layoutX="184.0" layoutY="100.0" prefHeight="420.0" prefWidth="755.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                              <JFXTextArea fx:id="unassignedOrderInfo" editable="false" layoutX="106.0" layoutY="25.0" prefHeight="328.0" prefWidth="555.0" styleClass="textfield" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                            <children>
-                              <JFXListView fx:id="ordersAssigned" layoutX="184.0" layoutY="100.0" prefHeight="368.0" prefWidth="767.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
+                              <JFXTreeTableView fx:id="assignedOrdersTable" layoutY="32.0" prefHeight="368.0" prefWidth="758.0">
+                                 <columns>
+                                    <TreeTableColumn fx:id="orderNameAssignedColumn" prefWidth="188.0" text="Order Name" />
+                                    <TreeTableColumn fx:id="timeOrderedAssignedColumn" minWidth="0.0" prefWidth="191.0" text="Time Ordered" />
+                                    <TreeTableColumn fx:id="locationAssignedColumn" maxWidth="221.0" minWidth="0.0" prefWidth="183.0" text="Location" />
+                                    <TreeTableColumn fx:id="assignedEmployeeColumn" prefWidth="195.0" text="Assigned Employee" />
+                                 </columns>
+                              </JFXTreeTableView>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <children>
-                              <JFXListView fx:id="assignedOrderItems" layoutX="184.0" layoutY="100.0" prefHeight="368.0" prefWidth="755.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="15.0" />
+                              <JFXTextArea fx:id="assignedOrdersInfo" layoutX="104.0" layoutY="39.0" prefHeight="322.0" prefWidth="555.0" styleClass="textfield" />
                            </children>
                         </AnchorPane>
                         <Label text="Current Orders" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -71,8 +87,8 @@
                            <children>
                               <HBox prefHeight="22.0" prefWidth="499.0" spacing="49.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="169.0" AnchorPane.topAnchor="25.0">
                                  <children>
-                                    <JFXComboBox fx:id="employeeToAssign" layoutX="1000.0" layoutY="1000.0" prefHeight="42.0" prefWidth="136.0" promptText="Employee" />
-                                    <JFXButton fx:id="assignButton" alignment="CENTER" buttonType="RAISED" onAction="#assignEmployee" prefHeight="31.0" prefWidth="151.0" text="Assign" />
+                                    <JFXComboBox fx:id="employeeToAssign" layoutX="1000.0" layoutY="1000.0" prefHeight="42.0" prefWidth="136.0" promptText="Employee" styleClass="textfield" />
+                                    <JFXButton fx:id="assignButton" alignment="CENTER" buttonType="RAISED" onAction="#assignEmployee" prefHeight="31.0" prefWidth="151.0" styleClass="buttonAdd" text="Assign" />
                                  </children>
                               </HBox>
                            </children>
@@ -96,8 +112,8 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="767.0" spacing="50.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0">
                                  <children>
-                                    <JFXComboBox promptText="Filter" />
-                                    <JFXButton fx:id="completeOrderButton" buttonType="RAISED" onAction="#completeOrder" prefHeight="31.0" prefWidth="151.0" text="Complete Order" />
+                                    <JFXComboBox promptText="Filter" styleClass="textfield" />
+                                    <JFXButton fx:id="completeOrderButton" buttonType="RAISED" onAction="#completeOrder" prefHeight="31.0" prefWidth="151.0" styleClass="buttonAdd" text="Complete Order" />
                                  </children>
                               </HBox>
                            </children>

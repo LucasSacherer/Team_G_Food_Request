@@ -243,9 +243,8 @@ public class AdminEditMenuController {
 
     }
     private void initializeRequestsTab(){
-        foodRequestManager.update();
 
-        for (FoodRequest foodRequest : foodRequestManager.getRequests()){
+        for (FoodRequest foodRequest : requestController.getRequests()){
             requestsRoot.getChildren().add(new TreeItem<>(foodRequest));
         }
 
