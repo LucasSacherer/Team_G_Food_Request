@@ -55,22 +55,22 @@ public class StaffMenuOrderController {
     private TreeTableColumn<CartItem,Integer> priceOrderColumn;
 
     private MenuItem item;
-    private Node node;
+    private Node location;
 
     private CartItem cartItem;
 
-    private TreeItem<MenuItem> menuRoot = new TreeItem<>(item);
+    private TreeItem<MenuItem> menuRoot = new TreeItem<>();
     private TreeItem<CartItem> orderRoot = new TreeItem<>();
     private List<MenuItem> addedItems = new ArrayList<>();
 
 
     public StaffMenuOrderController(DatabaseGargoyle databaseGargoyle,
                                     NodeManager nodeManager, FoodLogManager foodLogManager, MenuItemManager menuItemManager, WorkerManager workerManager,
-                                    FoodRequestManager foodRequestManager, JFXTextField selectQuantity, JFXTextField menuItemOrder, JFXTextField itemPrice, Label destination,
+                                    FoodRequestManager foodRequestManager, JFXTextField selectQuantity, JFXTextField menuItemOrder, JFXTextField itemPrice,
                                     JFXTreeTableView<MenuItem> menuOrderTable, JFXTreeTableView<CartItem> myOrderTable,
                                     TreeTableColumn<MenuItem, String> foodItemColumn, TreeTableColumn<CartItem,String> foodItemOrderColumn,
                                     TreeTableColumn<MenuItem, Integer> priceColumn, TreeTableColumn<CartItem,Integer> priceOrderColumn,
-                                     MenuController menuController, CartController cartController, RequestController requestController) {
+                                    CartController cartController, RequestController requestController,Label destination) {
         this.databaseGargoyle = databaseGargoyle;
         this.nodeManager = nodeManager;
         this.foodLogManager = foodLogManager;
@@ -80,32 +80,33 @@ public class StaffMenuOrderController {
         this.selectQuantity = selectQuantity;
         this.menuItemOrder = menuItemOrder;
         this.itemPrice = itemPrice;
-        this.destination = destination;
         this.menuOrderTable = menuOrderTable;
         this.myOrderTable = myOrderTable;
         this.foodItemColumn = foodItemColumn;
         this.foodItemOrderColumn = foodItemOrderColumn;
         this.priceColumn = priceColumn;
         this.priceOrderColumn = priceOrderColumn;
-        this.menuController = menuController;
         this.cartController = cartController;
         this.requestController = requestController;
+        this.destination = destination;
     }
 
-    public void initialize() {
+    public void initialize(Label destination, MenuController menuController) {
+        this.menuController = menuController;
+        System.out.println(menuController);
         initializeMenuTable();
         initializeOrderTable();
-
+        this.destination = destination;
     }
 
     private void initializeMenuTable() {
 
         for (MenuItem menuItem : menuController.getAvailableMenu()){
-            menuRoot.getChildren().add(new TreeItem<MenuItem>(menuItem));
+            menuRoot.getChildren().add(new TreeItem<>(menuItem));
         }
+
         foodItemColumn.setCellValueFactory(
                 (TreeTableColumn.CellDataFeatures<MenuItem, String> param) -> new ReadOnlyStringWrapper(param.getValue().getValue().getFoodName()));
-        //TODO -> Return price instead of null
         priceColumn.setCellValueFactory(
                 (TreeTableColumn.CellDataFeatures<MenuItem, Integer> param) -> new ReadOnlyObjectWrapper(param.getValue().getValue().getPrice()));
 
@@ -128,6 +129,7 @@ public class StaffMenuOrderController {
 
         }
     }
+
 
     private void initializeOrderTable() {
 
@@ -170,11 +172,18 @@ public class StaffMenuOrderController {
     }
 
     public void checkoutRequest() {
+        FoodRequest foodRequest = new FoodRequest(cartItem.getFoodNameCart(), LocalDateTime.now(),LocalDateTime.now(),"hello","This",
+                nodeManager.getNode("GREST01201"),null,cartController.getItems());
         orderRoot.getChildren().clear();
-        System.out.println("Hello");
-        FoodRequest foodRequest = new FoodRequest(cartItem.getFoodNameCart(), LocalDateTime.now(),LocalDateTime.now(),"Food","This is a food Request",
-                node,null,cartController.getItems());
-        foodRequestManager.addRequest(foodRequest);
+        System.out.println(foodRequest.getName());
+        System.out.println(foodRequest.getTimeCreated());
+        System.out.println(foodRequest.getOrder());
+        System.out.println(foodRequest.getNode());
+        System.out.println(foodRequest.getAssignedWorker());
+        System.out.println(foodRequest.getDescription());
+        System.out.println(foodRequest.getType());
+        System.out.println(foodRequest.getTimeCompleted());
+        requestController.addRequest(foodRequest);
         cartController.clearItems();
 
         initializeOrderTable();
@@ -191,8 +200,11 @@ public class StaffMenuOrderController {
     public void selectDietaryRestriction() {
     }
 
-    public void information() {
+    public void setLocation(Node location) {
+        this.location = location;
     }
-    public void destinationPopup() {
+
+    public void setLabelDestination(JFXTextField text){
+        destination.setText(text.getText());
     }
 }

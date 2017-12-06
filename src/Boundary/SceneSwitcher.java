@@ -74,7 +74,7 @@ public class SceneSwitcher {
         Parent root2 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setTitle("Directory");
-        stage.setScene(new Scene(root2, 600, 300));
+        stage.setScene(new Scene(root2, 1280, 720));
         stage.show();
     }
 

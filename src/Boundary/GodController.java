@@ -47,13 +47,13 @@ public class GodController {
     final private DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
 
     /* Managers */
-    FoodLogManager foodLogManager = new FoodLogManager(databaseGargoyle);
-    MenuItemManager menuItemManager = new MenuItemManager(databaseGargoyle);
-    NodeManager nodeManager = new NodeManager(databaseGargoyle);
-    WorkerManager workerManager = new WorkerManager(databaseGargoyle);
-    FoodRequestManager foodRequestManager = new FoodRequestManager(databaseGargoyle, nodeManager,
+    final private FoodLogManager foodLogManager = new FoodLogManager(databaseGargoyle);
+    final private MenuItemManager menuItemManager = new MenuItemManager(databaseGargoyle);
+    final private NodeManager nodeManager = new NodeManager(databaseGargoyle);
+    final private  WorkerManager workerManager = new WorkerManager(databaseGargoyle);
+    final private  FoodRequestManager foodRequestManager = new FoodRequestManager(databaseGargoyle, nodeManager,
             workerManager, menuItemManager, foodLogManager);
-    WorkerLogManager workerLogManager = new WorkerLogManager(databaseGargoyle);
+    final private  WorkerLogManager workerLogManager = new WorkerLogManager(databaseGargoyle);
 
 
 
@@ -63,12 +63,11 @@ public class GodController {
     CartController cartController = new CartController();
     DirectoryController directoryController = new DirectoryController(nodeManager);
     MenuController menuController = new MenuController(menuItemManager);
-    RequestController requestController = new RequestController(foodRequestManager,workerLogManager,foodLogManager);
+    RequestController requestController = new RequestController(foodRequestManager, workerLogManager, foodLogManager);
     SearchEngine searchEngine = new SearchEngine(nodeManager);
     WorkerController workerController = new WorkerController(workerManager);
+    /* Scene Commandments */
 
-    /* Scene Switcher */
-    SceneSwitcher sceneSwitcher = new SceneSwitcher(new StaffIntoPopupController(), new MapDirectoryController(directoryController));
 
 
     ///////////////////////
@@ -363,7 +362,7 @@ public class GodController {
     private JFXTextField menuItemOrder, itemPrice;
 
     @FXML
-    private Label destination;
+    private Label destination = new Label();
 
     @FXML
     private JFXTreeTableView<MenuItem> menuOrderTable = new JFXTreeTableView<>();
@@ -375,13 +374,29 @@ public class GodController {
     private TreeTableColumn<MenuItem, String> foodItemColumn = new TreeTableColumn<>();
 
     @FXML
-    private TreeTableColumn<CartItem,String> foodItemOrderColumn = new TreeTableColumn<>();
+    private TreeTableColumn<CartItem, String> foodItemOrderColumn = new TreeTableColumn<>();
 
     @FXML
     private TreeTableColumn<MenuItem, Integer> priceColumn = new TreeTableColumn<>();
 
     @FXML
-    private TreeTableColumn<CartItem,Integer> priceOrderColumn = new TreeTableColumn<>();
+    private TreeTableColumn<CartItem, Integer> priceOrderColumn = new TreeTableColumn<>();
+
+    AdminEditMenuController adminEditMenuController;
+    FoodRequestHubController foodRequestHubController;
+    ReportsController reportsController;
+    StaffIntoPopupController staffIntoPopupController;
+    StaffMenuOrderController staffMenuOrderController = new StaffMenuOrderController(databaseGargoyle,
+            nodeManager, foodLogManager, menuItemManager, workerManager,
+            foodRequestManager, selectQuantity, menuItemOrder, itemPrice,
+            menuOrderTable, myOrderTable,
+            foodItemColumn, foodItemOrderColumn,
+            priceColumn, priceOrderColumn, cartController, requestController,destination);
+
+    MapDirectoryController mapDirectoryController = new MapDirectoryController(directoryController, nodeManager, staffMenuOrderController);
+    /* Scene Switcher */
+    SceneSwitcher sceneSwitcher = new SceneSwitcher(new StaffIntoPopupController(), mapDirectoryController);
+
 
 
     /**
@@ -409,7 +424,7 @@ public class GodController {
     @FXML
     private void hubToStaffMenuOrder() throws IOException {
         sceneSwitcher.toStaffMenuOrder(this, foodRequestHubPane);
-        staffMenuOrderController.initialize();
+        staffMenuOrderController.initialize(destination, menuController);
     }
 
     @FXML
@@ -434,17 +449,6 @@ public class GodController {
         staffIntoPopupController.initializeStaffInfo();
     }
 
-
-
-
-    /* Scene Commandments */
-    AdminEditMenuController adminEditMenuController;
-    FoodRequestHubController foodRequestHubController;
-    MapDirectoryController mapDirectoryController;
-    ReportsController reportsController;
-    StaffIntoPopupController staffIntoPopupController;
-    StaffMenuOrderController staffMenuOrderController;
-
     public void initialize() {
         initializeAdminEditMenuScene();
         initializeFoodRequestHubScene();
@@ -454,6 +458,7 @@ public class GodController {
         initializeStaffMenuOrderScene();
         System.out.println("Observers initialized");
         initializeObservers();
+        staffMenuOrderController.initialize(destination, menuController);
     }
 
 
@@ -467,20 +472,20 @@ public class GodController {
                 requestsTable, requestNameColumn,
                 timeCreatedColumn, timeCompletedColumn,
                 requestTypeColumn, descriptionRequestColumn,
-                locationColumn, assignedWorkerColumn, veganColumn, diabeticColumn, gluttenFreeColumn, menuController, workerController, requestController,priceEditColumn,priceEditText);
+                locationColumn, assignedWorkerColumn, veganColumn, diabeticColumn, gluttenFreeColumn, menuController, workerController, requestController, priceEditColumn, priceEditText);
     }
 
     private void initializeFoodRequestHubScene() {
-        foodRequestHubController = new FoodRequestHubController( requestController,  employeeToAssign,  ordersAsssignTable,
-                  orderNameAssignColumn,   timeOrderedColumn,   descriptionAssignColumn,
-                  locationAssignColumn,  unassignedOrderInfo,  assignedOrdersTable,   orderNameAssignedColumn,
-                  timeOrderedAssignedColumn,   locationAssignedColumn,
-                  assignedEmployeeColumn, assignedOrdersInfo, workerController);
+        foodRequestHubController = new FoodRequestHubController(requestController, employeeToAssign, ordersAsssignTable,
+                orderNameAssignColumn, timeOrderedColumn, descriptionAssignColumn,
+                locationAssignColumn, unassignedOrderInfo, assignedOrdersTable, orderNameAssignedColumn,
+                timeOrderedAssignedColumn, locationAssignedColumn,
+                assignedEmployeeColumn, assignedOrdersInfo, workerController);
         foodRequestHubController.initialize();
     }
 
     private void initializeMapDirectoryScene() {
-        mapDirectoryController = new MapDirectoryController(directoryController);
+//        mapDirectoryController = new MapDirectoryController(directoryController, nodeManager, staffMenuOrderController);
     }
 
     private void initializeReportsScene() {
@@ -497,12 +502,12 @@ public class GodController {
     private void initializeStaffMenuOrderScene() {
         staffMenuOrderController = new StaffMenuOrderController(databaseGargoyle,
                 nodeManager, foodLogManager, menuItemManager, workerManager,
-                foodRequestManager, selectQuantity, menuItemOrder, itemPrice, destination,
+                foodRequestManager, selectQuantity, menuItemOrder, itemPrice,
                 menuOrderTable, myOrderTable,
                 foodItemColumn, foodItemOrderColumn,
-                priceColumn, priceOrderColumn, menuController,  cartController, requestController);
+                priceColumn, priceOrderColumn,
+                cartController, requestController, destination);
     }
-
 
 
     //////////////////////
@@ -567,53 +572,82 @@ public class GodController {
     /* Admin Edit */
     //////////////////////
 
-        /*Worker Tab */
+    /*Worker Tab */
     @FXML
-    private void removeWorker(){adminEditMenuController.deleteWorker();}
+    private void removeWorker() {
+        adminEditMenuController.deleteWorker();
+    }
 
     @FXML
-    private void clearWorker(){adminEditMenuController.clearWorker();}
+    private void clearWorker() {
+        adminEditMenuController.clearWorker();
+    }
 
     @FXML
-    private void editWorker(){adminEditMenuController.editWorker();}
+    private void editWorker() {
+        adminEditMenuController.editWorker();
+    }
 
     @FXML
-    private void addWorker(){adminEditMenuController.addWorker();}
+    private void addWorker() {
+        adminEditMenuController.addWorker();
+    }
 
     @FXML
-    private void exportWorkers(){adminEditMenuController.exportWorkerLogs();}
+    private void exportWorkers() {
+        adminEditMenuController.exportWorkerLogs();
+    }
 
-        /*Request Tab */
+    /*Request Tab */
     @FXML
-    private void deleteRequest() {adminEditMenuController.deleteRequest();}
-
-    @FXML
-    private void deleteAllRequests() {adminEditMenuController.deleteAllRequests();}
-
-    @FXML
-    private void cancelRequest() {adminEditMenuController.cancelRequest();}
+    private void deleteRequest() {
+        adminEditMenuController.deleteRequest();
+    }
 
     @FXML
-    private void exportRequests() {adminEditMenuController.exportFoodLogs();}
+    private void deleteAllRequests() {
+        adminEditMenuController.deleteAllRequests();
+    }
+
+    @FXML
+    private void cancelRequest() {
+        adminEditMenuController.cancelRequest();
+    }
+
+    @FXML
+    private void exportRequests() {
+        adminEditMenuController.exportFoodLogs();
+    }
 
         /*Menu Tab */
 
     @FXML
-    private void addMenuEditItem(){adminEditMenuController.addMenu();}
+    private void addMenuEditItem() {
+        adminEditMenuController.addMenu();
+    }
 
     @FXML
-    private void removeMenuEditItem() {adminEditMenuController.deleteMenu();}
+    private void removeMenuEditItem() {
+        adminEditMenuController.deleteMenu();
+    }
 
     @FXML
-    private void cancelMenuEditItem() {adminEditMenuController.clearMenu();}
+    private void cancelMenuEditItem() {
+        adminEditMenuController.clearMenu();
+    }
 
     @FXML
-    private void editMenuEditItem() {adminEditMenuController.editMenu();}
+    private void editMenuEditItem() {
+        adminEditMenuController.editMenu();
+    }
 
     @FXML
-    private void exportMenu() {adminEditMenuController.exportMenuItems();}
+    private void exportMenu() {
+        adminEditMenuController.exportMenuItems();
+    }
 
-    void initializeObservers(){
+
+    void initializeObservers() {
         databaseGargoyle.attachManager(foodLogManager);
         databaseGargoyle.attachManager(menuItemManager);
         databaseGargoyle.attachManager(nodeManager);
@@ -622,6 +656,7 @@ public class GodController {
         databaseGargoyle.attachManager(workerManager);
         databaseGargoyle.notifyManagers();
     }
+
 
 
 }

@@ -42,7 +42,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -64,7 +64,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -86,7 +86,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -152,7 +152,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -174,7 +174,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -196,7 +196,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -218,7 +218,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -240,7 +240,7 @@
                                                     <contextMenu>
                                                         <ContextMenu>
                                                             <items>
-                                                                <MenuItem mnemonicParsing="false"  text="Set as Origin" />
+                                                                <MenuItem mnemonicParsing="false" text="Set as Origin" />
                                                             </items>
                                                         </ContextMenu>
                                                     </contextMenu></ListView>
@@ -269,21 +269,7 @@
                                     <children>
                                         <VBox alignment="CENTER" prefHeight="228.0" prefWidth="358.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <HBox alignment="CENTER_LEFT">
-                                                    <children>
-                                                        <ImageView fitHeight="20.0" fitWidth="20.0">
-                                                            <image>
-                                                                <Image url="@../Pictures/circle-outline.png" />
-                                                            </image>
-                                                        </ImageView>
-                                                        <JFXTextField fx:id="directoryOrigin" editable="false" promptText="Kiosk Location">
-                                                            <font>
-                                                                <Font size="16.0" />
-                                                            </font>
-                                                        </JFXTextField>
-                                                        <JFXButton buttonType="RAISED" cancelButton="true"  text="X" />
-                                                    </children>
-                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" />
                                                 <HBox alignment="CENTER_LEFT">
                                                     <children>
                                                         <ImageView fitHeight="20.0" fitWidth="20.0">
@@ -298,7 +284,7 @@
                                                         </JFXTextField>
                                                     </children>
                                                 </HBox>
-                                                <JFXButton contentDisplay="GRAPHIC_ONLY"  prefHeight="75.0" prefWidth="78.0" text="Navigate">
+                                                <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#setDestination" prefHeight="75.0" prefWidth="78.0" text="Navigate">
                                                     <font>
                                                         <Font name="System Bold" size="18.0" />
                                                     </font>
