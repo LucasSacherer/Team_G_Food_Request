@@ -258,7 +258,7 @@ public class GodController {
     private TreeTableColumn<?, ?> userOrderFColumn;
 
     @FXML
-    private JFXTreeTableView<?> userCreationFColumn;
+    private TreeTableColumn<?, ?> userCreationFColumn;
 
     @FXML
     private TreeTableColumn<?, ?> userNameCColumn;
