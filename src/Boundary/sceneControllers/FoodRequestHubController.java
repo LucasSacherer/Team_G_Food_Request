@@ -173,6 +173,7 @@ public class FoodRequestHubController {
         FoodRequest completedFoodRequest = new FoodRequest(selectedFoodRequest.getValue().getName(),selectedFoodRequest.getValue().getTimeCreated(),
                 LocalDateTime.now(),selectedFoodRequest.getValue().getType(),selectedFoodRequest.getValue().getDescription(),
                 selectedFoodRequest.getValue().getNode(),selectedFoodRequest.getValue().getAssignedWorker(),selectedFoodRequest.getValue().getOrder());
+        requestController.completeRequest(completedFoodRequest);
         foodRequestAssignedRoot.getChildren().remove(selectedFoodRequest);
         requestController.addRequest(completedFoodRequest);
     }
