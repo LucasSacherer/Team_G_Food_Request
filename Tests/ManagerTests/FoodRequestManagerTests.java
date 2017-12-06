@@ -1,13 +1,11 @@
 package ManagerTests;
 
-import Database.DatabaseGargoyle;
-import Entity.CartItem;
-import Entity.FoodRequest;
-import Entity.MenuItem;
-import Manager.*;
+import Database2.DatabaseGargoyle;
+import Entity2.CartItem;
+import Entity2.FoodRequest;
+import Manager2.*;
 import org.junit.Test;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

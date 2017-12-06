@@ -1,8 +1,8 @@
 package ManagerTests;
 
-import Database.DatabaseGargoyle;
-import Entity.Worker;
-import Manager.WorkerManager;
+import Database2.DatabaseGargoyle;
+import Entity2.Worker;
+import Manager2.WorkerManager;
 import org.junit.Test;
 
 import java.sql.ResultSet;
