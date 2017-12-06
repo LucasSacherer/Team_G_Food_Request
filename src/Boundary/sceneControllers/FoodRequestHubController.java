@@ -24,7 +24,7 @@ public class FoodRequestHubController {
 
     private RequestController requestController;
     private WorkerController workerController;
-    private JFXComboBox employeeToAssign = new JFXComboBox();
+    private JFXComboBox employeeToAssign;
 
     private JFXTreeTableView<FoodRequest> ordersAssignTable;
     private TreeTableColumn<FoodRequest, String> orderNameAssignColumn;
