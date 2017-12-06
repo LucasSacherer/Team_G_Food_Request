@@ -38,32 +38,32 @@
                                     <Font size="36.0" />
                                  </font>
                               </Label>
-                              <JFXTextField fx:id="username" alignment="CENTER" layoutX="100.0" layoutY="198.0" prefHeight="62.0" prefWidth="278.0" promptText="Quantity" styleClass="textfield" text="Username">
+                              <JFXTextField fx:id="username" alignment="CENTER" layoutX="100.0" layoutY="198.0" prefHeight="62.0" prefWidth="278.0" promptText="Username" styleClass="textfield">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXButton fx:id="addWorker" layoutX="44.0" layoutY="292.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Add">
+                              <JFXButton fx:id="addWorker" layoutX="44.0" layoutY="292.0" onAction="#addWorker" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Add">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="cancelWorker" layoutX="245.0" layoutY="292.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Cancel">
+                              <JFXButton fx:id="cancelWorker" layoutX="245.0" layoutY="292.0" onAction="#clearWorker" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Cancel">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="deleteWorker" layoutX="245.0" layoutY="363.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Delete">
+                              <JFXButton fx:id="deleteWorker" layoutX="245.0" layoutY="363.0" onAction="#removeWorker" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Delete">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="editWorker" layoutX="44.0" layoutY="363.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Edit">
+                              <JFXButton fx:id="editWorker" layoutX="44.0" layoutY="363.0" onAction="#editWorker" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Edit">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="exportWorkers" layoutX="89.0" layoutY="636.0" prefHeight="55.0" prefWidth="247.0" styleClass="buttonNeutral" text="Export Workers CSV">
+                              <JFXButton fx:id="exportWorkers" layoutX="89.0" layoutY="636.0" onAction="#exportWorkers" prefHeight="55.0" prefWidth="247.0" styleClass="buttonNeutral" text="Export Workers CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -106,27 +106,27 @@
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXButton fx:id="addItem" layoutX="51.0" layoutY="575.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Add">
+                              <JFXButton fx:id="addItem" layoutX="51.0" layoutY="575.0" onAction="#addMenuEditItem" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Add">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="cancelItem" layoutX="264.0" layoutY="575.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Cancel">
+                              <JFXButton fx:id="cancelItem" layoutX="264.0" layoutY="575.0" onAction="#cancelMenuEditItem" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Cancel">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="deleteItem" layoutX="264.0" layoutY="646.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Delete">
+                              <JFXButton fx:id="deleteItem" layoutX="264.0" layoutY="646.0" onAction="#removeMenuEditItem" prefHeight="50.0" prefWidth="150.0" styleClass="buttonDelete" text="Delete">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="editItem" layoutX="51.0" layoutY="646.0" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Edit ">
+                              <JFXButton fx:id="editItem" layoutX="51.0" layoutY="646.0" onAction="#editMenuEditItem" prefHeight="50.0" prefWidth="150.0" styleClass="buttonAdd" text="Edit ">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="exportMenu" layoutX="109.0" layoutY="712.0" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Menu CSV">
+                              <JFXButton fx:id="exportMenu" layoutX="109.0" layoutY="712.0" onAction="#exportMenu" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Menu CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -143,20 +143,21 @@
                                           <TreeTableColumn fx:id="foodNameColumn" prefWidth="249.0" text="Food Name" />
                                           <TreeTableColumn fx:id="descriptionColumn" prefWidth="351.0" text="Description" />
                                           <TreeTableColumn fx:id="stockAvailableColumn" prefWidth="179.0" text="Stock Available" />
-                                          <TreeTableColumn fx:id="caloriesColumn" prefWidth="165.0" text="Calories" />
-                                          <TreeTableColumn fx:id="veganColumn" prefWidth="130.0" text="Vegan" />
-                                          <TreeTableColumn fx:id="diabeticColumn" prefWidth="136.0" text="Diabetic" />
-                                          <TreeTableColumn fx:id="gluttenFreeColumn" prefWidth="159.0" text="Glutten Free" />
+                                          <TreeTableColumn fx:id="caloriesColumn" prefWidth="113.0" text="Calories" />
+                                          <TreeTableColumn fx:id="veganColumn" prefWidth="97.0" text="Vegan" />
+                                          <TreeTableColumn fx:id="diabeticColumn" prefWidth="112.0" text="Diabetic" />
+                                          <TreeTableColumn fx:id="gluttenFreeColumn" prefWidth="121.0" text="Glutten Free" />
+                                          <TreeTableColumn fx:id="priceEditColumn" maxWidth="147.0" prefWidth="147.0" text="Price" />
                                        </columns>
                                     </JFXTreeTableView>
                                  </children>
                               </AnchorPane>
-                              <JFXTextField fx:id="stockAvailable" alignment="CENTER" layoutX="115.0" layoutY="345.0" prefHeight="51.0" prefWidth="219.0" promptText="Food Name" styleClass="textfield" text="Stock Available">
+                              <JFXTextField fx:id="stockAvailable" alignment="CENTER" layoutX="17.0" layoutY="348.0" prefHeight="51.0" prefWidth="219.0" promptText="Stock Available" styleClass="textfield">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
-                              <JFXTextField fx:id="calories" alignment="CENTER" layoutX="116.0" layoutY="423.0" prefHeight="51.0" prefWidth="219.0" promptText="Food Name" styleClass="textfield" text="Calories">
+                              <JFXTextField fx:id="calories" alignment="CENTER" layoutX="241.0" layoutY="348.0" prefHeight="51.0" prefWidth="219.0" promptText="Calories" styleClass="textfield">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -173,6 +174,11 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
+                              <JFXTextField fx:id="priceEditText" alignment="CENTER" layoutX="127.0" layoutY="422.0" prefHeight="51.0" prefWidth="219.0" promptText="Price" styleClass="textfield">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXTextField>
                            </children>
                         </AnchorPane>
                      </content>
@@ -196,7 +202,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="exportRequests" layoutX="94.0" layoutY="644.0" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Requests CSV">
+                              <JFXButton fx:id="exportRequests" layoutX="94.0" layoutY="644.0" onAction="#exportRequests" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Requests CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

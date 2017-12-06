@@ -50,15 +50,19 @@
                            <children>
                               <VBox alignment="CENTER" layoutY="65.0" prefHeight="652.0" prefWidth="374.0" spacing="50.0" AnchorPane.bottomAnchor="-269.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
                                  <children>
-                                    <JFXTextField fx:id="menuItemOrder" editable="false" promptText="Item" styleClass="textfield">
+                                    <JFXTextField fx:id="menuItemOrder" alignment="CENTER" editable="false" promptText="Item" styleClass="textfield">
                                        <VBox.margin>
                                           <Insets left="100.0" right="100.0" />
                                        </VBox.margin></JFXTextField>
-                                    <JFXTextField fx:id="itemPrice" editable="false" layoutX="10.0" layoutY="35.0" promptText="Price" styleClass="textfield">
+                                    <JFXTextField fx:id="itemPrice" alignment="CENTER" editable="false" layoutX="10.0" layoutY="35.0" promptText="Price" styleClass="textfield">
                                        <VBox.margin>
                                           <Insets left="100.0" right="100.0" />
                                        </VBox.margin></JFXTextField>
-                                    <JFXComboBox fx:id="selectQuantityCombo" layoutX="10.0" layoutY="10.0" onAction="#selectQuantity" promptText="Quantity" />
+                                    <JFXTextField fx:id="selectQuantity" alignment="CENTER" promptText="Quantity" styleClass="textfield">
+                                       <VBox.margin>
+                                          <Insets left="150.0" right="150.0" />
+                                       </VBox.margin>
+                                    </JFXTextField>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
                                        <children>
                                           <JFXButton fx:id="addMenuItemButton" buttonType="RAISED" onAction="#addMenuItem" prefHeight="31.0" prefWidth="121.0" styleClass="buttonAdd" text="Add">
@@ -77,11 +81,7 @@
                                        </padding>
                                     </HBox>
                                     <JFXButton fx:id="destinationPopupButton" buttonType="RAISED" onAction="#mapDirectoryPopup" prefHeight="31.0" prefWidth="121.0" styleClass="buttonNeutralBig" text="Destination" />
-                                    <JFXTextField fx:id="destination" editable="false">
-                                       <padding>
-                                          <Insets left="100.0" right="100.0" />
-                                       </padding>
-                                    </JFXTextField>
+                                    <Label fx:id="destination" text="Destination" />
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                                     <JFXButton fx:id="checkoutRequestButton" buttonType="RAISED" onAction="#checkoutRequest" prefHeight="39.0" prefWidth="153.0" styleClass="buttonNeutralBig" text="Checkout">
                                        <VBox.margin>
@@ -144,7 +144,7 @@
                               <JFXTreeTableView fx:id="myOrderTable">
                                  <columns>
                                     <TreeTableColumn fx:id="foodItemOrderColumn" prefWidth="699.0" text="Food Item" />
-                                    <TreeTableColumn fx:id="priceOrderColumn" prefWidth="621.0" text="Price" />
+                                    <TreeTableColumn fx:id="priceOrderColumn" prefWidth="621.0" text="Quantity" />
                                  </columns>
                               </JFXTreeTableView>
                               <JFXButton fx:id="deleteFoodItem" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#deleteFoodItemFromCart" prefHeight="31.0" prefWidth="121.0" styleClass="buttonDelete" stylesheets="@../APIStyle.css" text="Delete Food Item" />

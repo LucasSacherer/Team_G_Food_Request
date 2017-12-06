@@ -6,6 +6,7 @@ import Manager.WorkerLogManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 import Entity.FoodRequest;
 import Manager.FoodRequestManager;
@@ -39,8 +40,8 @@ public class RequestController {
         }else return false;
     }
 
-    public ObservableList<FoodRequest> getRequests(){
-        ObservableList requests =  FXCollections.observableArrayList();
+    public List<FoodRequest> getRequests(){
+        List<FoodRequest> requests = new ArrayList<>();
         requests.addAll(fm.getRequests());
         return requests;
     }

@@ -1,6 +1,7 @@
 package Manager;
 
 import Database.DatabaseGargoyle;
+import Entity.CartItem;
 import Entity.FoodLog;
 import Entity.FoodRequest;
 import Entity.MenuItem;
@@ -50,10 +51,10 @@ public class FoodLogManager implements EntityManager {
      * @param foodRequest
      */
     public void addFoodLog(FoodRequest foodRequest){
-        for (MenuItem item: foodRequest.getOrder()){
+        for (CartItem item: foodRequest.getOrder()){
             databaseGargoyle.createConnection();
             databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODLOG VALUES (" +
-                    "'" + item.getFoodName() + "', " +
+                    "'" + item.getFoodNameCart() + "', " +
                     "'" + Timestamp.valueOf(foodRequest.getTimeCreated()) + "', " +
                     "'" + foodRequest.getNode().getNodeID() + "')");
             databaseGargoyle.destroyConnection();
