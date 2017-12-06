@@ -163,6 +163,7 @@ public class FoodRequestHubController {
         FoodRequest assignedFoodRequest = new FoodRequest(selectedFoodRequest.getValue().getName(),selectedFoodRequest.getValue().getTimeCreated(),
                 selectedFoodRequest.getValue().getTimeCompleted(),selectedFoodRequest.getValue().getType(),selectedFoodRequest.getValue().getDescription(),
                 selectedFoodRequest.getValue().getNode(),workerController.getWorkerbyName(employeeToAssign.getSelectionModel().getSelectedItem().toString()),selectedFoodRequest.getValue().getOrder());
+        requestController.assignWorker(assignedFoodRequest, workerController.getWorkerbyName(employeeToAssign.getSelectionModel().getSelectedItem().toString()));
         foodRequestAssignRoot.getChildren().remove(selectedFoodRequest);
         foodRequestAssignedRoot.getChildren().add(new TreeItem<>(assignedFoodRequest));
     }
