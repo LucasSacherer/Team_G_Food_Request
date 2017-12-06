@@ -437,6 +437,7 @@ public class GodController {
     private void hubToStaffMenuOrder() throws IOException {
         sceneSwitcher.toStaffMenuOrder(this, foodRequestHubPane);
         staffMenuOrderController.initialize();
+
     }
 
     @FXML
