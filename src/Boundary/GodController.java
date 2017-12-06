@@ -36,6 +36,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -246,6 +247,15 @@ public class GodController {
 
     @FXML
     private PieChart userOrderCompletePieChart;
+
+    @FXML
+    private Label currentFloorNum;
+
+    @FXML
+    private JFXSlider zoomSlider;
+
+    @FXML
+    private JFXButton floorDown, floorUp;
 
 //    @FXML
 //    private JFXTreeTableView<?> userOrderFrequencyTable;
@@ -523,7 +533,7 @@ public class GodController {
 
     private void initializeReportsScene() {
         reportsController = new ReportsController(scrollPane, imageManager,foodLogManager,nodeManager,reportsTable,locationRequestsColumn,numberRequestsColumn,
-                foodOrders,menuFoodColumn,menuFoodOrdersColumn,orderItemsPieChart);
+                foodOrders,menuFoodColumn,menuFoodOrdersColumn,orderItemsPieChart, currentFloorNum, zoomSlider);
     }
 
     private void initializeStaffIntoPopupScene() {
@@ -562,6 +572,12 @@ public class GodController {
     /////////////
     /* Reports */
     /////////////
+
+    @FXML
+    private void floorUp() throws IOException, SQLException { reportsController.floorUp(); }
+
+    @FXML
+    private void floorDown() throws IOException, SQLException { reportsController.floorDown(); }
 
 
     ////////////////
