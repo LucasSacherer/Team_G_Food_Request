@@ -1,6 +1,8 @@
 package Entity;
 
-public class Slice {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Slice extends RecursiveTreeObject<Slice> {
     
         private String name;
         private int qty;
@@ -14,6 +16,14 @@ public class Slice {
 
         public String getName(){
             return name;
+        }
+
+        public int getQty(){
+            return qty;
+        }
+
+        public double getPercent(){
+            return percent;
         }
 
 }

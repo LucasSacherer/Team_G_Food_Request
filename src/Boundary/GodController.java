@@ -2,9 +2,8 @@ package Boundary;
 
 import Boundary.sceneControllers.*;
 import Database.DatabaseGargoyle;
-import Entity.FoodRequest;
+import Entity.*;
 import Entity.MenuItem;
-import Entity.Worker;
 import Manager.*;
 import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -287,6 +286,27 @@ public class GodController {
     @FXML
     private ScrollPane scrollPane;
 
+    @FXML
+    private JFXTreeTableView<DensityNode> reportsTable = new JFXTreeTableView<>();
+
+    @FXML
+    private TreeTableColumn<DensityNode, String> locationRequestsColumn = new JFXTreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<DensityNode, Integer> numberRequestsColumn = new JFXTreeTableColumn<>();
+
+    @FXML
+    private JFXTreeTableView<Slice> foodOrders = new JFXTreeTableView<>();
+
+    @FXML
+    private TreeTableColumn<Slice, String> menuFoodColumn = new JFXTreeTableColumn<>();
+
+    @FXML
+    private TreeTableColumn<Slice, Integer> menuFoodOrdersColumn = new JFXTreeTableColumn<>();
+
+    @FXML
+    private PieChart orderItemsPieChart = new PieChart();
+
     /* Staff Info Popup */
     @FXML
     private Pane foodInfoPane;
@@ -418,7 +438,8 @@ public class GodController {
     }
 
     private void initializeReportsScene() {
-        reportsController = new ReportsController(scrollPane, imageManager,foodLogManager,nodeManager);
+        reportsController = new ReportsController(scrollPane, imageManager,foodLogManager,nodeManager,reportsTable,locationRequestsColumn,numberRequestsColumn,
+                foodOrders,menuFoodColumn,menuFoodOrdersColumn,orderItemsPieChart);
     }
 
     private void initializeStaffIntoPopupScene() {

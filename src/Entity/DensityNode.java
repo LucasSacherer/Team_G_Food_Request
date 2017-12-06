@@ -1,6 +1,8 @@
 package Entity;
 
-public class DensityNode {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class DensityNode extends RecursiveTreeObject<DensityNode> {
     private String nodeID;
     private int density;
 
@@ -12,5 +14,5 @@ public class DensityNode {
     public String getNodeID(){
         return nodeID;
     }
-    public int getDensity(){return density;}
+    public Integer getDensity(){return density;}
 }
