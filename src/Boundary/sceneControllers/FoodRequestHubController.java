@@ -3,6 +3,7 @@ package Boundary.sceneControllers;
 import Controller.RequestController;
 import Controller.WorkerController;
 import Database.DatabaseGargoyle;
+import Entity.CartItem;
 import Entity.FoodRequest;
 import Entity.Worker;
 import Manager.FoodRequestManager;
@@ -14,6 +15,10 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FoodRequestHubController {
 
@@ -65,21 +70,17 @@ public class FoodRequestHubController {
     public void initialize() {
         initializeOrdersAssign();
         initializeOrdersAssigned();
-
-//        for (Worker worker : workerController.getWorkers()) {
-//            employeeToAssign.getItems().add(worker);
-//        }
+        for (Worker worker : workerController.getWorkers()) {
+            employeeToAssign.getItems().add(worker.getUsername());
+        }
 
     }
 
     private void initializeOrdersAssign() {
         for (FoodRequest foodRequest : requestController.getRequests()) {
             if (foodRequest.getAssignedWorker() == null){
-                System.out.println("This is assigned");
-            }else {
                 foodRequestAssignRoot.getChildren().add(new TreeItem<>(foodRequest));
             }
-
         }
 
         orderNameAssignColumn.setCellValueFactory(
@@ -105,15 +106,21 @@ public class FoodRequestHubController {
     private void onEditAssignRequests() {
         if (ordersAssignTable.getSelectionModel().getSelectedItem() != null) {
             TreeItem<FoodRequest> selectedFoodRequest = ordersAssignTable.getSelectionModel().getSelectedItem();
-            assignedOrdersInfo.setText(selectedFoodRequest.getValue().getOrder().toString());
+            List<CartItem> list = selectedFoodRequest.getValue().getOrder();
+            String display = "";
+            for (CartItem item : list){
+                display += item.toString();
+            }
+            unassignedOrderInfo.setText(display);
         }
 
     }
 
     private void initializeOrdersAssigned() {
         for (FoodRequest foodRequest : requestController.getRequests()) {
-//            if foodRequest.getAssignedWorker()
-            foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));
+            if (foodRequest.getAssignedWorker() != null){
+                foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));
+            }
         }
 
         orderNameAssignedColumn.setCellValueFactory(
@@ -138,18 +145,34 @@ public class FoodRequestHubController {
     private void onEditAssignedRequests() {
         if (assignedOrdersTable.getSelectionModel().getSelectedItem() != null) {
             TreeItem<FoodRequest> selectedFoodRequest = assignedOrdersTable.getSelectionModel().getSelectedItem();
-            unassignedOrderInfo.setText(selectedFoodRequest.getValue().getOrder().toString());
+            List<CartItem> list = selectedFoodRequest.getValue().getOrder();
+            String display = "";
+            for (CartItem item : list){
+                display += item.toString();
+            }
+            assignedOrdersInfo.setText(display);
         }
 
     }
 
-    public void selectEmployeeToAssign() {
-
-    }
 
     public void assignEmployee() {
+        TreeItem<FoodRequest> selectedFoodRequest = ordersAssignTable.getSelectionModel().getSelectedItem();
+        //(String name, LocalDateTime timeCreated, LocalDateTime timeCompleted,
+        //        String type, String description, Node node, Worker worker, List<CartItem> order)
+        FoodRequest assignedFoodRequest = new FoodRequest(selectedFoodRequest.getValue().getName(),selectedFoodRequest.getValue().getTimeCreated(),
+                selectedFoodRequest.getValue().getTimeCompleted(),selectedFoodRequest.getValue().getType(),selectedFoodRequest.getValue().getDescription(),
+                selectedFoodRequest.getValue().getNode(),workerController.getWorkerbyName(employeeToAssign.getSelectionModel().getSelectedItem().toString()),selectedFoodRequest.getValue().getOrder());
+        foodRequestAssignRoot.getChildren().remove(selectedFoodRequest);
+        foodRequestAssignedRoot.getChildren().add(new TreeItem<>(assignedFoodRequest));
     }
 
     public void completeOrder() {
+        TreeItem<FoodRequest> selectedFoodRequest = assignedOrdersTable.getSelectionModel().getSelectedItem();
+        FoodRequest completedFoodRequest = new FoodRequest(selectedFoodRequest.getValue().getName(),selectedFoodRequest.getValue().getTimeCreated(),
+                LocalDateTime.now(),selectedFoodRequest.getValue().getType(),selectedFoodRequest.getValue().getDescription(),
+                selectedFoodRequest.getValue().getNode(),selectedFoodRequest.getValue().getAssignedWorker(),selectedFoodRequest.getValue().getOrder());
+        foodRequestAssignedRoot.getChildren().remove(selectedFoodRequest);
+        requestController.addRequest(completedFoodRequest);
     }
 }
