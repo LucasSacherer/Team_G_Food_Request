@@ -1,19 +1,5 @@
 package ControllerTests;
 
-import Controller.ReportController;
-import Controller.RequestController;
-import Controller.SearchEngine;
-import Database.DatabaseGargoyle;
-import Entity.FoodRequest;
-import Entity.MenuItem;
-import Manager.*;
-import org.junit.Test;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
-
 public class ReportControllerTest {
 //
 //    @Test
@@ -43,7 +29,7 @@ public class ReportControllerTest {
 //        Timestamp time = Timestamp.valueOf("1960-01-01 23:03:20.000000000");
 //
 //        int originalSize = foodLogManager.getFoodLog().size();
-//        FoodRequest foodrequest = new FoodRequest("test", time.toLocalDateTime(), time.toLocalDateTime(), "type", "description", nodeManager.getNode("GRETL03501"), null, originalOrder);
+//        foodRequest.FoodRequest foodrequest = new foodRequest.FoodRequest("test", time.toLocalDateTime(), time.toLocalDateTime(), "type", "description", nodeManager.getNode("GRETL03501"), null, originalOrder);
 //
 //        requestC.addRequest(foodrequest);
 //        ReportController rc = new ReportController(foodLogManager);

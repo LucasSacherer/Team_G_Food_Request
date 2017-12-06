@@ -1,12 +1,11 @@
 package ControllerTests;
 
-import Controller.SearchEngine;
-import Database.DatabaseGargoyle;
-import Entity.Node;
-import Manager.FoodLogManager;
-import Manager.FoodRequestManager;
-import Manager.MenuItemManager;
-import Manager.NodeManager;
+import Controller2.SearchEngine;
+import Database2.DatabaseGargoyle;
+import Entity2.Node;
+import Manager2.FoodLogManager;
+import Manager2.MenuItemManager;
+import Manager2.NodeManager;
 import org.junit.Test;
 
 import java.util.ArrayList;
