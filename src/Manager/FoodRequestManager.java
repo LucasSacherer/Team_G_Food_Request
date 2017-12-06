@@ -129,6 +129,10 @@ public class FoodRequestManager implements EntityManager{
      * @param fReq
      */
     public void addRequest(FoodRequest fReq){
+        String assignedWorker;
+        if (fReq.getAssignedWorker() == null){
+            assignedWorker = "null";
+        } else assignedWorker = "'" + fReq.getAssignedWorker().getWorkerID() + "'";
         //Add the request to the FOODREQUEST table
         databaseGargoyle.createConnection();
         databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODREQUEST VALUES (" +
@@ -138,7 +142,7 @@ public class FoodRequestManager implements EntityManager{
                 "'" + fReq.getType() + "'," +
                 "'" + fReq.getDescription() + "'," +
                 "'" + fReq.getNode().getNodeID() + "'," +
-                "'" + fReq.getAssignedWorker().getWorkerID() + "')");
+                "" + assignedWorker + ")");
         databaseGargoyle.destroyConnection();
 
         //Add all food items to the FOODORDER table
@@ -234,7 +238,7 @@ public class FoodRequestManager implements EntityManager{
     public void assignWorker(FoodRequest fReq, Worker worker){
         databaseGargoyle.createConnection();
         databaseGargoyle.executeUpdateOnDatabase("UPDATE FOODREQUEST SET " +
-                "WORKERID = '" + worker + "' " +
+                "WORKERID = '" + worker.getWorkerID() + "' " +
                 "WHERE NAME = '" + fReq.getName() + "' " +
                 "AND TIMECREATED = '" + Timestamp.valueOf(fReq.getTimeCreated()) + "'");
         databaseGargoyle.destroyConnection();

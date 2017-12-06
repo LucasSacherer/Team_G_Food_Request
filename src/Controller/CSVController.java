@@ -40,7 +40,7 @@ public class CSVController {
      */
     public void saveMenuItems(String filePath) throws SQLException, IOException{
         databaseGargoyle.createConnection();
-        ResultSet rsMenuItem = databaseGargoyle.executeQueryOnDatabase("SELECT * FROM MENUITEMS");
+        ResultSet rsMenuItem = databaseGargoyle.executeQueryOnDatabase("SELECT * FROM MENUITEM");
         saveCSVFile(rsMenuItem, filePath);
         rsMenuItem.close();
         databaseGargoyle.destroyConnection();

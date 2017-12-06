@@ -6,6 +6,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.image.ImageView?>
@@ -32,51 +33,6 @@
          <children>
             <JFXTabPane prefHeight="1051.0" prefWidth="1920.0">
                <tabs>
-                  <Tab text="User Reports">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1920.0">
-                           <children>
-                              <GridPane prefHeight="180.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <PieChart fx:id="userOrderCreatePieChart" GridPane.columnIndex="1" />
-                                    <PieChart fx:id="userOrderCompletePieChart" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                       <children>
-                                          <JFXTreeTableView fx:id="userOrderFrequencyTable" layoutX="6.0" layoutY="35.0" prefHeight="391.0" prefWidth="952.0">
-                                             <columns>
-                                                <TreeTableColumn fx:id="userNameFColumn" prefWidth="75.0" text="User Name" />
-                                                <TreeTableColumn fx:id="userIDFColumn" prefWidth="75.0" text="User ID" />
-                                                <TreeTableColumn fx:id="userOrderFColumn" prefWidth="75.0" text="Order" />
-                                             </columns>
-                                          </JFXTreeTableView>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                       <children>
-                                          <JFXTreeTableView prefHeight="426.0" prefWidth="960.0">
-                                             <columns>
-                                                <TreeTableColumn fx:id="userCreationFColumn" prefWidth="75.0" text="User Name" />
-                                                <TreeTableColumn fx:id="userIDCColumn" prefWidth="75.0" text="User ID" />
-                                                <TreeTableColumn fx:id="userOrderCreatedCColumn1" prefWidth="75.0" text="Creation" />
-                                                <TreeTableColumn fx:id="userOrderCompleteCColumn11" prefWidth="75.0" text="Completion" />
-                                             </columns>
-                                          </JFXTreeTableView>
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
                   <Tab text="Menu Reports">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1920.0">
@@ -91,31 +47,21 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <PieChart fx:id="itemFrequencyOrderPieChart" GridPane.columnIndex="1" />
-                                    <PieChart fx:id="itemRestrictionsPieChart" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <PieChart GridPane.columnIndex="1" />
+                                    <PieChart layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <JFXTreeTableView prefHeight="400.0" prefWidth="960.0">
+                                          <JFXTreeTableView fx:id="foodOrders" prefHeight="400.0" prefWidth="960.0">
                                              <columns>
-                                                <TreeTableColumn fx:id="itemNameFColumn" prefWidth="75.0" text="Name" />
-                                                <TreeTableColumn fx:id="itemDescriptionFColumn" prefWidth="75.0" text="Description" />
-                                                <TreeTableColumn fx:id="totalQuantityOrderedFColumn" prefWidth="75.0" text="Quantity" />
+                                                <TreeTableColumn fx:id="menuFoodColumn" prefWidth="459.0" text="Food" />
+                                                <TreeTableColumn fx:id="menuFoodOrdersColumn" minWidth="0.0" prefWidth="500.0" text="# of Orders" />
                                              </columns>
                                           </JFXTreeTableView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                       <children>
-                                          <JFXTreeTableView fx:id="itemRestrictionsTable" prefHeight="400.0" prefWidth="959.0">
-                                             <columns>
-                                                <TreeTableColumn fx:id="itemNameRColumn" prefWidth="75.0" text="Name" />
-                                                <TreeTableColumn fx:id="itemVeganRColumn" prefWidth="75.0" text="Vegan" />
-                                                <TreeTableColumn fx:id="itemDiabeticRColumn" prefWidth="75.0" text="Diabetic" />
-                                                <TreeTableColumn fx:id="itemGlutenRColumn" prefWidth="75.0" text="Gluten Free" />
-                                             </columns>
-                                          </JFXTreeTableView>
-                                       </children>
-                                    </AnchorPane>
+                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                    <PieChart fx:id="orderItemsPieChart" GridPane.columnIndex="1" />
+                                    <PieChart fx:id="orderedTypesPieChart" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </children>
@@ -137,20 +83,21 @@
                                  <children>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                        <children>
-                                          <ImageView fx:id="heatMapImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                                          <Canvas fx:id="heatMapCanvas" height="200.0" width="200.0" />
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                          <Canvas height="200.0" width="200.0" />
+                                          <ScrollPane fx:id="scrollPane" layoutX="73.0" layoutY="162.0" prefHeight="862.0" prefWidth="960.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                                            </content>
+                                          </ScrollPane>
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <JFXTreeTableView fx:id="requestReportTable" layoutX="20.0" layoutY="33.0" prefHeight="796.0" prefWidth="888.0">
+                                          <JFXTreeTableView fx:id="reportsTable" layoutX="16.0" layoutY="33.0" prefHeight="796.0" prefWidth="888.0">
                                              <columns>
-                                                <TreeTableColumn fx:id="orderNameColumn" prefWidth="75.0" text="Name" />
-                                                <TreeTableColumn fx:id="orderLocationColumn" prefWidth="75.0" text="Location" />
-                                                <TreeTableColumn fx:id="orderWorkerColumn" prefWidth="75.0" text="Worker" />
-                                                <TreeTableColumn fx:id="orderDescriptionColumn" prefWidth="75.0" text="Description" />
-                                                <TreeTableColumn fx:id="orderTimeCreatedColumn" prefWidth="75.0" text="Created" />
-                                                <TreeTableColumn fx:id="orderTimeCompletedColumn" prefWidth="75.0" text="Completed" />
+                                                <TreeTableColumn fx:id="locationRequestsColumn" prefWidth="418.0" text="Location" />
+                                                <TreeTableColumn fx:id="numberRequestsColumn" minWidth="0.0" prefWidth="469.0" text="# of Requests" />
                                              </columns>
                                           </JFXTreeTableView>
                                        </children>
