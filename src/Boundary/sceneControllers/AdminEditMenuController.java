@@ -1,6 +1,8 @@
 package Boundary.sceneControllers;
 
+import Controller.CSVController;
 import Database.DatabaseGargoyle;
+import Entity.FileSelector;
 import Entity.FoodRequest;
 import Entity.MenuItem;
 import Entity.Worker;
@@ -11,15 +13,16 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableStringValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.*;
 
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class AdminEditMenuController {
     private DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
+    private CSVController csvController = new CSVController(databaseGargoyle);
+    final private FileSelector fileSelector = new FileSelector();
 
     /* Managers */
     private NodeManager nodeManager;
@@ -35,6 +38,7 @@ public class AdminEditMenuController {
     private JFXTreeTableView<Worker> workersTable;
     private TreeTableColumn<Worker,String> workerIDColumn;
     private TreeTableColumn<Worker,String> usernameColumn;
+
     /* Menu Tab */
     private JFXTextField foodName, stockAvailable, calories;
     private JFXTextArea descriptionItem;
@@ -250,6 +254,54 @@ public class AdminEditMenuController {
             TreeItem<Worker> selectedWorker = workersTable.getSelectionModel().getSelectedItem();
             username.setText(selectedWorker.getValue().getUsername());
             workerID.setText(selectedWorker.getValue().getWorkerID());
+        }
+    }
+
+    public void exportMenuItems() {
+        String path = fileSelector.selectFile();
+        try {
+            csvController.saveMenuItems(path);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("CSV File Populated");
+            alert.setHeaderText(null);
+            alert.setContentText("The CSV file " + path + " has been populated with all Nodes!");
+            alert.showAndWait();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exportWorkerLogs() {
+        String path = fileSelector.selectFile();
+        try {
+            csvController.saveWorkerLogs(path);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("CSV File Populated");
+            alert.setHeaderText(null);
+            alert.setContentText("The CSV file " + path + " has been populated with all Nodes!");
+            alert.showAndWait();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exportFoodLogs() {
+        String path = fileSelector.selectFile();
+        try {
+            csvController.saveFoodLogs(path);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("CSV File Populated");
+            alert.setHeaderText(null);
+            alert.setContentText("The CSV file " + path + " has been populated with all Nodes!");
+            alert.showAndWait();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
