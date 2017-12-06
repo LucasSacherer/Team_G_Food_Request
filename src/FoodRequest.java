@@ -21,7 +21,7 @@ public class FoodRequest extends Application {
 //        primaryStage.setTitle("Hello World");
 //        primaryStage.setScene(new Scene(root, 300, 275));
 //        primaryStage.show();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("boundary/fxml/reports.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("boundary/fxml/foodRequestHub.fxml"));
         GodController godController = new GodController();
         loader.setController(godController);
         godController.initialize();
