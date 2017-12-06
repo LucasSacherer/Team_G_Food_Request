@@ -534,6 +534,9 @@ public class GodController {
     @FXML
     private void addWorker(){adminEditMenuController.addWorker();}
 
+    @FXML
+    private void exportWorkers(){adminEditMenuController.exportWorkerLogs();}
+
         /*Request Tab */
     @FXML
     private void deleteRequest() {adminEditMenuController.deleteRequest();}
@@ -543,6 +546,11 @@ public class GodController {
 
     @FXML
     private void cancelRequest() {adminEditMenuController.cancelRequest();}
+
+    @FXML
+    private void exportRequests() {adminEditMenuController.exportFoodLogs();}
+
+        /*Menu Tab */
 
     @FXML
     private void addMenuEditItem(){adminEditMenuController.addMenu();}
@@ -555,6 +563,9 @@ public class GodController {
 
     @FXML
     private void editMenuEditItem() {adminEditMenuController.editMenu();}
+
+    @FXML
+    private void exportMenu() {adminEditMenuController.exportMenuItems();}
 
 
 

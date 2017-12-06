@@ -63,7 +63,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="exportWorkers" layoutX="89.0" layoutY="636.0" prefHeight="55.0" prefWidth="247.0" styleClass="buttonNeutral" text="Export Workers CSV">
+                              <JFXButton fx:id="exportWorkers" layoutX="89.0" layoutY="636.0" onAction="#exportWorkers" prefHeight="55.0" prefWidth="247.0" styleClass="buttonNeutral" text="Export Workers CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -126,7 +126,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="exportMenu" layoutX="109.0" layoutY="712.0" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Menu CSV">
+                              <JFXButton fx:id="exportMenu" layoutX="109.0" layoutY="712.0" onAction="#exportMenu" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Menu CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -202,7 +202,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="exportRequests" layoutX="94.0" layoutY="644.0" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Requests CSV">
+                              <JFXButton fx:id="exportRequests" layoutX="94.0" layoutY="644.0" onAction="#exportRequests" prefHeight="55.0" prefWidth="264.0" styleClass="buttonNeutral" text="Export Requests CSV">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
