@@ -65,4 +65,8 @@ public class Node {
         else return false;
     }
 
+    @Override
+    public String toString() {
+        return this.shortName;
+    }
 }

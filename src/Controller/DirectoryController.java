@@ -63,10 +63,9 @@ public class DirectoryController {
         return directory;
     }
 
-    HashMap<String, ObservableList<Node>> getDirectory(){
+    public HashMap<String, ObservableList<Node>> getDirectory(){
         //Get all visitable nodes from the NodeManager
         List<Node> visitableNodes = new ArrayList<Node>();
-
         for (int i = 0; nm.getAllNodes().size() > i; i++ ){
             if (!nm.getAllNodes().get(i).getNodeType().equals("HALL")){
                 visitableNodes.add(nm.getAllNodes().get(i));
