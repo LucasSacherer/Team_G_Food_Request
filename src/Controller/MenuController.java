@@ -34,7 +34,7 @@ public class MenuController {
         return diabetic;
     }
 
-    public List<MenuItem> getvegan(){
+    public List<MenuItem> getVegan(){
         List<MenuItem> items = mim.getMenuItems();
         List<MenuItem> vegan = new ArrayList<>();
         for(MenuItem mi:items){
