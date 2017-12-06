@@ -32,11 +32,12 @@ public class WorkerControllerTest {
         WorkerController wc = new WorkerController(workerManager);
 
         Worker emp = new Worker("worker4", "worker4");
-        //System.out.println(wc.getWorkers().size());
-        wc.addWorker(emp);
-        //System.out.println(wc.getWorkers().size());
-        wc.removeWorker(emp);
-        //System.out.println(wc.getWorkers().size());
+        System.out.println(wc.getWorkers().size());
+        wc.addWorker(emp.username);
+        System.out.println(wc.getWorkers().size());
+        Worker fired = wc.getWorkerbyName("worker4");
+        wc.removeWorker(fired);
+        System.out.println(wc.getWorkers().size());
         Worker modEmp = new Worker("worker4", "jim");
         wc.modifyWorker(modEmp);
         int fsize = wc.getWorkers().size();
