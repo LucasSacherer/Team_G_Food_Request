@@ -353,6 +353,8 @@ public class GodController {
     @FXML
     private TreeTableColumn<Slice, Integer> menuFoodOrdersColumn = new JFXTreeTableColumn<>();
 
+
+
     @FXML
     private PieChart orderItemsPieChart = new PieChart();
 
@@ -406,6 +408,7 @@ public class GodController {
 
     @FXML
     private TreeTableColumn<CartItem,Integer> priceOrderColumn = new TreeTableColumn<>();
+
 
 
     /**
