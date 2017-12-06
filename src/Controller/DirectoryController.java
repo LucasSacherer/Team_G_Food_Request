@@ -63,7 +63,7 @@ public class DirectoryController {
         return directory;
     }
 
-    HashMap<String, ObservableList<Node>> getDirectory(){
+    public HashMap<String, ObservableList<Node>> getDirectory(){
         //Get all visitable nodes from the NodeManager
         List<Node> visitableNodes = new ArrayList<Node>();
 

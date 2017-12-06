@@ -2,6 +2,9 @@ package Boundary;
 
 import Boundary.sceneControllers.MapDirectoryController;
 import Boundary.sceneControllers.StaffIntoPopupController;
+import Controller.DirectoryController;
+import Database.DatabaseGargoyle;
+import Manager.NodeManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,9 +24,15 @@ public class SceneSwitcher {
     private final String staffInfoPopupLoc = "/boundary/fxml/staffInfoPopup.fxml";
     private final String staffMenuOrderLoc = "/boundary/fxml/staffMenuOrder.fxml";
 
+    private DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
+
+    private NodeManager nodeManager = new NodeManager(databaseGargoyle);
+
+    private DirectoryController directoryController = new DirectoryController(nodeManager);
+
     private final StaffIntoPopupController staffInfoPopupController = new StaffIntoPopupController();
 
-    private final MapDirectoryController mapDirectoryController = new MapDirectoryController();
+    private final MapDirectoryController mapDirectoryController = new MapDirectoryController(directoryController);
 
     public void switchScene(GodController g, Pane from, String to) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(to));

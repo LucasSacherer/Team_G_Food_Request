@@ -426,7 +426,6 @@ public class GodController {
     @FXML
     private void mapDirectoryPopup(ActionEvent event) throws IOException {
         sceneSwitcher.toMapDirectoryPopup();
-
     }
 
     @FXML
@@ -480,7 +479,7 @@ public class GodController {
     }
 
     private void initializeMapDirectoryScene() {
-        mapDirectoryController = new MapDirectoryController();
+        mapDirectoryController = new MapDirectoryController(directoryController);
     }
 
     private void initializeReportsScene() {
