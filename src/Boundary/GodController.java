@@ -531,6 +531,9 @@ public class GodController {
     @FXML
     private void editWorker(){adminEditMenuController.editWorker();}
 
+    @FXML
+    private void addWorker(){adminEditMenuController.addWorker();}
+
         /*Request Tab */
     @FXML
     private void deleteRequest() {adminEditMenuController.deleteRequest();}

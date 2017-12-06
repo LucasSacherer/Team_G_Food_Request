@@ -325,12 +325,8 @@ public class AdminEditMenuController {
         }
     }
     public void addWorker() {
-        try {
-            workerController.addWorker( new Worker(workerID.getText(),username.getText()));
-        }catch (Exception e) {
-            System.out.println("Textfields are empty");
-        }
-
+        workerController.addWorker(username.getText());
+        workerRoot.getChildren().add(new TreeItem<>(workerController.getWorkerbyName(username.getText())));
 
     }
     public void deleteWorker() {
