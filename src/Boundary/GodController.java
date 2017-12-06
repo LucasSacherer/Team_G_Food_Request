@@ -51,6 +51,7 @@ public class GodController {
     FoodRequestManager foodRequestManager = new FoodRequestManager(databaseGargoyle, nodeManager,
             workerManager, menuItemManager, foodLogManager);
     WorkerLogManager workerLogManager = new WorkerLogManager(databaseGargoyle);
+    ImageManager imageManager = new ImageManager();
 
 
 
@@ -283,6 +284,9 @@ public class GodController {
     @FXML
     private TreeTableColumn<?, ?> orderTimeCompletedColumn;
 
+    @FXML
+    private ScrollPane scrollPane;
+
     /* Staff Info Popup */
     @FXML
     private Pane foodInfoPane;
@@ -369,6 +373,7 @@ public class GodController {
     @FXML
     private void hubToReports() throws IOException {
         sceneSwitcher.toReports(this, foodRequestHubPane);
+        reportsController.initialize();
     }
 
 
@@ -413,7 +418,7 @@ public class GodController {
     }
 
     private void initializeReportsScene() {
-        reportsController = new ReportsController();
+        reportsController = new ReportsController(scrollPane, imageManager,foodLogManager,nodeManager);
     }
 
     private void initializeStaffIntoPopupScene() {

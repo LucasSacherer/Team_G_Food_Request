@@ -110,8 +110,8 @@ public class TableCreator {
                     " CONSTRAINT foodNodeID_FK FOREIGN KEY (nodeID) REFERENCES NODE(nodeID))");
             System.out.println("FoodRequest table created!");
             statement.executeUpdate("INSERT INTO FOODREQUEST VALUES ('food1','1960-01-01 23:03:20','1960-01-01 23:03:20','type1', 'description1','GRETL03501', 'worker1')");
-            statement.executeUpdate("INSERT INTO FOODREQUEST VALUES ('food2','1960-01-01 23:03:20','1961-01-01 23:03:20','type2', 'description1','GSTAI00501', null)");
-        } catch (SQLException e) {
+            statement.executeUpdate("INSERT INTO FOODREQUEST VALUES (' food2','1960-01-01 23:03:20','1961-01-01 23:03:20','type2', 'description1','GSTAI00501', null)");
+            } catch (SQLException e) {
             System.out.println("FoodRequest table already exists");
             //e.printStackTrace();
         }
@@ -148,7 +148,19 @@ public class TableCreator {
                     " timeCreated TIMESTAMP NOT NULL, \n" +
                     " nodeID VARCHAR(250) NOT NULL\n)");
             System.out.println("FoodLog table created!");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Milk','1969-01-01 23:03:20', 'GELEV00N01')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Burger','1969-01-01 20:03:20', 'GRETL03501')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Milk','1969-01-02 23:03:20', 'GDEPT01901')");
             statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Milk','1969-01-01 23:03:20', 'GRETL03501')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Cereal','1969-01-01 20:03:20', 'GRETL03501')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Cereal','1969-01-02 23:03:20', 'GDEPT01901')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Milk','1969-01-01 23:03:20', 'GELEV00N01')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Burger','1969-01-01 20:03:20', 'GELEV00N01')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Milk','1969-01-02 15:03:20', 'GELEV00N01')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Milk','1969-01-01 2:03:20', 'GRETL03501')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Cereal','1969-01-01 21:03:20', 'GRETL03501')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Cereal','1969-01-02 23:03:20', 'GELEV00N01')");
+            statement.executeUpdate("INSERT INTO FOODLOG VALUES ('Cereal','1969-01-02 23:03:20', 'GSTAI00501')");
         } catch (SQLException e) {
             System.out.println("FoodLog table already exists");
             //e.printStackTrace();

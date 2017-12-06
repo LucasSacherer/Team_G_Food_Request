@@ -4,9 +4,9 @@ public class Slice {
     
         private String name;
         private int qty;
-        private int percent;
+        private double percent;
 
-        public Slice(String n, int q, int p){
+        public Slice(String n, int q, double p){
             this.name = n;
             this.qty = q;
             this.percent = p;
