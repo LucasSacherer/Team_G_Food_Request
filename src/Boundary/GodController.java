@@ -509,10 +509,6 @@ public class GodController {
     /* Food Request Hub */
     //////////////////////
 
-    @FXML
-    private void selectEmployeeToAssign() {
-        foodRequestHubController.selectEmployeeToAssign();
-    }
 
     @FXML
     private void assignEmployee() {

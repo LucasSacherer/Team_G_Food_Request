@@ -234,7 +234,7 @@ public class FoodRequestManager implements EntityManager{
     public void assignWorker(FoodRequest fReq, Worker worker){
         databaseGargoyle.createConnection();
         databaseGargoyle.executeUpdateOnDatabase("UPDATE FOODREQUEST SET " +
-                "WORKERID = '" + worker + "' " +
+                "WORKERID = '" + worker.getWorkerID() + "' " +
                 "WHERE NAME = '" + fReq.getName() + "' " +
                 "AND TIMECREATED = '" + Timestamp.valueOf(fReq.getTimeCreated()) + "'");
         databaseGargoyle.destroyConnection();
