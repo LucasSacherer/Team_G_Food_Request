@@ -7,19 +7,9 @@ public class Runner extends Application{
         launch();
     }
 
-    private void callRun(){
-        FoodRequest foodRequest = new FoodRequest();
-        try {
-            foodRequest.run(0, 0, 100, 100, null, null, null);
-        }catch (Exception ex){
-            System.out.println("Error went all the way to the top!");
-            ex.printStackTrace();
-        }
-    }
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         FoodRequest foodRequest = new FoodRequest();
-        foodRequest.run(0,0,0,0,null,null,null);
+        foodRequest.run(0,0,1900,1000,null,null,null);
     }
 }
