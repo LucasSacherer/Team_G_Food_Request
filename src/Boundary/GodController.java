@@ -193,6 +193,9 @@ public class GodController {
     private JFXComboBox employeeToAssign;
 
     @FXML
+    private JFXComboBox filterRequests =  new JFXComboBox();
+
+    @FXML
     private JFXTreeTableView<FoodRequest> ordersAsssignTable = new JFXTreeTableView<>();
 
     @FXML
@@ -391,6 +394,9 @@ public class GodController {
     private JFXTextField menuItemOrder, itemPrice;
 
     @FXML
+    private JFXComboBox dietaryRestrictionsCombo = new JFXComboBox();
+
+    @FXML
     private Label destination = new Label();
 
     @FXML
@@ -420,7 +426,7 @@ public class GodController {
             foodRequestManager, selectQuantity, menuItemOrder, itemPrice,
             menuOrderTable, myOrderTable,
             foodItemColumn, foodItemOrderColumn,
-            priceColumn, priceOrderColumn, cartController, requestController,destination);
+            priceColumn, priceOrderColumn, cartController, requestController,destination,dietaryRestrictionsCombo);
 
     MapDirectoryController mapDirectoryController = new MapDirectoryController(directoryController, nodeManager, staffMenuOrderController);
     /* Scene Switcher */
@@ -513,7 +519,7 @@ public class GodController {
                 orderNameAssignColumn, timeOrderedColumn, descriptionAssignColumn,
                 locationAssignColumn, unassignedOrderInfo, assignedOrdersTable, orderNameAssignedColumn,
                 timeOrderedAssignedColumn, locationAssignedColumn,
-                assignedEmployeeColumn, assignedOrdersInfo, workerController);
+                assignedEmployeeColumn, assignedOrdersInfo, workerController,filterRequests);
         foodRequestHubController.initialize();
     }
 
@@ -540,7 +546,7 @@ public class GodController {
                 menuOrderTable, myOrderTable,
                 foodItemColumn, foodItemOrderColumn,
                 priceColumn, priceOrderColumn,
-                cartController, requestController, destination);
+                cartController, requestController, destination, dietaryRestrictionsCombo);
     }
 
 
@@ -558,6 +564,9 @@ public class GodController {
     private void completeOrder() {
         foodRequestHubController.completeOrder();
     }
+
+    @FXML
+    private void filterRequests() { foodRequestHubController.filterRequests();}
 
     /////////////
     /* Reports */
@@ -593,6 +602,9 @@ public class GodController {
     private void checkoutRequest() {
         staffMenuOrderController.checkoutRequest();
     }
+
+    @FXML
+    private void filterMenu() {staffMenuOrderController.selectDietaryRestriction();}
 
     //////////////////////
     /* Admin Edit */

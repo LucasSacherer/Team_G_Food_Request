@@ -123,7 +123,7 @@
                                           <Insets />
                                        </HBox.margin>
                                     </Label>
-                                    <JFXComboBox fx:id="dietaryRestrictionsCombo" onAction="#selectDietaryRestriction" promptText="Dietary Restrictions" />
+                                    <JFXComboBox fx:id="dietaryRestrictionsCombo" onAction="#selectDietaryRestriction" promptText="Dietary Restrictions" styleClass="textfield" stylesheets="@../APIStyle.css" />
                                     <JFXButton fx:id="informationButton" buttonType="RAISED" onAction="#menuInfoPopup" prefHeight="31.0" prefWidth="121.0" styleClass="buttonNeutralBig" stylesheets="@../APIStyle.css" text="Information" />
                                  </children>
                               </HBox>
@@ -135,7 +135,7 @@
                               </JFXTreeTableView>
                               <Label alignment="CENTER" text="My Order">
                                  <VBox.margin>
-                                    <Insets left="450.0" />
+                                    <Insets left="400.0" />
                                  </VBox.margin>
                                  <font>
                                     <Font size="20.0" />

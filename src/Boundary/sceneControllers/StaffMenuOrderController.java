@@ -46,6 +46,7 @@ public class StaffMenuOrderController {
 
     private JFXTextField selectQuantity;
     private JFXTextField menuItemOrder, itemPrice;
+    private JFXComboBox dietaryRestrictionsCombo;
     private Label destination;
     private JFXTreeTableView<MenuItem> menuOrderTable;
     private JFXTreeTableView<CartItem> myOrderTable;
@@ -64,13 +65,15 @@ public class StaffMenuOrderController {
     private List<MenuItem> addedItems = new ArrayList<>();
 
 
+
+
     public StaffMenuOrderController(DatabaseGargoyle databaseGargoyle,
                                     NodeManager nodeManager, FoodLogManager foodLogManager, MenuItemManager menuItemManager, WorkerManager workerManager,
                                     FoodRequestManager foodRequestManager, JFXTextField selectQuantity, JFXTextField menuItemOrder, JFXTextField itemPrice,
                                     JFXTreeTableView<MenuItem> menuOrderTable, JFXTreeTableView<CartItem> myOrderTable,
                                     TreeTableColumn<MenuItem, String> foodItemColumn, TreeTableColumn<CartItem,String> foodItemOrderColumn,
                                     TreeTableColumn<MenuItem, Integer> priceColumn, TreeTableColumn<CartItem,Integer> priceOrderColumn,
-                                    CartController cartController, RequestController requestController,Label destination) {
+                                    CartController cartController, RequestController requestController,Label destination,JFXComboBox dietaryRestrictionsCombo) {
         this.databaseGargoyle = databaseGargoyle;
         this.nodeManager = nodeManager;
         this.foodLogManager = foodLogManager;
@@ -89,6 +92,11 @@ public class StaffMenuOrderController {
         this.cartController = cartController;
         this.requestController = requestController;
         this.destination = destination;
+        this.dietaryRestrictionsCombo = dietaryRestrictionsCombo;
+        dietaryRestrictionsCombo.getItems().add("Vegan");
+        dietaryRestrictionsCombo.getItems().add("Diabetic");
+        dietaryRestrictionsCombo.getItems().add("Gluten Free");
+        dietaryRestrictionsCombo.getItems().add("None");
     }
 
     public void initialize(Label destination, MenuController menuController) {
@@ -97,6 +105,9 @@ public class StaffMenuOrderController {
         initializeMenuTable();
         initializeOrderTable();
         this.destination = destination;
+
+
+
     }
 
     private void initializeMenuTable() {
@@ -198,6 +209,26 @@ public class StaffMenuOrderController {
     }
 
     public void selectDietaryRestriction() {
+        String foodFilter = dietaryRestrictionsCombo.getSelectionModel().getSelectedItem().toString();
+        menuRoot.getChildren().clear();
+        if ( foodFilter == "Vegan"){
+            for (MenuItem menuItem : menuController.getVegan())
+                menuRoot.getChildren().add(new TreeItem<>(menuItem));
+
+        }else if (foodFilter == "Diabetic"){
+            for (MenuItem menuItem : menuController.getDiabetic())
+                menuRoot.getChildren().add(new TreeItem<>(menuItem));
+
+        }else if (foodFilter == "Gluten Free"){
+            for (MenuItem menuItem : menuController.getGlutenFree())
+                menuRoot.getChildren().add(new TreeItem<>(menuItem));
+
+        }else if (foodFilter == "None"){
+            for (MenuItem menuItem : menuController.getAvailableMenu())
+                menuRoot.getChildren().add(new TreeItem<>(menuItem));
+
+        }
+
     }
 
     public void setLocation(Node location) {

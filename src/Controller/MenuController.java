@@ -45,7 +45,7 @@ public class MenuController {
         return vegan;
     }
 
-    public List<MenuItem> getGultenFree(){
+    public List<MenuItem> getGlutenFree(){
         List<MenuItem> items = mim.getMenuItems();
         List<MenuItem> gf = new ArrayList<>();
         for(MenuItem mi:items){

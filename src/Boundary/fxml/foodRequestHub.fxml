@@ -112,7 +112,7 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="767.0" spacing="50.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0">
                                  <children>
-                                    <JFXComboBox promptText="Filter" styleClass="textfield" />
+                                    <JFXComboBox fx:id="filterRequests" onAction="#filterRequests" promptText="Filter" styleClass="textfield" />
                                     <JFXButton fx:id="completeOrderButton" buttonType="RAISED" onAction="#completeOrder" prefHeight="31.0" prefWidth="151.0" styleClass="buttonAdd" text="Complete Order" />
                                  </children>
                               </HBox>

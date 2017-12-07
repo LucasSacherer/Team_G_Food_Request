@@ -72,7 +72,8 @@ public class RequestController {
     public List<FoodRequest> getRequestsByWorker(Worker worker){
         ArrayList<FoodRequest> results = new ArrayList<>();
         for (FoodRequest req: fm.getRequests()){
-            if (req.getAssignedWorker().equals(worker)){
+            System.out.println(req.getName());
+            if (req.getAssignedWorker().getWorkerID().equals(worker.getWorkerID())){
                 results.add(req);
             }
         }
