@@ -468,7 +468,6 @@ public class GodController {
         initializeReportsScene();
         initializeStaffIntoPopupScene();
         initializeStaffMenuOrderScene();
-        System.out.println("Observers initialized");
         initializeObservers();
         staffMenuOrderController.initialize(destination, menuController);
     }
