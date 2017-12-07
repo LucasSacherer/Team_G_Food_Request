@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class FoodRequest {
 
     public FoodRequest(){}
-    public void thing(){
+    public void thing(int xcoord, int ycoord, int windowWidth, int windowLength, String cssPath){
         DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
         databaseGargoyle.createConnection();
         databaseGargoyle.createTables();
@@ -29,17 +29,31 @@ public class FoodRequest {
             e.printStackTrace();
             return;
         }
-        Scene scene = new Scene(root,1900,1000);
+        Scene scene = new Scene(root,windowWidth,windowLength);
+        primaryStage.setX(xcoord);
+        primaryStage.setY(ycoord);
         primaryStage.setTitle("B&W Path Finding");
         primaryStage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("/Boundary2/APIStyle.css").toExternalForm());
-        //primaryStage.setMaximized(true);
+        scene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
         primaryStage.show();
     }
 
-    public void run(int xcoord, int ycoord, int windwoWidth, int windowLength, String cssPath, String destNodeID,
+    public void run(int xcoord, int ycoord, int windowWidth, int windowLength, String cssPath, String destNodeID,
                     String originNode) throws ServiceException {
-        thing();
+        String cssFile = cssPath;
+        if (xcoord < 0 || ycoord < 0 || windowWidth < 0 || windowLength < 0){
+            throw new ServiceException("There cannot be a negative value in the parameter of run().");
+        }
+        if (xcoord > windowWidth){
+            throw new ServiceException("Xcoord is out of the bounds of the window.");
+        }
+        if (ycoord > windowLength){
+            throw new ServiceException("Ycoord is out of the bounds of the window.");
+        }
+        if (cssPath == null){
+            cssFile = "/Boundary2/APIStyle.css";
+        }
+        thing(xcoord, ycoord, windowWidth, windowLength, cssFile);
     }
 }
 
