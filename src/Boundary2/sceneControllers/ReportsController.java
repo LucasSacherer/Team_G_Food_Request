@@ -125,6 +125,7 @@ public class ReportsController {
         scrollPane.setContent(group);
         currentFloor = "G";
         imageView.setImage(imageManager.getImage(currentFloor));
+        currentFloorNum.setText(currentFloor);
         mapPane.setScaleX(0.5);
         mapPane.setScaleY(0.5);
         scrollPane.setPannable(true);
