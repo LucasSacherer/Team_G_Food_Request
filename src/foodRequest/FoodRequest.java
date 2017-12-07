@@ -17,7 +17,7 @@ public class FoodRequest {
         databaseGargoyle.destroyConnection();
 
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(cssPath));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Boundary2/fxml/foodRequestHub.fxml"));
         GodController godController = new GodController();
         loader.setController(godController);
         godController.initialize();
@@ -34,7 +34,7 @@ public class FoodRequest {
         primaryStage.setY(ycoord);
         primaryStage.setTitle("B&W Path Finding");
         primaryStage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("/Boundary2/APIStyle.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource(cssPath).toExternalForm());
         primaryStage.show();
     }
 
@@ -42,10 +42,16 @@ public class FoodRequest {
                     String originNode) throws ServiceException {
         String cssFile = cssPath;
         if (xcoord < 0 || ycoord < 0 || windowWidth < 0 || windowLength < 0){
-            throw new ServiceException("O")
+            throw new ServiceException("There cannot be a negative value in the parameter of run().");
+        }
+        if (xcoord > windowWidth){
+            throw new ServiceException("Xcoord is out of the bounds of the window.");
+        }
+        if (ycoord > windowLength){
+            throw new ServiceException("Ycoord is out of the bounds of the window.");
         }
         if (cssPath == null){
-            cssFile = "/Boundary2/fxml/foodRequestHub.fxml";
+            cssFile = "/Boundary2/APIStyle.css";
         }
         thing(xcoord, ycoord, windowWidth, windowLength, cssFile);
     }
