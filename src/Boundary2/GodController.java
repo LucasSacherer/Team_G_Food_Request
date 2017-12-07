@@ -409,7 +409,7 @@ public class GodController {
     AdminEditMenuController adminEditMenuController;
     FoodRequestHubController foodRequestHubController;
     ReportsController reportsController;
-    StaffIntoPopupController staffIntoPopupController;
+    StaffIntoPopupController staffIntoPopupController = new StaffIntoPopupController(menuController);
     StaffMenuOrderController staffMenuOrderController = new StaffMenuOrderController(databaseGargoyle,
             nodeManager, foodLogManager, menuItemManager, workerManager,
             foodRequestManager, selectQuantity, menuItemOrder, itemPrice,
@@ -419,7 +419,7 @@ public class GodController {
 
     MapDirectoryController mapDirectoryController = new MapDirectoryController(directoryController, nodeManager, staffMenuOrderController);
     /* Scene Switcher */
-    SceneSwitcher sceneSwitcher = new SceneSwitcher(new StaffIntoPopupController(), mapDirectoryController);
+    SceneSwitcher sceneSwitcher = new SceneSwitcher(staffIntoPopupController, mapDirectoryController);
 
 
 

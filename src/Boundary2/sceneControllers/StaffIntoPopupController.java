@@ -36,7 +36,8 @@ public class StaffIntoPopupController {
     TreeItem<MenuItem> foodInfoRoot = new TreeItem<>();
 
 
-    public StaffIntoPopupController() {
+    public StaffIntoPopupController(MenuController menuController) {
+        this.menuController = menuController;
     }
 
 

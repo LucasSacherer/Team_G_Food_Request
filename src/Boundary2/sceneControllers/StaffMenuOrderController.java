@@ -195,7 +195,7 @@ public class StaffMenuOrderController {
     }
 
     public void checkoutRequest() {
-        if (destination.getLabelFor() == null){
+        if (location == null){
             Alert error = new Alert(Alert.AlertType.ERROR, "There is no set destination");
             error.show();
         }else {
@@ -206,6 +206,7 @@ public class StaffMenuOrderController {
             cartController.clearItems();
             initializeOrderTable();
             cancelMenuItem();
+            location = null;
         }
     }
 
@@ -265,5 +266,6 @@ public class StaffMenuOrderController {
             menuController.modifyMenuItem(newModifiedItem);
         }
         cartController.clearItems();
+        location = null;
     }
 }
