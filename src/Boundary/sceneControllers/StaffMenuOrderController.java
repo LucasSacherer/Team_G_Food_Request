@@ -18,10 +18,7 @@ import com.sun.xml.internal.bind.v2.TODO;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import sun.swing.MenuItemCheckIconFactory;
 
@@ -57,6 +54,7 @@ public class StaffMenuOrderController {
 
     private MenuItem item;
     private Node location;
+    private Integer lostStock;
 
     private CartItem cartItem;
 
@@ -143,7 +141,7 @@ public class StaffMenuOrderController {
 
 
     private void initializeOrderTable() {
-
+        cartController.getItems().clear();
         for (CartItem cartItem : cartController.getItems() ) {
             orderRoot.getChildren().add(new TreeItem<>(cartItem));
         }
@@ -168,11 +166,22 @@ public class StaffMenuOrderController {
 
 
     public void addMenuItem() {
-        TreeItem<MenuItem> selectedMenuItem = menuOrderTable.getSelectionModel().getSelectedItem();
-        cartItem = new CartItem(selectedMenuItem.getValue().getFoodName(),Integer.parseInt(selectQuantity.getText()));
-        cartController.addItemToCart(cartItem);
-        orderRoot.getChildren().add(new TreeItem<>(cartItem));
-        cancelMenuItem();
+        if (menuOrderTable.getSelectionModel().getSelectedItem().getValue().getStockAvailable() < Integer.parseInt(selectQuantity.getText())) {
+            cancelMenuItem();
+            Alert error = new Alert(Alert.AlertType.ERROR, "There is not enough stock for this Menu Item ");
+            error.show();
+        } else {
+            TreeItem<MenuItem> selectedMenuItem = menuOrderTable.getSelectionModel().getSelectedItem();
+            lostStock = Integer.parseInt(selectQuantity.getText());
+            MenuItem modifiedItem = new MenuItem(selectedMenuItem.getValue().getFoodName(), selectedMenuItem.getValue().getDescription(),
+                    selectedMenuItem.getValue().getStockAvailable() - lostStock, selectedMenuItem.getValue().getCalories(),
+                    selectedMenuItem.getValue().getVegan(), selectedMenuItem.getValue().getDiabetic(), selectedMenuItem.getValue().getGluttenFree(), selectedMenuItem.getValue().getPrice());
+            menuController.modifyMenuItem(modifiedItem);
+            cartItem = new CartItem(modifiedItem.getFoodName(), Integer.parseInt(selectQuantity.getText()));
+            cartController.addItemToCart(cartItem);
+            orderRoot.getChildren().add(new TreeItem<>(cartItem));
+            cancelMenuItem();
+        }
     }
 
     public void cancelMenuItem() {
@@ -186,14 +195,6 @@ public class StaffMenuOrderController {
         FoodRequest foodRequest = new FoodRequest(cartItem.getFoodNameCart(), LocalDateTime.now(),LocalDateTime.now(),"hello","This",
                 nodeManager.getNode("GREST01201"),null,cartController.getItems());
         orderRoot.getChildren().clear();
-        System.out.println(foodRequest.getName());
-        System.out.println(foodRequest.getTimeCreated());
-        System.out.println(foodRequest.getOrder());
-        System.out.println(foodRequest.getNode());
-        System.out.println(foodRequest.getAssignedWorker());
-        System.out.println(foodRequest.getDescription());
-        System.out.println(foodRequest.getType());
-        System.out.println(foodRequest.getTimeCompleted());
         requestController.addRequest(foodRequest);
         cartController.clearItems();
 
@@ -204,8 +205,15 @@ public class StaffMenuOrderController {
 
     public void deleteFoodItemFromCart() {
         TreeItem<CartItem> selectedMenuItem = myOrderTable.getSelectionModel().getSelectedItem();
+        MenuItem modifiedItem = menuItemManager.getMenuItemByName(selectedMenuItem.getValue().getFoodNameCart());
+        System.out.println(lostStock);
+        MenuItem newModifiedItem = new MenuItem(modifiedItem.getFoodName(),modifiedItem.getDescription(),
+                modifiedItem.getStockAvailable() + lostStock,modifiedItem.getCalories(),
+                modifiedItem.getVegan(),modifiedItem.getDiabetic(), modifiedItem.getGluttenFree(),modifiedItem.getPrice());
+        menuController.modifyMenuItem(newModifiedItem);
         cartController.getItems().remove(selectedMenuItem);
         orderRoot.getChildren().remove(selectedMenuItem);
+        lostStock = 0;
     }
 
     public void selectDietaryRestriction() {
