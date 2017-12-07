@@ -15,6 +15,7 @@ import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -22,6 +23,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ReportsController {
@@ -38,6 +41,8 @@ public class ReportsController {
     Pane mapPane;
     ReportController rc;
     NodeManager nodeManager;
+    private Label currentFloorNum;
+    private JFXSlider zoomSlider;
     JFXTreeTableView<DensityNode> reportsTable;
     TreeTableColumn<DensityNode, String> locationRequestsColumn;
     TreeTableColumn<DensityNode, Integer> numberRequestsColumn;
@@ -49,9 +54,14 @@ public class ReportsController {
     private TreeItem<Slice> pieroot = new TreeItem<>();
 
     PieChart orderItemsPieChart;
+    private String currentFloor;
 
-    public ReportsController(ScrollPane scrollPane, ImageManager imageManager, FoodLogManager foodLogManager, NodeManager nodeManager,JFXTreeTableView<DensityNode> reportsTable,TreeTableColumn<DensityNode, String> locationRequestsColumn,TreeTableColumn<DensityNode, Integer> numberRequestsColumn,
-                             JFXTreeTableView<Slice> foodOrders,TreeTableColumn<Slice, String> menuFoodColumn,TreeTableColumn<Slice, Integer> menuFoodOrdersColumn,PieChart orderItemsPieChart){
+    public ReportsController(ScrollPane scrollPane, ImageManager imageManager, FoodLogManager foodLogManager,
+                             NodeManager nodeManager, JFXTreeTableView<DensityNode> reportsTable,
+                             TreeTableColumn<DensityNode, String> locationRequestsColumn,
+                             TreeTableColumn<DensityNode, Integer> numberRequestsColumn,
+                             JFXTreeTableView<Slice> foodOrders, TreeTableColumn<Slice, String> menuFoodColumn,
+                             TreeTableColumn<Slice, Integer> menuFoodOrdersColumn, PieChart orderItemsPieChart, Label currentFloorNum, JFXSlider zoomSlider){
         this.scrollPane = scrollPane;
         this.imageManager = imageManager;
         this.foodLogManager = foodLogManager;
@@ -64,6 +74,8 @@ public class ReportsController {
         this.menuFoodColumn = menuFoodColumn;
         this.menuFoodOrdersColumn = menuFoodOrdersColumn;
         this.orderItemsPieChart = orderItemsPieChart;
+        this.currentFloorNum = currentFloorNum;
+        this.zoomSlider = zoomSlider;
     }
 
     public void initialize(){
@@ -110,7 +122,8 @@ public class ReportsController {
 
         group.getChildren().add(mapPane);
         scrollPane.setContent(group);
-        imageView.setImage(imageManager.getImage("1"));
+        currentFloor = "G";
+        imageView.setImage(imageManager.getImage(currentFloor));
         mapPane.setScaleX(0.5);
         mapPane.setScaleY(0.5);
         scrollPane.setPannable(true);
@@ -136,4 +149,54 @@ public class ReportsController {
 
     }
     public void reportsToHub() {}
+
+    public void floorDown() throws IOException, SQLException {
+        switch(currentFloor) {
+            case "L2" :
+                return;
+            case "L1" :
+                currentFloor = "L2";
+                break;
+            case "G" :
+                currentFloor = "L1";
+                break;
+            case "1" :
+                currentFloor = "G";
+                break;
+            case "2" :
+                currentFloor = "1";
+                break;
+            case "3" :
+                currentFloor = "2";
+                break;
+        }
+        imageView.setImage(imageManager.getImage(currentFloor));
+        currentFloorNum.setText(currentFloor);
+//        refreshCanvas();
+    }
+
+    public void floorUp() throws IOException, SQLException {
+        switch (currentFloor) {
+            case "3":
+                return;
+            case "L2":
+                currentFloor = "L1";
+                break;
+            case "L1":
+                currentFloor = "G";
+                break;
+            case "G":
+                currentFloor = "1";
+                break;
+            case "1":
+                currentFloor = "2";
+                break;
+            case "2":
+                currentFloor = "3";
+                break;
+        }
+        imageView.setImage(imageManager.getImage(currentFloor));
+        currentFloorNum.setText(currentFloor);
+//        refreshCanvas();
+    }
 }
