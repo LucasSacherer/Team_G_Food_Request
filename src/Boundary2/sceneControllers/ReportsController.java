@@ -128,16 +128,7 @@ public class ReportsController {
         mapPane.setScaleX(0.5);
         mapPane.setScaleY(0.5);
         scrollPane.setPannable(true);
-        List<DensityNode> nodes = rc.getRequestDensity();
-
-        for (DensityNode dn: nodes){
-            Node node = nodeManager.getNode(dn.getNodeID());
-            int size = (dn.getDensity() * 20);
-            gc.setFill(Color.BLACK);
-            gc.fillOval(node.getXcoord()-(size/2)-1,node.getYcoord()-(size/2)-1,size+5,size+5);
-            gc.setFill(Color.BLUEVIOLET);
-            gc.fillOval(node.getXcoord()-(size/2),node.getYcoord()-(size/2),size,size);
-        }
+        drawDensity();
 
     }
     private void initializePieChart(){
@@ -148,6 +139,22 @@ public class ReportsController {
         }
         orderItemsPieChart.setData(pieChartData);
 
+    }
+
+    private  void drawDensity(){
+        List<DensityNode> nodes = rc.getRequestDensity();
+
+        for (DensityNode dn: nodes){
+
+            Node node = nodeManager.getNode(dn.getNodeID());
+            if(node.getFloor().equals(currentFloor)) {
+                int size = (dn.getDensity() * 20);
+                gc.setFill(Color.BLACK);
+                gc.fillOval(node.getXcoord() - (size / 2) - 1, node.getYcoord() - (size / 2) - 1, size + 5, size + 5);
+                gc.setFill(Color.BLUEVIOLET);
+                gc.fillOval(node.getXcoord() - (size / 2), node.getYcoord() - (size / 2), size, size);
+            }
+        }
     }
     public void reportsToHub() {}
 
@@ -173,9 +180,13 @@ public class ReportsController {
         }
         imageView.setImage(imageManager.getImage(currentFloor));
         currentFloorNum.setText(currentFloor);
-//        refreshCanvas();
-    }
 
+        refreshCanvas();
+    }
+    private void refreshCanvas(){
+        gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
+        drawDensity();
+    }
     public void floorUp() throws IOException, SQLException {
         switch (currentFloor) {
             case "3":
@@ -198,6 +209,6 @@ public class ReportsController {
         }
         imageView.setImage(imageManager.getImage(currentFloor));
         currentFloorNum.setText(currentFloor);
-//        refreshCanvas();
+        refreshCanvas();
     }
 }
