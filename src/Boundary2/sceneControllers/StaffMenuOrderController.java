@@ -9,6 +9,7 @@ import Entity2.FoodRequest;
 import Entity2.MenuItem;
 import Entity2.Node;
 import Manager2.*;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -45,7 +46,7 @@ public class StaffMenuOrderController {
     private JFXTextField selectQuantity;
     private JFXTextField menuItemOrder, itemPrice;
     private JFXComboBox dietaryRestrictionsCombo;
-    private static Label destination;
+    public static Label destination;
     private JFXTreeTableView<MenuItem> menuOrderTable;
     private JFXTreeTableView<CartItem> myOrderTable;
     private TreeTableColumn<MenuItem, String> foodItemColumn;
