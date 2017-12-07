@@ -19,7 +19,7 @@ public class FoodRequestHubController {
 
     private RequestController requestController;
     private WorkerController workerController;
-    private JFXComboBox employeeToAssign;
+    private JFXComboBox employeeToAssign,filterRequests;
 
     private JFXTreeTableView<FoodRequest> ordersAssignTable;
     private TreeTableColumn<FoodRequest, String> orderNameAssignColumn;
@@ -42,7 +42,7 @@ public class FoodRequestHubController {
                                     TreeTableColumn<FoodRequest, String> orderNameAssignColumn, TreeTableColumn<FoodRequest, String> timeOrderedColumn, TreeTableColumn<FoodRequest, String> descriptionAssignColumn,
                                     TreeTableColumn<FoodRequest, String> locationAssignColumn, JFXTextArea unassignedOrderInfo, JFXTreeTableView<FoodRequest> assignedOrdersTable, TreeTableColumn<FoodRequest, String> orderNameAssignedColumn,
                                     TreeTableColumn<FoodRequest, String> timeOrderedAssignedColumn, TreeTableColumn<FoodRequest, String> locationAssignedColumn,
-                                    TreeTableColumn<FoodRequest, String> assignedEmployeeColumn, JFXTextArea assignedOrdersInfo, WorkerController workerController) {
+                                    TreeTableColumn<FoodRequest, String> assignedEmployeeColumn, JFXTextArea assignedOrdersInfo, WorkerController workerController, JFXComboBox filterRequests) {
 
         this.requestController = requestController;
         this.employeeToAssign = employeeToAssign;
@@ -59,6 +59,8 @@ public class FoodRequestHubController {
         this.assignedEmployeeColumn = assignedEmployeeColumn;
         this.assignedOrdersInfo = assignedOrdersInfo;
         this.workerController = workerController;
+        this.filterRequests = filterRequests;
+
 
     }
 
@@ -68,6 +70,10 @@ public class FoodRequestHubController {
         for (Worker worker : workerController.getWorkers()) {
             employeeToAssign.getItems().add(worker.getUsername());
         }
+        for (Worker worker : workerController.getWorkers()){
+            filterRequests.getItems().add(worker.getUsername());
+        }
+
 
     }
 
@@ -168,5 +174,18 @@ public class FoodRequestHubController {
         requestController.completeRequest(completedFoodRequest);
         foodRequestAssignedRoot.getChildren().remove(selectedFoodRequest);
         requestController.addRequest(completedFoodRequest);
+    }
+
+    public void filterRequests(){
+        String worker = filterRequests.getSelectionModel().getSelectedItem().toString();
+        Worker filterWorker = workerController.getWorkerbyName(worker);
+        System.out.println(worker);
+        System.out.println(filterWorker);
+        foodRequestAssignedRoot.getChildren().clear();
+        for (FoodRequest foodRequest : requestController.getRequestsByWorker(filterWorker)){
+            System.out.println(requestController.getRequestsByWorker(filterWorker));
+            foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));
+        }
+
     }
 }

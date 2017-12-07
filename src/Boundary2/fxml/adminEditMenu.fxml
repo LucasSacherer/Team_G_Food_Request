@@ -192,12 +192,12 @@
                                     <Font size="36.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="deleteRequest" layoutX="53.0" layoutY="418.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Delete">
+                              <JFXButton fx:id="deleteRequest" layoutX="53.0" layoutY="418.0" onAction="#deleteRequest" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Delete">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="deleteAllRequest" layoutX="278.0" layoutY="415.0" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Delete All">
+                              <JFXButton fx:id="deleteAllRequest" layoutX="278.0" layoutY="415.0" onAction="#deleteAllRequests" prefHeight="55.0" prefWidth="166.0" styleClass="buttonDelete" text="Delete All">
                                  <font>
                                     <Font size="24.0" />
                                  </font>

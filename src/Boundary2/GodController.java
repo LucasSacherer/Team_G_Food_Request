@@ -173,6 +173,9 @@ public class GodController {
     private JFXComboBox employeeToAssign;
 
     @FXML
+    private JFXComboBox filterRequests =  new JFXComboBox();
+
+    @FXML
     private JFXTreeTableView<FoodRequest> ordersAsssignTable = new JFXTreeTableView<>();
 
     @FXML
@@ -380,6 +383,9 @@ public class GodController {
     private JFXTextField menuItemOrder, itemPrice;
 
     @FXML
+    private JFXComboBox dietaryRestrictionsCombo = new JFXComboBox();
+
+    @FXML
     private Label destination = new Label();
 
     @FXML
@@ -403,17 +409,17 @@ public class GodController {
     AdminEditMenuController adminEditMenuController;
     FoodRequestHubController foodRequestHubController;
     ReportsController reportsController;
-    StaffIntoPopupController staffIntoPopupController;
+    StaffIntoPopupController staffIntoPopupController = new StaffIntoPopupController(menuController);
     StaffMenuOrderController staffMenuOrderController = new StaffMenuOrderController(databaseGargoyle,
             nodeManager, foodLogManager, menuItemManager, workerManager,
             foodRequestManager, selectQuantity, menuItemOrder, itemPrice,
             menuOrderTable, myOrderTable,
             foodItemColumn, foodItemOrderColumn,
-            priceColumn, priceOrderColumn, cartController, requestController,destination);
+            priceColumn, priceOrderColumn, cartController, requestController,destination,dietaryRestrictionsCombo);
 
     MapDirectoryController mapDirectoryController = new MapDirectoryController(directoryController, nodeManager, staffMenuOrderController);
     /* Scene Switcher */
-    SceneSwitcher sceneSwitcher = new SceneSwitcher(new StaffIntoPopupController(), mapDirectoryController);
+    SceneSwitcher sceneSwitcher = new SceneSwitcher(staffIntoPopupController, mapDirectoryController);
 
 
 
@@ -428,6 +434,7 @@ public class GodController {
     @FXML
     private void staffMenuOrderToHub() throws IOException {
         sceneSwitcher.toFoodRequestHub(this, staffMenuOrderPane);
+        staffMenuOrderController.resetOnLeave();
     }
 
     @FXML
@@ -501,7 +508,7 @@ public class GodController {
                 orderNameAssignColumn, timeOrderedColumn, descriptionAssignColumn,
                 locationAssignColumn, unassignedOrderInfo, assignedOrdersTable, orderNameAssignedColumn,
                 timeOrderedAssignedColumn, locationAssignedColumn,
-                assignedEmployeeColumn, assignedOrdersInfo, workerController);
+                assignedEmployeeColumn, assignedOrdersInfo, workerController,filterRequests);
         foodRequestHubController.initialize();
     }
 
@@ -528,7 +535,7 @@ public class GodController {
                 menuOrderTable, myOrderTable,
                 foodItemColumn, foodItemOrderColumn,
                 priceColumn, priceOrderColumn,
-                cartController, requestController, destination);
+                cartController, requestController, destination, dietaryRestrictionsCombo);
     }
 
 
@@ -546,6 +553,9 @@ public class GodController {
     private void completeOrder() {
         foodRequestHubController.completeOrder();
     }
+
+    @FXML
+    private void filterRequests() { foodRequestHubController.filterRequests();}
 
     /////////////
     /* Reports */
@@ -587,6 +597,9 @@ public class GodController {
     private void checkoutRequest() {
         staffMenuOrderController.checkoutRequest();
     }
+
+    @FXML
+    private void filterMenu() {staffMenuOrderController.selectDietaryRestriction();}
 
     //////////////////////
     /* Admin Edit */

@@ -9,15 +9,19 @@ import Entity2.FoodRequest;
 import Entity2.MenuItem;
 import Entity2.Node;
 import Manager2.*;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.sun.xml.internal.bind.v2.TODO;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import sun.swing.MenuItemCheckIconFactory;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -38,6 +42,7 @@ public class StaffMenuOrderController {
 
     private JFXTextField selectQuantity;
     private JFXTextField menuItemOrder, itemPrice;
+    private JFXComboBox dietaryRestrictionsCombo;
     public static Label destination;
     private JFXTreeTableView<MenuItem> menuOrderTable;
     private JFXTreeTableView<CartItem> myOrderTable;
@@ -48,6 +53,7 @@ public class StaffMenuOrderController {
 
     private MenuItem item;
     public static Node location;
+    private Integer lostStock;
 
     private CartItem cartItem;
 
@@ -62,7 +68,7 @@ public class StaffMenuOrderController {
                                     JFXTreeTableView<MenuItem> menuOrderTable, JFXTreeTableView<CartItem> myOrderTable,
                                     TreeTableColumn<MenuItem, String> foodItemColumn, TreeTableColumn<CartItem,String> foodItemOrderColumn,
                                     TreeTableColumn<MenuItem, Integer> priceColumn, TreeTableColumn<CartItem,Integer> priceOrderColumn,
-                                    CartController cartController, RequestController requestController,Label destination) {
+                                    CartController cartController, RequestController requestController,Label destination,JFXComboBox dietaryRestrictionsCombo) {
         this.databaseGargoyle = databaseGargoyle;
         this.nodeManager = nodeManager;
         this.foodLogManager = foodLogManager;
@@ -81,6 +87,11 @@ public class StaffMenuOrderController {
         this.cartController = cartController;
         this.requestController = requestController;
         this.destination = destination;
+        this.dietaryRestrictionsCombo = dietaryRestrictionsCombo;
+        dietaryRestrictionsCombo.getItems().add("Vegan");
+        dietaryRestrictionsCombo.getItems().add("Diabetic");
+        dietaryRestrictionsCombo.getItems().add("Gluten Free");
+        dietaryRestrictionsCombo.getItems().add("None");
     }
 
     public void initialize(Label destination, MenuController menuController) {
@@ -92,7 +103,7 @@ public class StaffMenuOrderController {
     }
 
     private void initializeMenuTable() {
-
+        menuRoot.getChildren().clear();
         for (MenuItem menuItem : menuController.getAvailableMenu()){
             menuRoot.getChildren().add(new TreeItem<>(menuItem));
         }
@@ -124,7 +135,6 @@ public class StaffMenuOrderController {
 
 
     private void initializeOrderTable() {
-
         orderRoot.getChildren().clear();
 
         for (CartItem cartItem : cartController.getItems() ) {
@@ -151,12 +161,29 @@ public class StaffMenuOrderController {
 
 
     public void addMenuItem() {
-        TreeItem<MenuItem> selectedMenuItem = menuOrderTable.getSelectionModel().getSelectedItem();
-        cartItem = new CartItem(selectedMenuItem.getValue().getFoodName(),Integer.parseInt(selectQuantity.getText()));
-        cartController.addItemToCart(cartItem);
-        //orderRoot.getChildren().add(new TreeItem<>(cartItem));
-        initializeOrderTable();
-        cancelMenuItem();
+        if (menuOrderTable.getSelectionModel().getSelectedItem().getValue().getStockAvailable() < Integer.parseInt(selectQuantity.getText())) {
+            cancelMenuItem();
+            Alert error = new Alert(Alert.AlertType.ERROR, "There is not enough stock for this Menu Item. The available stock for this item is : "
+                    + menuOrderTable.getSelectionModel().getSelectedItem().getValue().getStockAvailable());
+            error.show();
+
+        }
+        else {
+            TreeItem<MenuItem> selectedMenuItem = menuOrderTable.getSelectionModel().getSelectedItem();
+            lostStock = Integer.parseInt(selectQuantity.getText());
+            MenuItem modifiedItem = new MenuItem(selectedMenuItem.getValue().getFoodName(), selectedMenuItem.getValue().getDescription(),
+                    selectedMenuItem.getValue().getStockAvailable() - lostStock, selectedMenuItem.getValue().getCalories(),
+                    selectedMenuItem.getValue().getVegan(), selectedMenuItem.getValue().getDiabetic(), selectedMenuItem.getValue().getGluttenFree(), selectedMenuItem.getValue().getPrice());
+            menuController.modifyMenuItem(modifiedItem);
+            cartItem = new CartItem(modifiedItem.getFoodName(), Integer.parseInt(selectQuantity.getText()));
+            cartController.addItemToCart(cartItem);
+            menuRoot.getChildren().clear();
+            orderRoot.getChildren().add(new TreeItem<>(cartItem));
+            initializeMenuTable();
+            initializeOrderTable();
+            cancelMenuItem();
+        }
+
     }
 
     public void cancelMenuItem() {
@@ -168,32 +195,55 @@ public class StaffMenuOrderController {
     }
 
     public void checkoutRequest() {
-        FoodRequest foodRequest = new FoodRequest(cartItem.getFoodNameCart(), LocalDateTime.now(),LocalDateTime.now(),"hello","Food Request",
-                location,null,cartController.getItems());
-        orderRoot.getChildren().clear();
-        System.out.println(foodRequest.getName());
-        System.out.println(foodRequest.getTimeCreated());
-        System.out.println(foodRequest.getOrder());
-        System.out.println(foodRequest.getNode());
-        System.out.println(foodRequest.getAssignedWorker());
-        System.out.println(foodRequest.getDescription());
-        System.out.println(foodRequest.getType());
-        System.out.println(foodRequest.getTimeCompleted());
-        requestController.addRequest(foodRequest);
-        cartController.clearItems();
-
-        initializeOrderTable();
-        cancelMenuItem();
-
+        if (location == null){
+            Alert error = new Alert(Alert.AlertType.ERROR, "There is no set destination");
+            error.show();
+        }else {
+            FoodRequest foodRequest = new FoodRequest(cartItem.getFoodNameCart(), LocalDateTime.now(),LocalDateTime.now(),"hello","Food Request",
+                    location,null,cartController.getItems());
+            orderRoot.getChildren().clear();
+            requestController.addRequest(foodRequest);
+            cartController.clearItems();
+            initializeOrderTable();
+            cancelMenuItem();
+            location = null;
+        }
     }
 
     public void deleteFoodItemFromCart() {
         TreeItem<CartItem> selectedMenuItem = myOrderTable.getSelectionModel().getSelectedItem();
+        MenuItem modifiedItem = menuItemManager.getMenuItemByName(selectedMenuItem.getValue().getFoodNameCart());
+        System.out.println(lostStock);
+        MenuItem newModifiedItem = new MenuItem(modifiedItem.getFoodName(),modifiedItem.getDescription(),
+                modifiedItem.getStockAvailable() + lostStock,modifiedItem.getCalories(),
+                modifiedItem.getVegan(),modifiedItem.getDiabetic(), modifiedItem.getGluttenFree(),modifiedItem.getPrice());
+        menuController.modifyMenuItem(newModifiedItem);
         cartController.getItems().remove(selectedMenuItem);
         orderRoot.getChildren().remove(selectedMenuItem);
+        lostStock = 0;
     }
 
     public void selectDietaryRestriction() {
+        String foodFilter = dietaryRestrictionsCombo.getSelectionModel().getSelectedItem().toString();
+        menuRoot.getChildren().clear();
+        if ( foodFilter == "Vegan"){
+            for (MenuItem menuItem : menuController.getVegan())
+                menuRoot.getChildren().add(new TreeItem<>(menuItem));
+
+        }else if (foodFilter == "Diabetic"){
+            for (MenuItem menuItem : menuController.getDiabetic())
+                menuRoot.getChildren().add(new TreeItem<>(menuItem));
+
+        }else if (foodFilter == "Gluten Free"){
+            for (MenuItem menuItem : menuController.getGlutenFree())
+                menuRoot.getChildren().add(new TreeItem<>(menuItem));
+
+        }else if (foodFilter == "None"){
+            for (MenuItem menuItem : menuController.getAvailableMenu())
+                menuRoot.getChildren().add(new TreeItem<>(menuItem));
+
+        }
+
     }
 
     public void setLocation(Node location) {
@@ -204,5 +254,18 @@ public class StaffMenuOrderController {
     public void setLabelDestination(JFXTextField text){
         System.out.println(text);
         destination.setText(text.getText());
+    }
+
+    public void resetOnLeave(){
+        for (CartItem c : cartController.getItems()){
+            MenuItem modifiedItem = menuItemManager.getMenuItemByName(c.getFoodNameCart());
+            System.out.println(c.getQuantity());
+            MenuItem newModifiedItem = new MenuItem(modifiedItem.getFoodName(),modifiedItem.getDescription(),
+                    modifiedItem.getStockAvailable() + c.getQuantity(),modifiedItem.getCalories(),
+                    modifiedItem.getVegan(),modifiedItem.getDiabetic(), modifiedItem.getGluttenFree(),modifiedItem.getPrice());
+            menuController.modifyMenuItem(newModifiedItem);
+        }
+        cartController.clearItems();
+        location = null;
     }
 }

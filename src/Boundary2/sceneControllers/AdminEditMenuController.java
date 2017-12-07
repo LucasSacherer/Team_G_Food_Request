@@ -43,8 +43,8 @@ public class AdminEditMenuController {
     private JFXTextField username;
     private Label workerID;
     private JFXTreeTableView<Worker> workersTable;
-    private TreeTableColumn<Worker,String> workerIDColumn;
-    private TreeTableColumn<Worker,String> usernameColumn;
+    private TreeTableColumn<Worker, String> workerIDColumn;
+    private TreeTableColumn<Worker, String> usernameColumn;
 
     /* Menu Tab */
     private JFXTextField foodName, stockAvailable, calories;
@@ -52,25 +52,25 @@ public class AdminEditMenuController {
     private JFXTextArea descriptionItem;
     private JFXToggleButton vegan, diabetic, gluttenfree;
     private JFXTreeTableView<MenuItem> menuTable;
-    private TreeTableColumn<MenuItem,String> foodNameColumn;
-    private TreeTableColumn<MenuItem,String> descriptionColumn;
-    private TreeTableColumn<MenuItem,Integer> stockAvailableColumn;
-    private TreeTableColumn<MenuItem,Integer> caloriesColumn;
-    private TreeTableColumn<MenuItem,String> veganColumn;
-    private TreeTableColumn<MenuItem,String> diabeticColumn;
-    private TreeTableColumn<MenuItem,String> gluttenFreeColumn;
+    private TreeTableColumn<MenuItem, String> foodNameColumn;
+    private TreeTableColumn<MenuItem, String> descriptionColumn;
+    private TreeTableColumn<MenuItem, Integer> stockAvailableColumn;
+    private TreeTableColumn<MenuItem, Integer> caloriesColumn;
+    private TreeTableColumn<MenuItem, String> veganColumn;
+    private TreeTableColumn<MenuItem, String> diabeticColumn;
+    private TreeTableColumn<MenuItem, String> gluttenFreeColumn;
     private TreeTableColumn<MenuItem, Integer> priceEditColumn;
 
     /* Requests Tab */
     private JFXTextArea requestOrder;
     private JFXTreeTableView<FoodRequest> requestsTable;
-    private TreeTableColumn<FoodRequest,String> requestNameColumn;
-    private TreeTableColumn<FoodRequest,String> timeCreatedColumn;
-    private TreeTableColumn<FoodRequest,String> timeCompletedColumn;
-    private TreeTableColumn<FoodRequest,String> requestTypeColumn;
-    private TreeTableColumn<FoodRequest,String> descriptionRequestColumn;
-    private TreeTableColumn<FoodRequest,String> locationColumn;
-    private TreeTableColumn<FoodRequest,String> assignedWorkerColumn;
+    private TreeTableColumn<FoodRequest, String> requestNameColumn;
+    private TreeTableColumn<FoodRequest, String> timeCreatedColumn;
+    private TreeTableColumn<FoodRequest, String> timeCompletedColumn;
+    private TreeTableColumn<FoodRequest, String> requestTypeColumn;
+    private TreeTableColumn<FoodRequest, String> descriptionRequestColumn;
+    private TreeTableColumn<FoodRequest, String> locationColumn;
+    private TreeTableColumn<FoodRequest, String> assignedWorkerColumn;
 
     private TreeItem<FoodRequest> requestsRoot = new TreeItem<>();
     private TreeItem<MenuItem> menuRoot = new TreeItem<>();
@@ -79,20 +79,20 @@ public class AdminEditMenuController {
     private MenuItem menuItem;
     private Worker worker;
 
-    public AdminEditMenuController(DatabaseGargoyle databaseGargoyle,NodeManager nodeManager,FoodLogManager foodLogManager,MenuItemManager menuItemManager,WorkerManager workerManager,
+    public AdminEditMenuController(DatabaseGargoyle databaseGargoyle, NodeManager nodeManager, FoodLogManager foodLogManager, MenuItemManager menuItemManager, WorkerManager workerManager,
                                    FoodRequestManager foodRequestManager, WorkerLogManager workerLogManager, JFXTextField username, Label workerID, JFXTreeTableView<Worker> workersTable,
-                                   TreeTableColumn<Worker,String> workerIDColumn, TreeTableColumn<Worker,String> usernameColumn,
-                                   JFXTextField foodName,JFXTextField stockAvailable,JFXTextField calories,
-                                   JFXTextArea descriptionItem, JFXToggleButton vegan,JFXToggleButton diabetic,JFXToggleButton gluttenfree, JFXTreeTableView<MenuItem> menuTable,
-                                   TreeTableColumn<MenuItem,String> foodNameColumn, TreeTableColumn<MenuItem,String> descriptionColumn, TreeTableColumn<MenuItem,Integer> stockAvailableColumn,
-                                   TreeTableColumn<MenuItem,Integer> caloriesColumn, JFXTextArea requestOrder,
-                                   JFXTreeTableView<FoodRequest> requestsTable, TreeTableColumn<FoodRequest,String> requestNameColumn,
-                                   TreeTableColumn<FoodRequest,String> timeCreatedColumn, TreeTableColumn<FoodRequest,String> timeCompletedColumn,
-                                   TreeTableColumn<FoodRequest,String> requestTypeColumn, TreeTableColumn<FoodRequest,String> descriptionRequestColumn,
-                                   TreeTableColumn<FoodRequest,String> locationColumn, TreeTableColumn<FoodRequest,String> assignedWorkerColumn,
-                                   TreeTableColumn<MenuItem,String> veganColumn,TreeTableColumn<MenuItem,String> diabeticColumn,TreeTableColumn<MenuItem,String> gluttenFreeColumn,
-                                    MenuController menuController, WorkerController workerController, RequestController requestController,TreeTableColumn<MenuItem, Integer> priceEditColumn,
-                                   JFXTextField priceEditText){
+                                   TreeTableColumn<Worker, String> workerIDColumn, TreeTableColumn<Worker, String> usernameColumn,
+                                   JFXTextField foodName, JFXTextField stockAvailable, JFXTextField calories,
+                                   JFXTextArea descriptionItem, JFXToggleButton vegan, JFXToggleButton diabetic, JFXToggleButton gluttenfree, JFXTreeTableView<MenuItem> menuTable,
+                                   TreeTableColumn<MenuItem, String> foodNameColumn, TreeTableColumn<MenuItem, String> descriptionColumn, TreeTableColumn<MenuItem, Integer> stockAvailableColumn,
+                                   TreeTableColumn<MenuItem, Integer> caloriesColumn, JFXTextArea requestOrder,
+                                   JFXTreeTableView<FoodRequest> requestsTable, TreeTableColumn<FoodRequest, String> requestNameColumn,
+                                   TreeTableColumn<FoodRequest, String> timeCreatedColumn, TreeTableColumn<FoodRequest, String> timeCompletedColumn,
+                                   TreeTableColumn<FoodRequest, String> requestTypeColumn, TreeTableColumn<FoodRequest, String> descriptionRequestColumn,
+                                   TreeTableColumn<FoodRequest, String> locationColumn, TreeTableColumn<FoodRequest, String> assignedWorkerColumn,
+                                   TreeTableColumn<MenuItem, String> veganColumn, TreeTableColumn<MenuItem, String> diabeticColumn, TreeTableColumn<MenuItem, String> gluttenFreeColumn,
+                                   MenuController menuController, WorkerController workerController, RequestController requestController, TreeTableColumn<MenuItem, Integer> priceEditColumn,
+                                   JFXTextField priceEditText) {
         this.databaseGargoyle = databaseGargoyle;
         this.nodeManager = nodeManager;
         this.foodLogManager = foodLogManager;
@@ -145,10 +145,11 @@ public class AdminEditMenuController {
         initializeWorkerTab();
 
     }
-    private void initializeMenuTab(){
+
+    private void initializeMenuTab() {
         menuItemManager.update();
 
-        for (MenuItem menuItem : menuItemManager.getMenuItems()){
+        for (MenuItem menuItem : menuItemManager.getMenuItems()) {
             menuRoot.getChildren().add(new TreeItem<MenuItem>(menuItem));
 
         }
@@ -180,7 +181,7 @@ public class AdminEditMenuController {
             }
         });
 
-        }
+    }
 
 
     private void onEditMenu() {
@@ -196,14 +197,17 @@ public class AdminEditMenuController {
             priceEditText.setText("" + selectedMenuItem.getValue().getPrice());
         }
     }
+
     public void addMenu() {
         TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
-        MenuItem newMenuItem = new MenuItem(foodName.getText(),descriptionItem.getText(),
-               Integer.parseInt(stockAvailable.getText()),Integer.parseInt(calories.getText()),
-                vegan.isSelected(),diabetic.isSelected(),gluttenfree.isSelected(),Integer.parseInt(priceEditText.getText()));
+        MenuItem newMenuItem = new MenuItem(foodName.getText(), descriptionItem.getText(),
+                Integer.parseInt(stockAvailable.getText()), Integer.parseInt(calories.getText()),
+                vegan.isSelected(), diabetic.isSelected(), gluttenfree.isSelected(), Integer.parseInt(priceEditText.getText()));
         menuRoot.getChildren().add(new TreeItem<>(newMenuItem));
         clearMenu();
     }
+
+
     public void deleteMenu() {
         TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
         menuController.removeMenuItem(selectedMenuItem.getValue());
@@ -211,11 +215,12 @@ public class AdminEditMenuController {
         clearMenu();
 
     }
+
     public void editMenu() {
         TreeItem<MenuItem> selectedItem = menuTable.getSelectionModel().getSelectedItem();
-        MenuItem modifiedItem = new MenuItem(foodName.getText(),descriptionItem.getText(),
-                Integer.parseInt(stockAvailable.getText()),Integer.parseInt(calories.getText()),
-                vegan.isSelected(),diabetic.isSelected(),gluttenfree.isSelected(),Integer.parseInt(priceEditText.getText()));
+        MenuItem modifiedItem = new MenuItem(foodName.getText(), descriptionItem.getText(),
+                Integer.parseInt(stockAvailable.getText()), Integer.parseInt(calories.getText()),
+                vegan.isSelected(), diabetic.isSelected(), gluttenfree.isSelected(), Integer.parseInt(priceEditText.getText()));
         menuController.modifyMenuItem(modifiedItem);
 
         menuRoot.getChildren().remove(selectedItem);
@@ -224,7 +229,7 @@ public class AdminEditMenuController {
 
     }
 
-    public void clearMenu(){
+    public void clearMenu() {
         foodName.setText(foodName.getPromptText());
         descriptionItem.setText("");
         stockAvailable.setText(stockAvailable.getPromptText());
@@ -235,9 +240,10 @@ public class AdminEditMenuController {
         priceEditText.setText(priceEditText.getPromptText());
 
     }
-    private void initializeRequestsTab(){
 
-        for (FoodRequest foodRequest : requestController.getRequests()){
+    private void initializeRequestsTab() {
+
+        for (FoodRequest foodRequest : requestController.getRequests()) {
             requestsRoot.getChildren().add(new TreeItem<>(foodRequest));
         }
 
@@ -255,16 +261,16 @@ public class AdminEditMenuController {
                 (TreeTableColumn.CellDataFeatures<FoodRequest, String> param) -> new ReadOnlyStringWrapper(param.getValue().getValue().getDescription()));
         locationColumn.setCellValueFactory(
                 (TreeTableColumn.CellDataFeatures<FoodRequest, String> param) -> {
-                    if (param.getValue().getValue().getNode() == null){
+                    if (param.getValue().getValue().getNode() == null) {
                         return null;
-                    }else
-                    return new ReadOnlyStringWrapper(param.getValue().getValue().getNode().getLongName());
+                    } else
+                        return new ReadOnlyStringWrapper(param.getValue().getValue().getNode().getLongName());
                 });
         assignedWorkerColumn.setCellValueFactory(
                 (TreeTableColumn.CellDataFeatures<FoodRequest, String> param) -> {
-                    if (param.getValue().getValue().getAssignedWorker() == null){
+                    if (param.getValue().getValue().getAssignedWorker() == null) {
                         return null;
-                    }else
+                    } else
                         return new ReadOnlyObjectWrapper(param.getValue().getValue().getAssignedWorker().getWorkerID());
                 });
 
@@ -278,6 +284,7 @@ public class AdminEditMenuController {
         });
 
     }
+
     private void onEditRequests() {
         if (requestsTable.getSelectionModel().getSelectedItem() != null) {
             TreeItem<FoodRequest> selectedFoodRequest = requestsTable.getSelectionModel().getSelectedItem();
@@ -285,6 +292,7 @@ public class AdminEditMenuController {
         }
 
     }
+
     public void deleteRequest() {
         TreeItem<FoodRequest> selectedFoodRequest = requestsTable.getSelectionModel().getSelectedItem();
         requestController.deleteRequest(selectedFoodRequest.getValue());
@@ -293,18 +301,21 @@ public class AdminEditMenuController {
 
 
     }
+
     public void deleteAllRequests() {
         requestsRoot.getChildren().clear();
 
     }
+
     public void cancelRequest() {
         requestOrder.setText("");
 
     }
-    private void initializeWorkerTab(){
-         workerManager.update();
 
-        for (Worker worker : workerManager.getWorkers()){
+    private void initializeWorkerTab() {
+        workerManager.update();
+
+        for (Worker worker : workerManager.getWorkers()) {
             workerRoot.getChildren().add(new TreeItem<Worker>(worker));
         }
         workerIDColumn.setCellValueFactory(
@@ -329,12 +340,14 @@ public class AdminEditMenuController {
             workerID.setText(selectedWorker.getValue().getWorkerID());
         }
     }
+
     public void addWorker() {
         workerController.addWorker(username.getText());
         workerRoot.getChildren().add(new TreeItem<>(workerController.getWorkerbyName(username.getText())));
         clearWorker();
 
     }
+
     public void deleteWorker() {
         TreeItem<Worker> selectedWorker = workersTable.getSelectionModel().getSelectedItem();
         workerManager.removeWorker(selectedWorker.getValue());
@@ -344,12 +357,13 @@ public class AdminEditMenuController {
         clearWorker();
 
     }
+
     public void editWorker() {
         TreeItem<Worker> selectedWorker = workersTable.getSelectionModel().getSelectedItem();
 //        if (username.getText() == null){
 //            return new JFXAlert<>()
 //        }
-        Worker modifiedWorker = new Worker(selectedWorker.getValue().workerID,username.getText());
+        Worker modifiedWorker = new Worker(selectedWorker.getValue().workerID, username.getText());
         workerController.modifyWorker(modifiedWorker);
 
         workerRoot.getChildren().remove(selectedWorker);
@@ -357,7 +371,8 @@ public class AdminEditMenuController {
         clearWorker();
 
     }
-    public void clearWorker(){
+
+    public void clearWorker() {
         username.setText(username.getPromptText());
         workerID.setText("Worker ID");
 
