@@ -2,7 +2,9 @@ package Manager2;
 
 import Database2.DatabaseGargoyle;
 import Entity2.*;
+import Entity2.MenuItem;
 
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -107,6 +109,7 @@ public class FoodRequestManager implements EntityManager{
      * @param fReq
      */
     public void completeRequest(FoodRequest fReq){
+
         //Change the completed time of the database request
         databaseGargoyle.createConnection();
         databaseGargoyle.executeUpdateOnDatabase("UPDATE FOODREQUEST SET " +
@@ -121,6 +124,21 @@ public class FoodRequestManager implements EntityManager{
                 "WHERE REQUESTNAME = '" + fReq.getName() +"' " +
                 "AND TIMECREATED = '" + Timestamp.valueOf(fReq.getTimeCreated()) + "'");
         databaseGargoyle.destroyConnection();
+
+        //Modify Stock Availablility
+        for (CartItem item: fReq.getOrder()){
+            MenuItem menuItem = menuItemManager.getMenuItemByName(item.getFoodNameCart());
+            databaseGargoyle.createConnection();
+            databaseGargoyle.executeUpdateOnDatabase("UPDATE MENUITEM SET " +
+                    "FOODNAME = '" + menuItem.getFoodName() + "', " +
+                    "DESCRIPTION = '" + menuItem.getDescription() + "', " +
+                    "STOCKAVAILABLE = " + (menuItem.getStockAvailable() - item.getQuantity()) + ", " +
+                    "CALORIES = " + menuItem.getCalories() + ", " +
+                    "ISVEGAN = '" + menuItem.getVegan() + "', " +
+                    "ISDIABETIC = '" + menuItem.getDiabetic() + "', " +
+                    "ISGLUTTENFREE = '" + menuItem.getGluttenFree() + "'");
+
+        }
     }
 
     /**
@@ -156,9 +174,6 @@ public class FoodRequestManager implements EntityManager{
                 }
             }
         }
-
-        //Add its order to the food log
-        foodLogManager.addFoodLog(fReq);
     }
 
     /**
