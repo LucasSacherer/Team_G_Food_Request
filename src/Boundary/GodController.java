@@ -529,9 +529,16 @@ public class GodController {
     /////////////
 
     @FXML
+<<<<<<< Updated upstream
     public void reportsToHub(ActionEvent event) {
         reportsController.reportsToHub();
     }
+=======
+    private void floorUp() throws IOException, SQLException { reportsController.floorUp(); }
+
+    @FXML
+    private void floorDown() throws IOException, SQLException { reportsController.floorDown(); }
+>>>>>>> Stashed changes
 
     ////////////////
     /* Menu Order */
