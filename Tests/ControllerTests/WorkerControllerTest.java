@@ -1,16 +1,12 @@
 package ControllerTests;
 
-import Controller.CartController;
-import Controller.MenuController;
-import Controller.SearchEngine;
-import Controller.WorkerController;
-import Database.DatabaseGargoyle;
-import Entity.MenuItem;
-import Entity.Worker;
-import Manager.FoodLogManager;
-import Manager.MenuItemManager;
-import Manager.NodeManager;
-import Manager.WorkerManager;
+import Controller2.WorkerController;
+import Database2.DatabaseGargoyle;
+import Entity2.Worker;
+import Manager2.FoodLogManager;
+import Manager2.MenuItemManager;
+import Manager2.NodeManager;
+import Manager2.WorkerManager;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,11 +1,9 @@
 package ManagerTests;
 
-import Database.DatabaseGargoyle;
-import Entity.MenuItem;
-import Manager.MenuItemManager;
+import Database2.DatabaseGargoyle;
+import Entity2.MenuItem;
+import Manager2.MenuItemManager;
 import org.junit.Test;
-
-import javax.xml.crypto.Data;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -81,7 +79,7 @@ public class MenuItemManagerTests {
 
         menuItemManager.addMenuItem(newMenuItem);
 
-        //Test that the new menuItem is in added to the Entity
+        //Test that the new menuItem is in added to the Entity2
         assertEquals(originialSize + 1, menuItemManager.getMenuItems().size());
 
         menuItemManager.removeMenuItem(newMenuItem);

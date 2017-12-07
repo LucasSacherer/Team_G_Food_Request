@@ -1,8 +1,7 @@
 package ManagerTests;
 
-import Database.DatabaseGargoyle;
-import Entity.Node;
-import Manager.NodeManager;
+import Database2.DatabaseGargoyle;
+import Manager2.NodeManager;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

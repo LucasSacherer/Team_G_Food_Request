@@ -1,7 +1,10 @@
-public class Runner {
+import foodRequest.FoodRequest;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Runner extends Application{
     public static void main(String[] args){
-        Runner runner = new Runner();
-        runner.callRun();
+        launch();
     }
 
     private void callRun(){
@@ -12,5 +15,11 @@ public class Runner {
             System.out.println("Error went all the way to the top!");
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FoodRequest foodRequest = new FoodRequest();
+        foodRequest.run(0,0,0,0,null,null,null);
     }
 }
