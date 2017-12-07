@@ -19,9 +19,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class GodController {
-    /* Database2 Gargoyle */
+    /* Database Gargoyle */
     final private DatabaseGargoyle databaseGargoyle = new DatabaseGargoyle();
 
     /* Managers */
@@ -225,6 +226,15 @@ public class GodController {
 
     @FXML
     private PieChart userOrderCompletePieChart;
+
+    @FXML
+    private Label currentFloorNum;
+
+    @FXML
+    private JFXSlider zoomSlider;
+
+    @FXML
+    private JFXButton floorDown, floorUp;
 
 //    @FXML
 //    private JFXTreeTableView<?> userOrderFrequencyTable;
@@ -501,7 +511,7 @@ public class GodController {
 
     private void initializeReportsScene() {
         reportsController = new ReportsController(scrollPane, imageManager,foodLogManager,nodeManager,reportsTable,locationRequestsColumn,numberRequestsColumn,
-                foodOrders,menuFoodColumn,menuFoodOrdersColumn,orderItemsPieChart);
+                foodOrders,menuFoodColumn,menuFoodOrdersColumn,orderItemsPieChart, currentFloorNum, zoomSlider);
     }
 
     private void initializeStaffIntoPopupScene() {
@@ -540,6 +550,12 @@ public class GodController {
     /////////////
     /* Reports */
     /////////////
+
+    @FXML
+    private void floorUp() throws IOException, SQLException { reportsController.floorUp(); }
+
+    @FXML
+    private void floorDown() throws IOException, SQLException { reportsController.floorDown(); }
 
 
     ////////////////

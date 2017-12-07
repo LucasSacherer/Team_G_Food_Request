@@ -134,7 +134,6 @@ public class FoodRequestHubController {
                 onEditAssignedRequests();
             }
         });
-
     }
 
     private void onEditAssignedRequests() {
@@ -147,9 +146,7 @@ public class FoodRequestHubController {
             }
             assignedOrdersInfo.setText(display);
         }
-
     }
-
 
     public void assignEmployee() {
         TreeItem<FoodRequest> selectedFoodRequest = ordersAssignTable.getSelectionModel().getSelectedItem();
