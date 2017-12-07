@@ -51,12 +51,14 @@ public class FoodLogManager implements EntityManager {
      */
     public void addFoodLog(FoodRequest foodRequest){
         for (CartItem item: foodRequest.getOrder()){
-            databaseGargoyle.createConnection();
-            databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODLOG VALUES (" +
-                    "'" + item.getFoodNameCart() + "', " +
-                    "'" + Timestamp.valueOf(foodRequest.getTimeCreated()) + "', " +
-                    "'" + foodRequest.getNode().getNodeID() + "')");
-            databaseGargoyle.destroyConnection();
+            for (int i = 0; i < item.getQuantity(); i++){
+                databaseGargoyle.createConnection();
+                databaseGargoyle.executeUpdateOnDatabase("INSERT INTO FOODLOG VALUES (" +
+                        "'" + item.getFoodNameCart() + "', " +
+                        "'" + Timestamp.valueOf(foodRequest.getTimeCreated()) + "', " +
+                        "'" + foodRequest.getNode().getNodeID() + "')");
+                databaseGargoyle.destroyConnection();
+            }
         }
     }
 

@@ -112,7 +112,6 @@ public class DatabaseGargoyle {
      */
     public void notifyManagers(){
         for (EntityManager manager: managers){
-            System.out.println("Manager2 updated");
             manager.update();
         }
     }

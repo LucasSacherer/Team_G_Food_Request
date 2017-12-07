@@ -203,7 +203,6 @@ public class AdminEditMenuController {
                 vegan.isSelected(),diabetic.isSelected(),gluttenfree.isSelected(),Integer.parseInt(priceEditText.getText()));
         menuRoot.getChildren().add(new TreeItem<>(newMenuItem));
         clearMenu();
-
     }
     public void deleteMenu() {
         TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
