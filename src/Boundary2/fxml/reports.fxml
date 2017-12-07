@@ -103,7 +103,7 @@
                                                                <graphic>
                                                                   <ImageView fitHeight="39.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" translateY="-2.0">
                                                                      <image>
-                                                                        <Image url="@../../../../BW_Hospital_Pathfinder/src/boundary/images/Icons/ArrowUp.png" />
+                                                                        <Image url="@../Pictures/ArrowUp.png" />
                                                                      </image>
                                                                   </ImageView>
                                                                </graphic>
@@ -124,7 +124,7 @@
                                                                <graphic>
                                                                   <ImageView fitHeight="39.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" translateY="4.0">
                                                                      <image>
-                                                                        <Image url="@../../../../BW_Hospital_Pathfinder/src/boundary/images/Icons/DownArrow.png" />
+                                                                        <Image url="@../Pictures/DownArrow.png" />
                                                                      </image>
                                                                   </ImageView>
                                                                </graphic>
