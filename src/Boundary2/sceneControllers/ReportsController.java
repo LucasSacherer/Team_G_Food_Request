@@ -6,6 +6,7 @@ import Entity2.*;
 import Manager2.FoodLogManager;
 import Manager2.ImageManager;
 import Manager2.NodeManager;
+import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
