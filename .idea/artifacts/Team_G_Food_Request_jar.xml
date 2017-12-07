@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Team-G-Food-Request:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Team_G_Food_Request_jar</output-path>
+    <root id="archive" name="Team-G-Food-Request.jar">
+      <element id="module-output" name="Team G Food Request" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Resources/derby.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Resources/commons-csv-1.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Resources/jfoenix.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -1,6 +1,6 @@
 package ManagerTests;
 
-import Manager.ImageManager;
+import Manager2.ImageManager;
 import org.junit.Test;
 
 public class ImageManagerTest {

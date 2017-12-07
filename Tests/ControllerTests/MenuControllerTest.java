@@ -1,13 +1,13 @@
 package ControllerTests;
 
-import Controller.MenuController;
-import Controller.SearchEngine;
-import Database.DatabaseGargoyle;
-import Manager.FoodLogManager;
-import Manager.MenuItemManager;
-import Manager.NodeManager;
+import Controller2.MenuController;
+import Controller2.SearchEngine;
+import Database2.DatabaseGargoyle;
+import Manager2.FoodLogManager;
+import Manager2.MenuItemManager;
+import Manager2.NodeManager;
 import org.junit.Test;
-import Entity.MenuItem;
+import Entity2.MenuItem;
 import static org.junit.Assert.*;
 
 public class MenuControllerTest {

@@ -1,9 +1,8 @@
 package DatabaseTests;
 
-import Database.DatabaseGargoyle;
-import Manager.FoodRequestManager;
-import Manager.MenuItemManager;
-import Manager.NodeManager;
+import Database2.DatabaseGargoyle;
+import Manager2.MenuItemManager;
+import Manager2.NodeManager;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
