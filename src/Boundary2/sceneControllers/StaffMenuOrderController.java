@@ -103,7 +103,7 @@ public class StaffMenuOrderController {
     }
 
     private void initializeMenuTable() {
-
+        menuRoot.getChildren().clear();
         for (MenuItem menuItem : menuController.getAvailableMenu()){
             menuRoot.getChildren().add(new TreeItem<>(menuItem));
         }
@@ -135,8 +135,6 @@ public class StaffMenuOrderController {
 
 
     private void initializeOrderTable() {
-        cartController.getItems().clear();
-
         orderRoot.getChildren().clear();
 
         for (CartItem cartItem : cartController.getItems() ) {
@@ -165,9 +163,12 @@ public class StaffMenuOrderController {
     public void addMenuItem() {
         if (menuOrderTable.getSelectionModel().getSelectedItem().getValue().getStockAvailable() < Integer.parseInt(selectQuantity.getText())) {
             cancelMenuItem();
-            Alert error = new Alert(Alert.AlertType.ERROR, "There is not enough stock for this Menu Item ");
+            Alert error = new Alert(Alert.AlertType.ERROR, "There is not enough stock for this Menu Item. The available stock for this item is : "
+                    + menuOrderTable.getSelectionModel().getSelectedItem().getValue().getStockAvailable());
             error.show();
-        } else {
+
+        }
+        else {
             TreeItem<MenuItem> selectedMenuItem = menuOrderTable.getSelectionModel().getSelectedItem();
             lostStock = Integer.parseInt(selectQuantity.getText());
             MenuItem modifiedItem = new MenuItem(selectedMenuItem.getValue().getFoodName(), selectedMenuItem.getValue().getDescription(),
@@ -176,9 +177,13 @@ public class StaffMenuOrderController {
             menuController.modifyMenuItem(modifiedItem);
             cartItem = new CartItem(modifiedItem.getFoodName(), Integer.parseInt(selectQuantity.getText()));
             cartController.addItemToCart(cartItem);
+            menuRoot.getChildren().clear();
             orderRoot.getChildren().add(new TreeItem<>(cartItem));
+            initializeMenuTable();
+            initializeOrderTable();
             cancelMenuItem();
         }
+
     }
 
     public void cancelMenuItem() {
@@ -190,15 +195,18 @@ public class StaffMenuOrderController {
     }
 
     public void checkoutRequest() {
-        FoodRequest foodRequest = new FoodRequest(cartItem.getFoodNameCart(), LocalDateTime.now(),LocalDateTime.now(),"hello","Food Request",
-                location,null,cartController.getItems());
-        orderRoot.getChildren().clear();
-        requestController.addRequest(foodRequest);
-        cartController.clearItems();
-
-        initializeOrderTable();
-        cancelMenuItem();
-
+        if (destination.getLabelFor() == null){
+            Alert error = new Alert(Alert.AlertType.ERROR, "There is no set destination");
+            error.show();
+        }else {
+            FoodRequest foodRequest = new FoodRequest(cartItem.getFoodNameCart(), LocalDateTime.now(),LocalDateTime.now(),"hello","Food Request",
+                    location,null,cartController.getItems());
+            orderRoot.getChildren().clear();
+            requestController.addRequest(foodRequest);
+            cartController.clearItems();
+            initializeOrderTable();
+            cancelMenuItem();
+        }
     }
 
     public void deleteFoodItemFromCart() {
@@ -245,5 +253,17 @@ public class StaffMenuOrderController {
     public void setLabelDestination(JFXTextField text){
         System.out.println(text);
         destination.setText(text.getText());
+    }
+
+    public void resetOnLeave(){
+        for (CartItem c : cartController.getItems()){
+            MenuItem modifiedItem = menuItemManager.getMenuItemByName(c.getFoodNameCart());
+            System.out.println(c.getQuantity());
+            MenuItem newModifiedItem = new MenuItem(modifiedItem.getFoodName(),modifiedItem.getDescription(),
+                    modifiedItem.getStockAvailable() + c.getQuantity(),modifiedItem.getCalories(),
+                    modifiedItem.getVegan(),modifiedItem.getDiabetic(), modifiedItem.getGluttenFree(),modifiedItem.getPrice());
+            menuController.modifyMenuItem(newModifiedItem);
+        }
+        cartController.clearItems();
     }
 }

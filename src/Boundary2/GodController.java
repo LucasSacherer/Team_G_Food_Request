@@ -424,6 +424,7 @@ public class GodController {
     @FXML
     private void staffMenuOrderToHub() throws IOException {
         sceneSwitcher.toFoodRequestHub(this, staffMenuOrderPane);
+        staffMenuOrderController.resetOnLeave();
     }
 
     @FXML

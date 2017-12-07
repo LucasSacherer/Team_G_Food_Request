@@ -28,7 +28,14 @@ public class CartController {
             cartItems.add(item);
         }*/
     }
-    public void getItemFromCart (String foodName){}
+    public CartItem getItemFromCart (String foodName){
+        for (CartItem c : cartItems){
+            if (c.getFoodNameCart().equals(foodName)){
+                return c;
+            }
+        }
+        return null;
+    }
 
     public void clearItems(){
         cartItems.clear();
