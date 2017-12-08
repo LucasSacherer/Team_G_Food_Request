@@ -433,26 +433,22 @@ public class GodController {
     /////////////////////////////
     @FXML
     private void staffMenuOrderToHub() throws IOException {
-        sceneSwitcher.makeFadeOut(staffMenuOrderPane);
         sceneSwitcher.toFoodRequestHub(this, staffMenuOrderPane);
         staffMenuOrderController.resetOnLeave();
     }
 
     @FXML
     private void adminEditToHub() throws IOException {
-        sceneSwitcher.makeFadeOut(adminEditPane);
         sceneSwitcher.toFoodRequestHub(this, adminEditPane);
     }
 
     @FXML
     private void reportsToHub() throws IOException {
-        sceneSwitcher.makeFadeOut(reportPane);
         sceneSwitcher.toFoodRequestHub(this, reportPane);
     }
 
     @FXML
     private void hubToStaffMenuOrder() throws IOException {
-        sceneSwitcher.makeFadeOut(foodRequestHubPane);
         sceneSwitcher.toStaffMenuOrder(this, foodRequestHubPane);
         staffMenuOrderController.initialize(destination, menuController);
 
@@ -460,15 +456,12 @@ public class GodController {
 
     @FXML
     private void hubToAdminEdit() throws IOException {
-        sceneSwitcher.makeFadeOut(foodRequestHubPane);
         sceneSwitcher.toAdminEditMenu(this, foodRequestHubPane);
         adminEditMenuController.initialize();
     }
 
     @FXML
     private void hubToReports() throws IOException {
-        sceneSwitcher.prepareSlideMenuAnimation(foodRequestHubPane);
-        sceneSwitcher.makeFadeOut(reportPane);
         sceneSwitcher.toReports(this, foodRequestHubPane);
         reportsController.initialize();
     }

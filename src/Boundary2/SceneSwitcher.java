@@ -70,7 +70,7 @@ public class SceneSwitcher {
         switchScene(g, from, staffMenuOrderLoc);
     }
 
-    public void toMapDirectoryPopup( ) throws IOException {
+    public void toMapDirectoryPopup() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(mapDirectoryLoc));
         fxmlLoader.setController(mapDirectoryController);
         Parent root2 = (Parent) fxmlLoader.load();
@@ -80,7 +80,7 @@ public class SceneSwitcher {
         stage.show();
     }
 
-    public void toMenuInfoPopup( ) throws IOException {
+    public void toMenuInfoPopup() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(staffInfoPopupLoc));
         fxmlLoader.setController(staffInfoPopupController);
         Parent root1 = (Parent) fxmlLoader.load();
@@ -88,30 +88,6 @@ public class SceneSwitcher {
         stage.setTitle("Menu Info");
         stage.setScene(new Scene(root1, 1280, 720));
         stage.show();
-    }
-
-    public void makeFadeOut(Pane pane) {
-        FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setDuration(Duration.millis(1000000));
-        fadeTransition.setNode(pane);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.play();
-
-    }
-    public void prepareSlideMenuAnimation( Pane pane) {
-        TranslateTransition openNav=new TranslateTransition(new Duration(350), pane);
-        openNav.setToX(0);
-        TranslateTransition closeNav=new TranslateTransition(new Duration(350), pane);
-//        button.setOnAction((ActionEvent evt)->{
-//            if(pane.getTranslateX()!=0){
-//                openNav.play();
-//            }else{
-//                closeNav.setToX(-(pane.getWidth()));
-//                closeNav.play();
-//            }
-//        });
-        openNav.play();
     }
 }
 
