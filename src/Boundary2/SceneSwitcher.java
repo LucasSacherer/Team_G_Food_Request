@@ -2,13 +2,19 @@ package Boundary2;
 
 import Boundary2.sceneControllers.MapDirectoryController;
 import Boundary2.sceneControllers.StaffIntoPopupController;
+import com.jfoenix.controls.JFXButton;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class SceneSwitcher {
@@ -83,5 +89,30 @@ public class SceneSwitcher {
         stage.setScene(new Scene(root1, 1280, 720));
         stage.show();
     }
+
+    public void makeFadeOut(Pane pane) {
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(1000000));
+        fadeTransition.setNode(pane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
+
+    }
+    public void prepareSlideMenuAnimation( Pane pane) {
+        TranslateTransition openNav=new TranslateTransition(new Duration(350), pane);
+        openNav.setToX(0);
+        TranslateTransition closeNav=new TranslateTransition(new Duration(350), pane);
+//        button.setOnAction((ActionEvent evt)->{
+//            if(pane.getTranslateX()!=0){
+//                openNav.play();
+//            }else{
+//                closeNav.setToX(-(pane.getWidth()));
+//                closeNav.play();
+//            }
+//        });
+        openNav.play();
+    }
 }
+
 

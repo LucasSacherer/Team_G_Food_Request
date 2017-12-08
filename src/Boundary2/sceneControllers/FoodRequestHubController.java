@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 
@@ -19,7 +20,7 @@ public class FoodRequestHubController {
 
     private RequestController requestController;
     private WorkerController workerController;
-    private JFXComboBox employeeToAssign,filterRequests;
+    private JFXComboBox employeeToAssign, filterRequests;
 
     private JFXTreeTableView<FoodRequest> ordersAssignTable;
     private TreeTableColumn<FoodRequest, String> orderNameAssignColumn;
@@ -70,7 +71,7 @@ public class FoodRequestHubController {
         for (Worker worker : workerController.getWorkers()) {
             employeeToAssign.getItems().add(worker.getUsername());
         }
-        for (Worker worker : workerController.getWorkers()){
+        for (Worker worker : workerController.getWorkers()) {
             filterRequests.getItems().add(worker.getUsername());
         }
 
@@ -79,7 +80,7 @@ public class FoodRequestHubController {
 
     private void initializeOrdersAssign() {
         for (FoodRequest foodRequest : requestController.getRequests()) {
-            if (foodRequest.getAssignedWorker() == null){
+            if (foodRequest.getAssignedWorker() == null) {
                 foodRequestAssignRoot.getChildren().add(new TreeItem<>(foodRequest));
             }
         }
@@ -97,19 +98,19 @@ public class FoodRequestHubController {
         ordersAssignTable.setShowRoot(false);
         ordersAssignTable.setOnMouseClicked(event ->
 
-    {
-        if (event.getClickCount() > 1) {
-            onEditAssignRequests();
-        }
-    });
-}
+        {
+            if (event.getClickCount() > 1) {
+                onEditAssignRequests();
+            }
+        });
+    }
 
     private void onEditAssignRequests() {
         if (ordersAssignTable.getSelectionModel().getSelectedItem() != null) {
             TreeItem<FoodRequest> selectedFoodRequest = ordersAssignTable.getSelectionModel().getSelectedItem();
             List<CartItem> list = selectedFoodRequest.getValue().getOrder();
             String display = "";
-            for (CartItem item : list){
+            for (CartItem item : list) {
                 display += item.toString();
             }
             unassignedOrderInfo.setText(display);
@@ -119,7 +120,7 @@ public class FoodRequestHubController {
 
     private void initializeOrdersAssigned() {
         for (FoodRequest foodRequest : requestController.getRequests()) {
-            if (foodRequest.getAssignedWorker() != null){
+            if (foodRequest.getAssignedWorker() != null) {
                 foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));
             }
         }
@@ -147,7 +148,7 @@ public class FoodRequestHubController {
             TreeItem<FoodRequest> selectedFoodRequest = assignedOrdersTable.getSelectionModel().getSelectedItem();
             List<CartItem> list = selectedFoodRequest.getValue().getOrder();
             String display = "";
-            for (CartItem item : list){
+            for (CartItem item : list) {
                 display += item.toString();
             }
             assignedOrdersInfo.setText(display);
@@ -155,34 +156,46 @@ public class FoodRequestHubController {
     }
 
     public void assignEmployee() {
-        TreeItem<FoodRequest> selectedFoodRequest = ordersAssignTable.getSelectionModel().getSelectedItem();
-        //(String name, LocalDateTime timeCreated, LocalDateTime timeCompleted,
-        //        String type, String description, Node node, Worker worker, List<CartItem> order)
-        FoodRequest assignedFoodRequest = new FoodRequest(selectedFoodRequest.getValue().getName(),selectedFoodRequest.getValue().getTimeCreated(),
-                selectedFoodRequest.getValue().getTimeCompleted(),selectedFoodRequest.getValue().getType(),selectedFoodRequest.getValue().getDescription(),
-                selectedFoodRequest.getValue().getNode(),workerController.getWorkerbyName(employeeToAssign.getSelectionModel().getSelectedItem().toString()),selectedFoodRequest.getValue().getOrder());
-        requestController.assignWorker(assignedFoodRequest, workerController.getWorkerbyName(employeeToAssign.getSelectionModel().getSelectedItem().toString()));
-        foodRequestAssignRoot.getChildren().remove(selectedFoodRequest);
-        foodRequestAssignedRoot.getChildren().add(new TreeItem<>(assignedFoodRequest));
+        if (employeeToAssign.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "There is employee assigned");
+            error.show();
+        } else {
+            TreeItem<FoodRequest> selectedFoodRequest = ordersAssignTable.getSelectionModel().getSelectedItem();
+            //(String name, LocalDateTime timeCreated, LocalDateTime timeCompleted,
+            //        String type, String description, Node node, Worker worker, List<CartItem> order)
+            FoodRequest assignedFoodRequest = new FoodRequest(selectedFoodRequest.getValue().getName(), selectedFoodRequest.getValue().getTimeCreated(),
+                    selectedFoodRequest.getValue().getTimeCompleted(), selectedFoodRequest.getValue().getType(), selectedFoodRequest.getValue().getDescription(),
+                    selectedFoodRequest.getValue().getNode(), workerController.getWorkerbyName(employeeToAssign.getSelectionModel().getSelectedItem().toString()), selectedFoodRequest.getValue().getOrder());
+            requestController.assignWorker(assignedFoodRequest, workerController.getWorkerbyName(employeeToAssign.getSelectionModel().getSelectedItem().toString()));
+            foodRequestAssignRoot.getChildren().remove(selectedFoodRequest);
+            foodRequestAssignedRoot.getChildren().add(new TreeItem<>(assignedFoodRequest));
+        }
     }
 
     public void completeOrder() {
-        TreeItem<FoodRequest> selectedFoodRequest = assignedOrdersTable.getSelectionModel().getSelectedItem();
-        FoodRequest completedFoodRequest = new FoodRequest(selectedFoodRequest.getValue().getName(),selectedFoodRequest.getValue().getTimeCreated(),
-                LocalDateTime.now(),selectedFoodRequest.getValue().getType(),selectedFoodRequest.getValue().getDescription(),
-                selectedFoodRequest.getValue().getNode(),selectedFoodRequest.getValue().getAssignedWorker(),selectedFoodRequest.getValue().getOrder());
-        requestController.completeRequest(completedFoodRequest);
-        foodRequestAssignedRoot.getChildren().remove(selectedFoodRequest);
-        requestController.addRequest(completedFoodRequest);
+        if (assignedOrdersTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "There is no selected order to complete");
+            error.show();
+        } else
+
+        {
+            TreeItem<FoodRequest> selectedFoodRequest = assignedOrdersTable.getSelectionModel().getSelectedItem();
+            FoodRequest completedFoodRequest = new FoodRequest(selectedFoodRequest.getValue().getName(), selectedFoodRequest.getValue().getTimeCreated(),
+                    LocalDateTime.now(), selectedFoodRequest.getValue().getType(), selectedFoodRequest.getValue().getDescription(),
+                    selectedFoodRequest.getValue().getNode(), selectedFoodRequest.getValue().getAssignedWorker(), selectedFoodRequest.getValue().getOrder());
+            requestController.completeRequest(completedFoodRequest);
+            foodRequestAssignedRoot.getChildren().remove(selectedFoodRequest);
+            requestController.addRequest(completedFoodRequest);
+        }
     }
 
-    public void filterRequests(){
+    public void filterRequests() {
         String worker = filterRequests.getSelectionModel().getSelectedItem().toString();
         Worker filterWorker = workerController.getWorkerbyName(worker);
         System.out.println(worker);
         System.out.println(filterWorker);
         foodRequestAssignedRoot.getChildren().clear();
-        for (FoodRequest foodRequest : requestController.getRequestsByWorker(filterWorker)){
+        for (FoodRequest foodRequest : requestController.getRequestsByWorker(filterWorker)) {
             System.out.println(requestController.getRequestsByWorker(filterWorker));
             foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));
         }

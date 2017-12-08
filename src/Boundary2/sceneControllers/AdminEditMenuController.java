@@ -185,7 +185,10 @@ public class AdminEditMenuController {
 
 
     private void onEditMenu() {
-        if (menuTable.getSelectionModel().getSelectedItem() != null) {
+        if (menuTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "No selected Item");
+            error.show();
+        } else {
             TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
             foodName.setText(selectedMenuItem.getValue().getFoodName());
             stockAvailable.setText("" + selectedMenuItem.getValue().getStockAvailable());
@@ -199,34 +202,47 @@ public class AdminEditMenuController {
     }
 
     public void addMenu() {
-        TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
-        MenuItem newMenuItem = new MenuItem(foodName.getText(), descriptionItem.getText(),
-                Integer.parseInt(stockAvailable.getText()), Integer.parseInt(calories.getText()),
-                vegan.isSelected(), diabetic.isSelected(), gluttenfree.isSelected(), Integer.parseInt(priceEditText.getText()));
-        menuRoot.getChildren().add(new TreeItem<>(newMenuItem));
-        clearMenu();
+        if (menuTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "No selected Item");
+            error.show();
+        } else {
+            TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
+            MenuItem newMenuItem = new MenuItem(foodName.getText(), descriptionItem.getText(),
+                    Integer.parseInt(stockAvailable.getText()), Integer.parseInt(calories.getText()),
+                    vegan.isSelected(), diabetic.isSelected(), gluttenfree.isSelected(), Integer.parseInt(priceEditText.getText()));
+            menuRoot.getChildren().add(new TreeItem<>(newMenuItem));
+            clearMenu();
+        }
     }
 
 
     public void deleteMenu() {
-        TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
-        menuController.removeMenuItem(selectedMenuItem.getValue());
-        menuRoot.getChildren().remove(selectedMenuItem);
-        clearMenu();
-
+        if (menuTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "No selected Item");
+            error.show();
+        } else {
+            TreeItem<MenuItem> selectedMenuItem = menuTable.getSelectionModel().getSelectedItem();
+            menuController.removeMenuItem(selectedMenuItem.getValue());
+            menuRoot.getChildren().remove(selectedMenuItem);
+            clearMenu();
+        }
     }
 
     public void editMenu() {
-        TreeItem<MenuItem> selectedItem = menuTable.getSelectionModel().getSelectedItem();
-        MenuItem modifiedItem = new MenuItem(foodName.getText(), descriptionItem.getText(),
-                Integer.parseInt(stockAvailable.getText()), Integer.parseInt(calories.getText()),
-                vegan.isSelected(), diabetic.isSelected(), gluttenfree.isSelected(), Integer.parseInt(priceEditText.getText()));
-        menuController.modifyMenuItem(modifiedItem);
+        if (menuTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "No selected Item");
+            error.show();
+        } else {
+            TreeItem<MenuItem> selectedItem = menuTable.getSelectionModel().getSelectedItem();
+            MenuItem modifiedItem = new MenuItem(foodName.getText(), descriptionItem.getText(),
+                    Integer.parseInt(stockAvailable.getText()), Integer.parseInt(calories.getText()),
+                    vegan.isSelected(), diabetic.isSelected(), gluttenfree.isSelected(), Integer.parseInt(priceEditText.getText()));
+            menuController.modifyMenuItem(modifiedItem);
 
-        menuRoot.getChildren().remove(selectedItem);
-        menuRoot.getChildren().add(new TreeItem<>(modifiedItem));
-        clearMenu();
-
+            menuRoot.getChildren().remove(selectedItem);
+            menuRoot.getChildren().add(new TreeItem<>(modifiedItem));
+            clearMenu();
+        }
     }
 
     public void clearMenu() {
@@ -238,8 +254,8 @@ public class AdminEditMenuController {
         diabetic.setSelected(false);
         gluttenfree.setSelected(false);
         priceEditText.setText(priceEditText.getPromptText());
-
     }
+
 
     private void initializeRequestsTab() {
 
@@ -294,12 +310,15 @@ public class AdminEditMenuController {
     }
 
     public void deleteRequest() {
-        TreeItem<FoodRequest> selectedFoodRequest = requestsTable.getSelectionModel().getSelectedItem();
-        requestController.deleteRequest(selectedFoodRequest.getValue());
-        requestsRoot.getChildren().remove(selectedFoodRequest);
-        cancelRequest();
-
-
+        if (menuTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "No selected Item");
+            error.show();
+        }else {
+            TreeItem<FoodRequest> selectedFoodRequest = requestsTable.getSelectionModel().getSelectedItem();
+            requestController.deleteRequest(selectedFoodRequest.getValue());
+            requestsRoot.getChildren().remove(selectedFoodRequest);
+            cancelRequest();
+        }
     }
 
     public void deleteAllRequests() {
@@ -342,34 +361,43 @@ public class AdminEditMenuController {
     }
 
     public void addWorker() {
-        workerController.addWorker(username.getText());
-        workerRoot.getChildren().add(new TreeItem<>(workerController.getWorkerbyName(username.getText())));
-        clearWorker();
-
+        if (menuTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "No selected Item");
+            error.show();
+        }else {
+            workerController.addWorker(username.getText());
+            workerRoot.getChildren().add(new TreeItem<>(workerController.getWorkerbyName(username.getText())));
+            clearWorker();
+        }
     }
 
     public void deleteWorker() {
-        TreeItem<Worker> selectedWorker = workersTable.getSelectionModel().getSelectedItem();
-        workerManager.removeWorker(selectedWorker.getValue());
-        username.setText(username.getPromptText());
-        workerID.setText("Worker ID");
-        workerRoot.getChildren().remove(selectedWorker);
-        clearWorker();
-
+        if (menuTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "No selected Item");
+            error.show();
+        }else {
+            TreeItem<Worker> selectedWorker = workersTable.getSelectionModel().getSelectedItem();
+            workerManager.removeWorker(selectedWorker.getValue());
+            username.setText(username.getPromptText());
+            workerID.setText("Worker ID");
+            workerRoot.getChildren().remove(selectedWorker);
+            clearWorker();
+        }
     }
 
     public void editWorker() {
-        TreeItem<Worker> selectedWorker = workersTable.getSelectionModel().getSelectedItem();
-//        if (username.getText() == null){
-//            return new JFXAlert<>()
-//        }
-        Worker modifiedWorker = new Worker(selectedWorker.getValue().workerID, username.getText());
-        workerController.modifyWorker(modifiedWorker);
+        if (menuTable.getSelectionModel().getSelectedItem() == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "No selected Item");
+            error.show();
+        }else {
+            TreeItem<Worker> selectedWorker = workersTable.getSelectionModel().getSelectedItem();
+            Worker modifiedWorker = new Worker(selectedWorker.getValue().workerID, username.getText());
+            workerController.modifyWorker(modifiedWorker);
 
-        workerRoot.getChildren().remove(selectedWorker);
-        workerRoot.getChildren().add(new TreeItem<>(modifiedWorker));
-        clearWorker();
-
+            workerRoot.getChildren().remove(selectedWorker);
+            workerRoot.getChildren().add(new TreeItem<>(modifiedWorker));
+            clearWorker();
+        }
     }
 
     public void clearWorker() {
