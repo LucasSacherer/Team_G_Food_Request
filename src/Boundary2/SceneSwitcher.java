@@ -2,13 +2,19 @@ package Boundary2;
 
 import Boundary2.sceneControllers.MapDirectoryController;
 import Boundary2.sceneControllers.StaffIntoPopupController;
+import com.jfoenix.controls.JFXButton;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class SceneSwitcher {
@@ -64,7 +70,7 @@ public class SceneSwitcher {
         switchScene(g, from, staffMenuOrderLoc);
     }
 
-    public void toMapDirectoryPopup( ) throws IOException {
+    public void toMapDirectoryPopup() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(mapDirectoryLoc));
         fxmlLoader.setController(mapDirectoryController);
         Parent root2 = (Parent) fxmlLoader.load();
@@ -74,7 +80,7 @@ public class SceneSwitcher {
         stage.show();
     }
 
-    public void toMenuInfoPopup( ) throws IOException {
+    public void toMenuInfoPopup() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(staffInfoPopupLoc));
         fxmlLoader.setController(staffInfoPopupController);
         Parent root1 = (Parent) fxmlLoader.load();
@@ -84,4 +90,5 @@ public class SceneSwitcher {
         stage.show();
     }
 }
+
 

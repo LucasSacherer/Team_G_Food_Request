@@ -2,7 +2,7 @@
     -fx-background-color: lightgrey;
 }
 .jfx-tab-pane .tab-header-background {
-    -fx-background-color: #003da6 ;
+    -fx-background-color: #0068b1 ;
 }
 
 .tab .tab-label {
@@ -15,13 +15,13 @@
     -fx-min-width: inherit;
 }
 .buttonNeutral {
-    -fx-background-color: #003da6;
+    -fx-background-color: #0068b1;
     -fx-text-fill: white;
     -fx-background-radius: 30;
     -fx-background-insets: 0,1,1;
 }
 .buttonNeutralBig {
-    -fx-background-color: #003da6;
+    -fx-background-color: #0068b1;
     -fx-text-fill: white;
     -fx-background-radius: 30;
     -fx-background-insets: 0, 1, 1;
@@ -43,4 +43,14 @@
 .textfield {
     -fx-text-fill: black;
     -fx-background-color: white;
+}
+.backButton {
+    -fx-text-fill: #0068b1 ;
+    -fx-background-color: white;
+    -fx-background-radius: 30;
+    -fx-border-radius: 20;
+    -fx-border-width:5;
+    -fx-border-color: #0068b1;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
 }

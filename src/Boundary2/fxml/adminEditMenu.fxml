@@ -15,12 +15,12 @@
 
 <AnchorPane fx:id="adminEditPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton fx:id="editMenuBack" layoutX="10.0" layoutY="10.0" onAction="#adminEditToHub" ripplerFill="WHITE" style="-fx-background-color: #003da6;" text="&lt;- Back" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <JFXButton fx:id="editMenuBack" layoutX="10.0" layoutY="10.0" onAction="#adminEditToHub" ripplerFill="WHITE" styleClass="backButton" stylesheets="@../APIStyle.css" text="Back" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <Label layoutX="86.0" layoutY="54.0" text="EDIT">
+      <Label layoutX="106.0" layoutY="54.0" text="EDIT">
          <font>
             <Font name="System Bold" size="50.0" />
          </font>

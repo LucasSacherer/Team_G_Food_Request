@@ -41,7 +41,7 @@
                       <RowConstraints maxHeight="569.0" minHeight="10.0" prefHeight="517.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXButton fx:id="menuOrderBack" onAction="#staffMenuOrderToHub" ripplerFill="WHITE" style="-fx-background-color: #003da6;" text="&lt;- Back" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <JFXButton fx:id="menuOrderBack" onAction="#staffMenuOrderToHub" ripplerFill="WHITE" styleClass="backButton" stylesheets="@../APIStyle.css" text="Back" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
