@@ -116,7 +116,7 @@ public class StaffMenuOrderController {
         menuOrderTable.setRoot(menuRoot);
         menuOrderTable.setShowRoot(false);
         menuOrderTable.setOnMouseClicked((MouseEvent event) -> {
-            if (event.getClickCount() > 1) {
+            if (event.getClickCount() > 0) {
                 onEdit();
             }
         });
@@ -149,7 +149,7 @@ public class StaffMenuOrderController {
         myOrderTable.setRoot(orderRoot);
         myOrderTable.setShowRoot(false);
         myOrderTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() > 1) {
+            if (event.getClickCount() > 0) {
                 onEditOrder();
             }
         });
@@ -218,7 +218,9 @@ public class StaffMenuOrderController {
                 modifiedItem.getStockAvailable() + lostStock,modifiedItem.getCalories(),
                 modifiedItem.getVegan(),modifiedItem.getDiabetic(), modifiedItem.getGluttenFree(),modifiedItem.getPrice());
         menuController.modifyMenuItem(newModifiedItem);
-        cartController.getItems().remove(selectedMenuItem);
+        System.out.println(cartController.getItems());
+        cartController.getItems().remove(selectedMenuItem.getValue());
+        System.out.println(cartController.getItems());
         orderRoot.getChildren().remove(selectedMenuItem);
         lostStock = 0;
     }
