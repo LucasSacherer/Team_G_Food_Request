@@ -202,9 +202,11 @@ public class ReportsController {
         else if(!typesUsed.contains("Gluten Free")){
             dataSeries1.getData().add(new XYChart.Data("Gluten Free",0));
         }
-
+        bc.setStyle("CHART_COLOR_1: #1e90ff;");
         bc.getData().add(dataSeries1);
         //get numbers of each category
+
+
     }
 
     private  void drawDensity(){
