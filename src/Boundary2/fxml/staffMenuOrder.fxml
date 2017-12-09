@@ -41,10 +41,13 @@
                       <RowConstraints maxHeight="569.0" minHeight="10.0" prefHeight="517.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXButton fx:id="menuOrderBack" onAction="#staffMenuOrderToHub" ripplerFill="WHITE" styleClass="backButton" stylesheets="@../APIStyle.css" text="Back" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <JFXButton fx:id="menuOrderBack" onAction="#staffMenuOrderToHub" prefHeight="41.0" prefWidth="93.0" ripplerFill="WHITE" styleClass="backButton" stylesheets="@../APIStyle.css" text="&lt;- Back" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets left="20.0" top="20.0" />
+                           </GridPane.margin>
                         </JFXButton>
                         <AnchorPane prefHeight="495.0" prefWidth="374.0" GridPane.rowIndex="1">
                            <children>
