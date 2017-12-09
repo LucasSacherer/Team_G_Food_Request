@@ -61,6 +61,7 @@ public class FoodRequestHubController {
         this.assignedOrdersInfo = assignedOrdersInfo;
         this.workerController = workerController;
         this.filterRequests = filterRequests;
+        filterRequests.getItems().add("None");
 
 
     }
@@ -190,15 +191,18 @@ public class FoodRequestHubController {
     }
 
     public void filterRequests() {
-        String worker = filterRequests.getSelectionModel().getSelectedItem().toString();
-        Worker filterWorker = workerController.getWorkerbyName(worker);
-        System.out.println(worker);
-        System.out.println(filterWorker);
-        foodRequestAssignedRoot.getChildren().clear();
-        for (FoodRequest foodRequest : requestController.getRequestsByWorker(filterWorker)) {
-            System.out.println(requestController.getRequestsByWorker(filterWorker));
-            foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));
-        }
+        if (filterRequests.getSelectionModel().getSelectedItem().toString() == "None"){
+            foodRequestAssignedRoot.getChildren().clear();
+            initializeOrdersAssigned();
+        }else {
 
+            String worker = filterRequests.getSelectionModel().getSelectedItem().toString();
+            Worker filterWorker = workerController.getWorkerbyName(worker);
+            foodRequestAssignedRoot.getChildren().clear();
+            for (FoodRequest foodRequest : requestController.getRequestsByWorker(filterWorker)) {
+                System.out.println(requestController.getRequestsByWorker(filterWorker));
+                foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));
+            }
+        }
     }
 }
