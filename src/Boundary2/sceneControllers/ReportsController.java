@@ -1,10 +1,12 @@
 package Boundary2.sceneControllers;
 
 
+import Controller2.MenuController;
 import Controller2.ReportController;
 import Entity2.*;
 import Manager2.FoodLogManager;
 import Manager2.ImageManager;
+import Manager2.MenuItemManager;
 import Manager2.NodeManager;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -15,7 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
@@ -25,7 +27,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportsController {
@@ -34,6 +38,8 @@ public class ReportsController {
     //** Managers **//
     ImageManager imageManager;
     FoodLogManager foodLogManager;
+    MenuItemManager mim;
+    MenuController menuController;
     //** Map **//
     ScrollPane scrollPane;
     ImageView imageView;
@@ -57,17 +63,30 @@ public class ReportsController {
     PieChart orderItemsPieChart;
     private String currentFloor;
 
+    private BarChart<String,Number> bc;
+    private NumberAxis yAxis;
+    private CategoryAxis xAxis;
+
+    JFXTreeTableView<TypeData> typeTable;
+    TreeTableColumn<TypeData, String> typeofOrder;
+    TreeTableColumn<TypeData, Integer> numberofTypeOrders;
+    private TreeItem<TypeData> barroot = new TreeItem<>();
+
     public ReportsController(ScrollPane scrollPane, ImageManager imageManager, FoodLogManager foodLogManager,
                              NodeManager nodeManager, JFXTreeTableView<DensityNode> reportsTable,
                              TreeTableColumn<DensityNode, String> locationRequestsColumn,
                              TreeTableColumn<DensityNode, Integer> numberRequestsColumn,
                              JFXTreeTableView<Slice> foodOrders, TreeTableColumn<Slice, String> menuFoodColumn,
-                             TreeTableColumn<Slice, Integer> menuFoodOrdersColumn, PieChart orderItemsPieChart, Label currentFloorNum, JFXSlider zoomSlider){
+                             TreeTableColumn<Slice, Integer> menuFoodOrdersColumn, PieChart orderItemsPieChart, Label currentFloorNum, JFXSlider zoomSlider,
+                             BarChart<String,Number> bc, NumberAxis yAxis, CategoryAxis xAxis, MenuItemManager mim,
+                             JFXTreeTableView<TypeData> typeTable,TreeTableColumn<TypeData,String> typeofOrder,TreeTableColumn<TypeData, Integer> numberofOrders){
         this.scrollPane = scrollPane;
         this.imageManager = imageManager;
         this.foodLogManager = foodLogManager;
         this.nodeManager = nodeManager;
-        rc  = new ReportController(foodLogManager);
+        this.mim = mim;
+        this.menuController = new MenuController(mim);
+        rc  = new ReportController(foodLogManager,menuController);
         this.reportsTable = reportsTable;
         this.locationRequestsColumn = locationRequestsColumn;
         this.numberRequestsColumn = numberRequestsColumn;
@@ -77,6 +96,12 @@ public class ReportsController {
         this.orderItemsPieChart = orderItemsPieChart;
         this.currentFloorNum = currentFloorNum;
         this.zoomSlider = zoomSlider;
+        this.bc = bc;
+        this.xAxis = xAxis;
+        this.yAxis = yAxis;
+        this.typeTable = typeTable;
+        this.typeofOrder = typeofOrder;
+        this.numberofTypeOrders = numberofOrders;
     }
 
     public void initialize(){
@@ -84,6 +109,8 @@ public class ReportsController {
         initializeTable();
         initializePieTable();
         initializePieChart();
+        initializeBarChart();
+        initializrBarTable();
     }
 
     private void initializePieTable(){
@@ -109,6 +136,18 @@ public class ReportsController {
                 (TreeTableColumn.CellDataFeatures<DensityNode, Integer> param) -> new ReadOnlyObjectWrapper(param.getValue().getValue().getDensity()));
         reportsTable.setRoot(root);
         reportsTable.setShowRoot(false);
+    }
+    private void initializrBarTable(){
+        List<TypeData> type = rc.getBarChartdata();
+        for (TypeData t: type){
+            barroot.getChildren().add(new TreeItem<>(t));
+        }
+        typeofOrder.setCellValueFactory(
+                (TreeTableColumn.CellDataFeatures<TypeData, String> param) -> new ReadOnlyStringWrapper(param.getValue().getValue().getType()));
+        numberofTypeOrders.setCellValueFactory(
+                (TreeTableColumn.CellDataFeatures<TypeData, Integer> param) -> new ReadOnlyObjectWrapper(param.getValue().getValue().getAmount()));
+        typeTable.setRoot(barroot);
+        typeTable.setShowRoot(false);
     }
     private void initializeMap(){
         Group group = new Group();
@@ -142,6 +181,32 @@ public class ReportsController {
 
     }
 
+    private void initializeBarChart(){
+
+        xAxis.setLabel("Type");
+        yAxis.setLabel("# of Orders");
+
+        List<TypeData> data = rc.getBarChartdata();
+        XYChart.Series dataSeries1 = new XYChart.Series();
+        List<String> typesUsed = new ArrayList<>();
+        for(TypeData t: data){
+            dataSeries1.getData().add(new XYChart.Data(t.getType(),t.getAmount()));
+            typesUsed.add(t.getType());
+        }
+        if(!typesUsed.contains("Diabetic")){
+            dataSeries1.getData().add(new XYChart.Data("Diabetic",0));
+        }
+        else if(!typesUsed.contains("Vegan")){
+            dataSeries1.getData().add(new XYChart.Data("Vegan",0));
+        }
+        else if(!typesUsed.contains("Gluten Free")){
+            dataSeries1.getData().add(new XYChart.Data("Gluten Free",0));
+        }
+
+        bc.getData().add(dataSeries1);
+        //get numbers of each category
+    }
+
     private  void drawDensity(){
         List<DensityNode> nodes = rc.getRequestDensity();
 
@@ -157,6 +222,7 @@ public class ReportsController {
             }
         }
     }
+
     public void reportsToHub() {}
 
     public void floorDown() throws IOException, SQLException {

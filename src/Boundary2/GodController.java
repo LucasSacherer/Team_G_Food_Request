@@ -10,6 +10,9 @@ import Manager2.*;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.PieChart;
@@ -477,6 +480,25 @@ public class GodController {
         staffIntoPopupController.initializeStaffInfo();
     }
 
+    @FXML
+    private BarChart<String,Number> barChart;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+
+    @FXML
+    private JFXTreeTableView<TypeData> typeTable;
+
+    @FXML
+    private TreeTableColumn<TypeData,String> typeofOrder;
+
+    @FXML
+    private TreeTableColumn<TypeData,Integer> numberofTypeOrders;
+
+
     public void initialize() {
         initializeAdminEditMenuScene();
         initializeFoodRequestHubScene();
@@ -517,7 +539,8 @@ public class GodController {
 
     private void initializeReportsScene() {
         reportsController = new ReportsController(scrollPane, imageManager,foodLogManager,nodeManager,reportsTable,locationRequestsColumn,numberRequestsColumn,
-                foodOrders,menuFoodColumn,menuFoodOrdersColumn,orderItemsPieChart, currentFloorNum, zoomSlider);
+                foodOrders,menuFoodColumn,menuFoodOrdersColumn,orderItemsPieChart, currentFloorNum, zoomSlider,barChart,yAxis,xAxis,menuItemManager,
+                typeTable,typeofOrder,numberofTypeOrders);
     }
 
     private void initializeStaffIntoPopupScene() {
