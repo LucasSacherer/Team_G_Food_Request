@@ -2,6 +2,7 @@ package Controller2;
 import Entity2.DensityNode;
 import Entity2.FoodLog;
 import Entity2.Slice;
+import Entity2.TypeData;
 import Manager2.FoodLogManager;
 
 import java.util.ArrayList;
@@ -12,11 +13,44 @@ import java.util.List;
 public class ReportController {
 
     FoodLogManager foodLogManager;
-    public ReportController(FoodLogManager flm){
+    MenuController mc;
+
+    public ReportController(FoodLogManager flm,MenuController mc){
         this.foodLogManager = flm;
+        this.mc = mc;
     }
     public List<Slice> getPieSlices(){
         return calcSlices();
+    }
+
+    public List<TypeData> getBarChartdata(){
+        return calcBarChart();
+    }
+
+    private List<TypeData> calcBarChart(){
+        List<TypeData> data = new ArrayList<>();
+        List<Slice> orders = calcSlices();
+        HashMap<String,Integer> typeOrders = new HashMap<>();
+        for(Slice s: orders){
+            String foodName = s.getName();
+            List<String> types = mc.getTypes(foodName);
+            for(String t: types){
+                if (typeOrders.containsKey(t)){
+                    typeOrders.put(t,typeOrders.get(t) + s.getQty());
+                }
+                else{
+                    typeOrders.put(t,s.getQty());
+                }
+            }
+        }
+
+        List<String> allTypes = new ArrayList<>(typeOrders.keySet());
+
+        for(String t : allTypes){
+            TypeData type = new TypeData(t,typeOrders.get(t));
+            data.add(type);
+        }
+        return data;
     }
 
     private HashMap<String,Integer> orders(List<FoodLog> foodLog){
