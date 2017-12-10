@@ -83,6 +83,20 @@ public class MenuController {
         }
     }
 
+    public List<String> getTypes(String itemName){
+        List<String> types = new ArrayList<>();
+        MenuItem item = mim.getMenuItemByName(itemName);
+        if(item.getDiabetic()){
+            types.add("Diabetic");
+        }
+        if(item.getVegan()){
+            types.add("Vegan");
+        }
+        if(item.getGluttenFree()){
+            types.add("Gluten Free");
+        }
+        return types;
+    }
     public void removeMenuItem(MenuItem delete){
         if(mim.getMenuItemByName(delete.getFoodName()) != null){
             mim.removeMenuItem(delete);

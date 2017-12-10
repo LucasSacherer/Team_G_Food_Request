@@ -4,6 +4,9 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -60,9 +63,25 @@
                                           </JFXTreeTableView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                       <children>
+                                          <JFXTreeTableView fx:id="typeTable" layoutX="1.0" layoutY="25.0" prefHeight="403.0" prefWidth="962.0">
+                                             <columns>
+                                                <TreeTableColumn fx:id="typeofOrder" prefWidth="459.0" text="Type" />
+                                                <TreeTableColumn fx:id="numberofTypeOrders" prefWidth="501.9999694824219" text="# of Orders" />
+                                             </columns>
+                                          </JFXTreeTableView>
+                                       </children></AnchorPane>
                                     <PieChart fx:id="orderItemsPieChart" GridPane.columnIndex="1" />
                                     <PieChart fx:id="orderedTypesPieChart" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <BarChart fx:id="barChart" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis fx:id="yAxis" side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
                                  </children>
                               </GridPane>
                            </children>

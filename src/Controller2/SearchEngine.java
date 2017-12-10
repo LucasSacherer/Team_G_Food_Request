@@ -25,7 +25,6 @@ public class SearchEngine {
         return locations;
     }
     //put list of list into lists of names
-
     private  int LevenshteinDistance(String src, String dest)
     {
     int[][] d = new int[(src.length() + 1)] [(dest.length() + 1)];

@@ -68,12 +68,14 @@ public class FoodRequestHubController {
     public void initialize() {
         initializeOrdersAssign();
         initializeOrdersAssigned();
+        filterRequests.getItems().add("None");
         for (Worker worker : workerController.getWorkers()) {
             employeeToAssign.getItems().add(worker.getUsername());
         }
         for (Worker worker : workerController.getWorkers()) {
             filterRequests.getItems().add(worker.getUsername());
         }
+
 
 
     }
@@ -192,9 +194,13 @@ public class FoodRequestHubController {
     public void filterRequests() {
         String worker = filterRequests.getSelectionModel().getSelectedItem().toString();
         Worker filterWorker = workerController.getWorkerbyName(worker);
-        System.out.println(worker);
-        System.out.println(filterWorker);
         foodRequestAssignedRoot.getChildren().clear();
+        if (worker.equals("None")){
+            for (FoodRequest foodRequest : requestController.getAssignedRequests()){
+                foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));
+            }
+            return;
+        }
         for (FoodRequest foodRequest : requestController.getRequestsByWorker(filterWorker)) {
             System.out.println(requestController.getRequestsByWorker(filterWorker));
             foodRequestAssignedRoot.getChildren().add(new TreeItem<>(foodRequest));

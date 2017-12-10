@@ -26,14 +26,14 @@ public class DatabaseGargoyle {
         //Load driver
         try {
             Class.forName(driver).newInstance();
-        }catch (Exception ex){
+        } catch (Exception ex){
             System.out.println("Failed to find Embedded JavaDB driver!");
             ex.printStackTrace();
         }
 
         //Create connection and statement to be run
         try {
-            this.connection = DriverManager.getConnection("jdbc:derby:derby-db;create=true;user=granite_gargoyle;password=wong");
+            this.connection = DriverManager.getConnection("jdbc:derby:gargoyle_food_request_db;create=true;user=granite_gargoyle;password=wong");
             this.statement = connection.createStatement();
         }catch (SQLException ex){
             System.out.println("Exception thrown in createConnection()");
