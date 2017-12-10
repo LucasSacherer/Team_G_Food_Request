@@ -101,7 +101,7 @@ public class FoodRequestHubController {
         ordersAssignTable.setOnMouseClicked(event ->
 
         {
-            if (event.getClickCount() > 1) {
+            if (event.getClickCount() > 0) {
                 onEditAssignRequests();
             }
         });
@@ -139,7 +139,7 @@ public class FoodRequestHubController {
         assignedOrdersTable.setRoot(foodRequestAssignedRoot);
         assignedOrdersTable.setShowRoot(false);
         assignedOrdersTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() > 1) {
+            if (event.getClickCount() > 0) {
                 onEditAssignedRequests();
             }
         });
