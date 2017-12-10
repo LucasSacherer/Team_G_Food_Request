@@ -148,7 +148,6 @@ public class AdminEditMenuController {
 
     private void initializeMenuTab() {
         menuItemManager.update();
-
         for (MenuItem menuItem : menuItemManager.getMenuItems()) {
             menuRoot.getChildren().add(new TreeItem<MenuItem>(menuItem));
 

@@ -16,6 +16,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -570,6 +571,9 @@ public class GodController {
     ////////////////
     /* Menu Order */
     ////////////////
+
+    @FXML
+    private AnchorPane dPane;
 
     @FXML
     private void selectDietaryRestriction() {
