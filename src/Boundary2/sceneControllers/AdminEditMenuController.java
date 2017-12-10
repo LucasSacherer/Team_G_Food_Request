@@ -175,7 +175,7 @@ public class AdminEditMenuController {
         menuTable.setRoot(menuRoot);
         menuTable.setShowRoot(false);
         menuTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() > 1) {
+            if (event.getClickCount() > 0) {
                 onEditMenu();
             }
         });
@@ -293,7 +293,7 @@ public class AdminEditMenuController {
         requestsTable.setRoot(requestsRoot);
         requestsTable.setShowRoot(false);
         requestsTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() > 1) {
+            if (event.getClickCount() > 0) {
                 onEditRequests();
             }
         });
@@ -344,7 +344,7 @@ public class AdminEditMenuController {
         workersTable.setRoot(workerRoot);
         workersTable.setShowRoot(false);
         workersTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() > 1) {
+            if (event.getClickCount() > 0) {
                 onEditWorkers();
             }
         });
