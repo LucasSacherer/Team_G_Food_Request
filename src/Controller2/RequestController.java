@@ -71,7 +71,23 @@ public class RequestController {
         ArrayList<FoodRequest> results = new ArrayList<>();
         for (FoodRequest req: fm.getRequests()){
             System.out.println(req.getName());
-            if (req.getAssignedWorker().getWorkerID().equals(worker.getWorkerID())){
+            if (req.getAssignedWorker() != null){
+                if (req.getAssignedWorker().getWorkerID().equals(worker.getWorkerID())){
+                    results.add(req);
+                }
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Returns a list of requests that are assigned to a worker
+     * @return
+     */
+    public List<FoodRequest> getAssignedRequests(){
+        ArrayList<FoodRequest> results = new ArrayList<>();
+        for (FoodRequest req: fm.getRequests()){
+            if (req.getAssignedWorker() != null){
                 results.add(req);
             }
         }

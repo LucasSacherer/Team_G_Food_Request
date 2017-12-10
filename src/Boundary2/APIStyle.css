@@ -75,9 +75,9 @@
     -fx-background-insets: 0, 1, 2;
 }
 .scroll-bar:vertical {
-    -fx-opacity: 0;
-    -fx-padding:-7;
-}
+     -fx-opacity: 0;
+     -fx-padding:-7;
+ }
 .scroll-bar:horizontal {
     -fx-opacity: 0;
     -fx-padding:-7;
