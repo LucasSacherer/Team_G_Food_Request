@@ -10,6 +10,7 @@ import Manager2.*;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.PieChart;
@@ -18,6 +19,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -418,7 +420,7 @@ public class GodController {
             foodItemColumn, foodItemOrderColumn,
             priceColumn, priceOrderColumn, cartController, requestController,destination,dietaryRestrictionsCombo);
 
-    MapDirectoryController mapDirectoryController = new MapDirectoryController(directoryController, nodeManager, staffMenuOrderController);
+    MapDirectoryController mapDirectoryController = new MapDirectoryController(directoryController, staffMenuOrderController);
     /* Scene Switcher */
     SceneSwitcher sceneSwitcher = new SceneSwitcher(staffIntoPopupController, mapDirectoryController);
 
@@ -469,7 +471,7 @@ public class GodController {
 
     @FXML
     private void mapDirectoryPopup(ActionEvent event) throws IOException {
-        sceneSwitcher.toMapDirectoryPopup();
+        toMapDirectoryPopup(dPane);
     }
 
     @FXML
@@ -513,7 +515,7 @@ public class GodController {
     }
 
     private void initializeMapDirectoryScene() {
-        mapDirectoryController = new MapDirectoryController(directoryController, nodeManager, staffMenuOrderController);
+        mapDirectoryController = new MapDirectoryController(directoryController, staffMenuOrderController);
     }
 
     private void initializeReportsScene() {
@@ -691,6 +693,17 @@ public class GodController {
         databaseGargoyle.attachManager(foodRequestManager);
         databaseGargoyle.attachManager(workerManager);
         databaseGargoyle.notifyManagers();
+    }
+//    @FXML
+    public void toMapDirectoryPopup(AnchorPane dPane) throws IOException {
+        JFXRippler rippler = new JFXRippler();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Boundary2/fxml/mapDirectory.fxml"));
+        loader.setController(mapDirectoryController);
+        Region region = loader.load();
+        dPane.getChildren().add(rippler);
+        JFXPopup popup = new JFXPopup(region);
+        mapDirectoryController.setMainSceneController(staffMenuOrderController);
+        popup.show(rippler, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT);
     }
 
 
