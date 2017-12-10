@@ -249,6 +249,7 @@ public class StaffMenuOrderController {
     public void setLocation(Node location) {
         System.out.println(location);
         this.location = location;
+        destination.setText(location.getNodeID());
     }
 
     public void setLabelDestination(JFXTextField text){

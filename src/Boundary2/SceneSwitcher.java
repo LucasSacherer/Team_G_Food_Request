@@ -3,6 +3,8 @@ package Boundary2;
 import Boundary2.sceneControllers.MapDirectoryController;
 import Boundary2.sceneControllers.StaffIntoPopupController;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPopup;
+import com.jfoenix.controls.JFXRippler;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -70,15 +73,6 @@ public class SceneSwitcher {
         switchScene(g, from, staffMenuOrderLoc);
     }
 
-    public void toMapDirectoryPopup() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(mapDirectoryLoc));
-        fxmlLoader.setController(mapDirectoryController);
-        Parent root2 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setTitle("Directory");
-        stage.setScene(new Scene(root2, 1280, 720));
-        stage.show();
-    }
 
     public void toMenuInfoPopup() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(staffInfoPopupLoc));
