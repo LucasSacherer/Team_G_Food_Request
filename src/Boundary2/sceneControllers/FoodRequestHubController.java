@@ -187,7 +187,6 @@ public class FoodRequestHubController {
                     selectedFoodRequest.getValue().getNode(), selectedFoodRequest.getValue().getAssignedWorker(), selectedFoodRequest.getValue().getOrder());
             requestController.completeRequest(completedFoodRequest);
             foodRequestAssignedRoot.getChildren().remove(selectedFoodRequest);
-            requestController.addRequest(completedFoodRequest);
         }
     }
 
