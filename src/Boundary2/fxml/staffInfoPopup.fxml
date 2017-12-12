@@ -28,7 +28,7 @@
             </ImageView>
          </right>
          <top>
-            <Label text="Food Information" BorderPane.alignment="CENTER">
+            <Label styleClass="label2" text="Food Information" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
