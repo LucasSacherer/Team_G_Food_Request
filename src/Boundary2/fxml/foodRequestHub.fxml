@@ -88,7 +88,10 @@
                               <HBox prefHeight="22.0" prefWidth="499.0" spacing="49.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="169.0" AnchorPane.topAnchor="25.0">
                                  <children>
                                     <JFXComboBox fx:id="employeeToAssign" layoutX="1000.0" layoutY="1000.0" prefHeight="42.0" prefWidth="136.0" promptText="Employee" styleClass="textfield" />
-                                    <JFXButton fx:id="assignButton" alignment="CENTER" buttonType="RAISED" onAction="#assignEmployee" prefHeight="31.0" prefWidth="151.0" styleClass="buttonAdd" text="Assign" />
+                                    <JFXButton fx:id="assignButton" alignment="CENTER" buttonType="RAISED" onAction="#assignEmployee" prefHeight="31.0" prefWidth="151.0" styleClass="buttonAdd" text="Assign">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin></JFXButton>
                                  </children>
                               </HBox>
                            </children>
@@ -115,7 +118,7 @@
                                     <JFXComboBox fx:id="filterRequests" onAction="#filterRequests" promptText="Filter" styleClass="textfield" />
                                     <JFXButton fx:id="completeOrderButton" buttonType="RAISED" onAction="#completeOrder" prefHeight="31.0" prefWidth="151.0" styleClass="buttonAdd" text="Complete Order">
                                        <HBox.margin>
-                                          <Insets left="60.0" />
+                                          <Insets />
                                        </HBox.margin></JFXButton>
                                  </children>
                               </HBox>
