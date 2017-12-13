@@ -23,7 +23,7 @@
 .tab :focused{
     -fx-background-color: #003da6;
 }
-.label{
+.label1{
     -fx-text-fill: white;
 }
 .tab .tab-selected-line{
@@ -38,7 +38,6 @@
     -fx-text-fill: black;
     -fx-background-color: white;
 }
-
 .tree-table-row-cell {
     -fx-background-color: -fx-table-cell-border-color, -fx-control-inner-background;
     -fx-background-insets: 0, 0 0 1 0;

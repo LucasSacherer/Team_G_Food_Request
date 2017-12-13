@@ -164,7 +164,7 @@
                               <Insets left="120.0" top="50.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <Label text="Food Request Hub" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                        <Label styleClass="label1" text="Food Request Hub" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                            <font>
                               <Font name="System Bold" size="36.0" />
                            </font>
