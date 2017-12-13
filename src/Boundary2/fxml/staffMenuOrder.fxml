@@ -63,12 +63,12 @@
                                     </JFXTextField>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
                                        <children>
-                                          <JFXButton fx:id="addMenuItemButton" buttonType="RAISED" onAction="#addMenuItem" prefHeight="31.0" prefWidth="121.0" styleClass="buttonAdd" text="Add">
+                                          <JFXButton fx:id="addMenuItemButton" onAction="#addMenuItem" prefHeight="31.0" prefWidth="121.0" styleClass="buttonAdd" text="Add">
                                              <HBox.margin>
                                                 <Insets right="50.0" />
                                              </HBox.margin>
                                           </JFXButton>
-                                          <JFXButton fx:id="cancelMenuItemButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#cancelMenuItem" prefHeight="31.0" prefWidth="121.0" styleClass="buttonDelete" text="Cancel">
+                                          <JFXButton fx:id="cancelMenuItemButton" layoutX="10.0" layoutY="10.0" onAction="#cancelMenuItem" prefHeight="31.0" prefWidth="121.0" styleClass="buttonDelete" text="Cancel">
                                              <HBox.margin>
                                                 <Insets right="50.0" />
                                              </HBox.margin>
@@ -80,7 +80,7 @@
                                     </HBox>
                                     <AnchorPane fx:id="dPane" prefHeight="76.0" prefWidth="374.0">
                                        <children>
-                                          <JFXButton fx:id="destinationPopupButton" buttonType="RAISED" layoutX="106.0" layoutY="7.0" onAction="#mapDirectoryPopup" prefHeight="39.0" prefWidth="121.0" styleClass="buttonNeutralBig" text="Destination" />
+                                          <JFXButton fx:id="destinationPopupButton" layoutX="106.0" layoutY="7.0" onAction="#mapDirectoryPopup" prefHeight="39.0" prefWidth="121.0" styleClass="buttonNeutralBig" text="Destination" />
                                        </children>
                                        <VBox.margin>
                                           <Insets left="20.0" right="20.0" />
@@ -106,13 +106,13 @@
                         </AnchorPane>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <GridPane.margin>
-                              <Insets left="120.0" />
+                              <Insets left="110.0" />
                            </GridPane.margin>
                            <image>
                               <Image url="@../Pictures/BWH-transparent-final.png" />
                            </image>
                         </ImageView>
-                        <JFXButton fx:id="back" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" onAction="#staffMenuOrderToHub" prefHeight="80.0" prefWidth="80.0" ripplerFill="WHITE" text="Back" textFill="WHITE">
+                        <JFXButton fx:id="back" alignment="CENTER" contentDisplay="TOP" onAction="#staffMenuOrderToHub" prefHeight="80.0" prefWidth="80.0" ripplerFill="WHITE" text="Back" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -152,7 +152,7 @@
                                        </HBox.margin>
                                     </Label>
                                     <JFXComboBox fx:id="dietaryRestrictionsCombo" onAction="#selectDietaryRestriction" promptText="Dietary Restrictions" styleClass="textfield" stylesheets="@../APIStyle.css" />
-                                    <JFXButton fx:id="informationButton" buttonType="RAISED" onAction="#menuInfoPopup" prefHeight="31.0" prefWidth="121.0" styleClass="buttonNeutralBig" stylesheets="@../APIStyle.css" text="Information" />
+                                    <JFXButton fx:id="informationButton" onAction="#menuInfoPopup" prefHeight="31.0" prefWidth="121.0" styleClass="buttonNeutralBig" stylesheets="@../APIStyle.css" text="Information" />
                                  </children>
                               </HBox>
                               <JFXTreeTableView fx:id="menuOrderTable" prefHeight="428.0" prefWidth="1323.0">
@@ -169,7 +169,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="deleteFoodItem" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#deleteFoodItemFromCart" prefHeight="31.0" prefWidth="121.0" styleClass="buttonDelete" stylesheets="@../APIStyle.css" text="Delete Food Item" />
+                              <JFXButton fx:id="deleteFoodItem" alignment="CENTER" contentDisplay="CENTER" onAction="#deleteFoodItemFromCart" prefHeight="31.0" prefWidth="121.0" styleClass="buttonDelete" stylesheets="@../APIStyle.css" text="Delete Food Item" />
                               <JFXTreeTableView fx:id="myOrderTable">
                                  <columns>
                                     <TreeTableColumn fx:id="foodItemOrderColumn" prefWidth="699.0" text="Food Item" />

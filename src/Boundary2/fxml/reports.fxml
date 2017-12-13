@@ -174,7 +174,7 @@
             </JFXTabPane>
          </children>
       </VBox>
-      <JFXButton fx:id="back" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" onAction="#reportsToHub" prefHeight="80.0" prefWidth="80.0" ripplerFill="WHITE" text="Back" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <JFXButton fx:id="back" alignment="CENTER" contentDisplay="TOP" onAction="#reportsToHub" prefHeight="80.0" prefWidth="80.0" ripplerFill="WHITE" text="Back" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
